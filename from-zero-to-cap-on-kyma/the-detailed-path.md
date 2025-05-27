@@ -74,15 +74,19 @@ make run-local
   - In shell
 
     ```shell
+    export DOCKER_ACCOUNT=<your-docker-account>
     export KUBECONFIG=<your-kubeconfig-file-path>
     export NAMESPACE=<your-kyma-namespace>
+    export CLUSTER_DOMAIN=$(kubectl get cm -n kube-system shoot-info -ojsonpath='{.data.domain}')
     ```
 
   - In Windows powershell
 
     ```powershell
+    $ENV:DOCKER_ACCOUNT="<your-docker-account>"
     $ENV:KUBECONFIG="<your-kubeconfig-file-path>"
     $ENV:NAMESPACE="<your-kyma-namespace>"
+    $ENV:CLUSTER_DOMAIN=$(kubectl get cm -n kube-system shoot-info -ojsonpath='{.data.domain}')
     ```
 
 - For mac users, export the DOCKER_HOST
@@ -105,6 +109,45 @@ make create-namespace
 
 ```shell
 make prepare-kyma-for-deployment
+```
+
+## Deploy to Kyma runtime
+
+## Build Docker images
+
+On Kyma runtime, application run as docker containers. They require a docker image to be created out of the application code / binaries.
+
+The docker image can be stored on the docker registry. It can be a private docker registry where access is restricted with credentials.
+
+We will use pack to build the docker images.
+
+- Checkout what is happening when building the docker image
+
+```shell
+make build-hana-deployer --just-print
+```
+
+You will notice that `pack` intelligently identifies how to pack the source code and create the necessary artifacts. The same is also true for Java applications.
+
+- Build and push the Hana deployer image
+
+```shell
+make build-hana-deployer
+make push-hana-deployer
+```
+
+- Build and push the CAP Srv image
+
+```shell
+make build-cap-srv
+make push-cap-srv
+```
+
+- Build and push the Approuter image
+
+```shell
+make build-approuter
+make push-approuter
 ```
 
 ### Create Helm chart
@@ -130,31 +173,70 @@ Now take a moment to understand the generated Helm chart in the [chart](./booksh
 - [bookshop/chart/Chart.yaml](bookshop/chart/Chart.yaml) contains the details about the chart and all its dependencies. <!-- markdown-link-check-disable-line -->
 - [bookshop/chart/values.yaml](bookshop/chart/values.yaml) contains all the details to configure the chart deployment. You will notice that it has sections for `hana deployer`, `cap application` as well as required `service instances` and `service bindings` <!-- markdown-link-check-disable-line -->
 
-### Build and deploy
+### Deploy helm chart
 
-- Add containerize
+- Check the make command by running
 
 ```shell
-make add-containerize
+make deploy-dry-run --just-print
 ```
 
-- Build and deploy to Kyma runtime
+You will notice that we are overriding a various properties defined in `chart/values.yaml`. This is standard helm feature where you can override your values by specifying them in the command line. This obviates the need to modify the `values.yaml` file. Of course, you can also update the `values.yaml` directly.
+
+- Run the command to do a dry run
 
 ```shell
-make cds-build-deploy
+make deploy-dry-run
+```
+
+Take some time to understand what all will be deployed and how does the configuration looks like.
+It is interesting to notice that all these deployment configurations are auto-generated via cds.
+
+**This ensures that you as a developer does not need work with the complexities of helm charts and configurations. At the same time, these pre-shipped charts follow the best practices when it comes to deploying on Kyma.**
+
+- You can now proceed to do the actual deployment
+  
+```shell
+make deploy
 ```
 
 ### Verify your deployment
+
+- Check the state of the application pods. **Wait until pods are in running state.**
+
+```shell
+make check-pods
+```
+
+- Check the hana deployer logs
+
+```shell
+make check-hana-deployer-logs
+```
+
+- Check the logs for the CAP application
+
+```shell
+make check-cap-srv-logs
+```
+
+- Check the logs for the Approuter
+
+```shell
+make check-approuter-logs
+```
 
 - Access the application via the app router URL. It will be of the form <https://bookshop-approuter-${NAMESPACE}.${KYMA_CLUSTER_DOMAIN}>
 
 ### Cleanup
 
-- Delete the helm chart. This will delete the helm chart. Thereby all deployed applications, service instances and their bindings will be cleaned.
+- Delete the helm chart
 
 ```shell
 make undeploy
 ```
+
+This will delete the helm chart. Thereby all deployed applications, service instances and their bindings will be cleaned.
 
 - Remove the namespace and bookshop cap application folder
 

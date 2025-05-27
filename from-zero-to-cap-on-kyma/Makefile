@@ -2,7 +2,11 @@ DOCKER_ACCOUNT?=provide-as-env-var
 NAMESPACE?=provide-as-env-var
 CLUSTER_DOMAIN?=provide-as-env-var
 
-APP_VERSION=0.0.12
+BUILDER=paketobuildpacks/builder-jammy-base:latest
+BUILDPACK=paketo-buildpacks/nodejs
+
+APP_VERSION=0.0.13
+HELM_RELEASE_NAME=bookshop
 
 HANA_DEPLOYER=bookshop-hana-deployer
 HANA_DEPLOYER_IMAGE_REPO=${DOCKER_ACCOUNT}/${HANA_DEPLOYER}
@@ -12,66 +16,88 @@ CAP_SRV=bookshop-srv
 CAP_SRV_IMAGE_REPO=${DOCKER_ACCOUNT}/${CAP_SRV}
 CAP_SRV_IMAGE=${CAP_SRV_IMAGE_REPO}:${APP_VERSION}
 
+APPROUTER=bookshop-approuter
+APPROUTER_IMAGE_REPO=${DOCKER_ACCOUNT}/${APPROUTER}
+APPROUTER_IMAGE=${APPROUTER_IMAGE_REPO}:${APP_VERSION}
+
 init:
-	cds init bookshop --add tiny-sample,nodejs
+	cds init bookshop --add tiny-sample
+	cd bookshop && \
+		cds add hana,xsuaa --for production && \
+		cds add approuter && \
+		cd -
 
 run-local:
 	cds watch bookshop
 
-add-hana:
-	cd bookshop && cds add hana --for production && cd -
+create-namespace:
+	kubectl create namespace ${NAMESPACE}
 
-add-required-libs:
-	cd bookshop && npm i passport && npm i @sap/xssec && cd -
+prepare-kyma-for-deployment:
+	kubectl config set-context --current --namespace=${NAMESPACE}
+	kubectl label namespace ${NAMESPACE} istio-injection=enabled --overwrite
+	./create-docker-pull-secret.sh
 
-build-hana-deployer:
+create-helm-chart:
+	cd bookshop && cds add helm && cd -
+
+add-containerize:
+	cd bookshop && \
+		cds add containerize && \
+		cd -
+
+cds-build-deploy:
+	cd bookshop && \
+		cds up -2 k8s && \
+		cd -
+
+cds-build:
 	cds build -in bookshop --production
+
+build-hana-deployer: cds-build
 	DOCKER_DEFAULT_PLATFORM=linux/amd64 pack build ${HANA_DEPLOYER} --tag ${HANA_DEPLOYER_IMAGE} \
          --path bookshop/gen/db \
-         --buildpack gcr.io/paketo-buildpacks/nodejs \
-         --builder paketobuildpacks/builder:base \
+         --buildpack ${BUILDPACK} \
+         --builder ${BUILDER} \
          --env BP_NODE_RUN_SCRIPTS=""
 
 push-hana-deployer:
 	docker push ${HANA_DEPLOYER_IMAGE}
 
-build-cap-srv:
-	cds build -in bookshop --production
-	DOCKER_DEFAULT_PLATFORM=linux/amd64 pack build ${CAP_SRV} --tag ${CAP_SRV_IMAGE}\
+build-cap-srv: cds-build
+	DOCKER_DEFAULT_PLATFORM=linux/amd64 pack build ${CAP_SRV} --tag ${CAP_SRV_IMAGE} \
 		--path bookshop/gen/srv \
-		--buildpack gcr.io/paketo-buildpacks/nodejs \
-		--builder paketobuildpacks/builder:base \
+		--buildpack ${BUILDPACK} \
+		--builder ${BUILDER} \
 		--env BP_NODE_RUN_SCRIPTS=""
 
 push-cap-srv:
 	docker push ${CAP_SRV_IMAGE}
 
-prepare-kyma-for-deployment:
-	kubectl create namespace ${NAMESPACE}
-	kubectl label namespace ${NAMESPACE} istio-injection=enabled
+build-approuter: cds-build
+	DOCKER_DEFAULT_PLATFORM=linux/amd64 pack build ${APPROUTER} --tag ${APPROUTER_IMAGE} \
+		--path bookshop/app/router \
+		--buildpack ${BUILDPACK} \
+		--builder ${BUILDER} \
+		--env BP_NODE_RUN_SCRIPTS=""
 
-create-helm-chart:
-	cd bookshop && cds add helm && cd -
+push-approuter:
+	docker push ${APPROUTER_IMAGE}
 
-deploy-dry-run:
-	helm template cap-bookshop ./bookshop/chart --namespace ${NAMESPACE} \
-    		--set hana-deployer.image.tag=${APP_VERSION} \
-    		--set hana-deployer.image.repository=${HANA_DEPLOYER_IMAGE_REPO} \
-    		--set srv.image.tag=${APP_VERSION} \
-    		--set srv.image.repository=${CAP_SRV_IMAGE_REPO} \
-    		--set global.domain=${CLUSTER_DOMAIN} \
-    		--values bookshop/chart/values.yaml \
-    		--values ./values-cds.yaml
+deploy-dry-run: cds-build
+	helm template ${HELM_RELEASE_NAME} ./bookshop/gen/chart \
+			--namespace ${NAMESPACE} \
+			--set global.image.tag=${APP_VERSION} \
+			--values bookshop/gen/chart/values.yaml \
+			--set-file xsuaa.jsonParameters=bookshop/xs-security.json
 
-deploy:
-	helm upgrade --install cap-bookshop ./bookshop/chart --namespace ${NAMESPACE} \
-    		--set hana-deployer.image.tag=${APP_VERSION} \
-    		--set hana-deployer.image.repository=${HANA_DEPLOYER_IMAGE_REPO} \
-    		--set srv.image.tag=${APP_VERSION} \
-    		--set srv.image.repository=${CAP_SRV_IMAGE_REPO} \
-    		--set global.domain=${CLUSTER_DOMAIN} \
-    		--values bookshop/chart/values.yaml \
-    		--values ./values-cds.yaml
+deploy: cds-build
+	helm upgrade --install ${HELM_RELEASE_NAME} ./bookshop/gen/chart \
+			--namespace ${NAMESPACE} \
+			--set global.image.tag=${APP_VERSION} \
+			--values bookshop/gen/chart/values.yaml \
+			--set-file xsuaa.jsonParameters=bookshop/xs-security.json \
+			--wait --wait-for-jobs
 
 check-pods:
 	kubectl get po --namespace ${NAMESPACE}
@@ -82,9 +108,12 @@ check-hana-deployer-logs:
 check-cap-srv-logs:
 	kubectl -n ${NAMESPACE} logs -l app.kubernetes.io/name=srv
 
-open-deployed-app:
-	open https://cap-bookshop-srv-${NAMESPACE}.${CLUSTER_DOMAIN}
+check-approuter-logs:
+	kubectl -n ${NAMESPACE} logs -l app.kubernetes.io/name=approuter
 
 undeploy:
-	helm del cap-bookshop --namespace ${NAMESPACE}
+	helm del ${HELM_RELEASE_NAME} --namespace ${NAMESPACE}
+
+cleanup:
+	kubectl delete namespace ${NAMESPACE}
 	rm -rf bookshop
