@@ -130,7 +130,7 @@ Now take a moment to understand the generated Helm chart in the [chart](./booksh
 ![helm-chart](assets/helm-chart.png)
 
 - [bookshop/chart/Chart.yaml](bookshop/chart/Chart.yaml) contains the details about the chart and all its dependencies. <!-- markdown-link-check-disable-line -->
-- [bookshop/chart/values.yaml](bookshop/chart/values.yaml) contains all the details to configure the chart deployment. You will notice that it has sections for `hana deployer`, `cap application` as well as required `service instances` and `service bindings` <!-- markdown-link-check-disable-line -->
+- [bookshop/chart/values.yaml](bookshop/chart/values.yaml) <!-- markdown-link-check-disable-line --> contains all the details to configure the chart deployment. You will notice that it has sections for `hana deployer`, `cap application` as well as required `service instances` and `service bindings`
 
 - Add Istio destination rule for approuter. Please check the [approuter documentation](https://www.npmjs.com/package/@sap/approuter) for details about `PLATFORM_COOKIE_NAME` configuration.
 
@@ -186,6 +186,23 @@ make cleanup
 ## Detailed Path
 
 For following the detailed path where you build the artifacts and deploy them step by step, please refer to [the detailed path](./the-detailed-path.md).
+
+## CAP Version
+
+Latest verified on following CAP version.
+
+| bookshop               | "Add your repository here" |
+|------------------------|----------------------------|
+| @cap-js/asyncapi       | 1.0.3                      |
+| @cap-js/openapi        | 1.2.2                      |
+| @sap/cds               | 8.9.4                      |
+| @sap/cds-compiler      | 5.9.2                      |
+| @sap/cds-dk (global)   | 8.9.4                      |
+| @sap/cds-fiori         | 1.4.1                      |
+| @sap/cds-foss          | 5.0.1                      |
+| @sap/cds-mtxs          | 2.7.2                      |
+| @sap/eslint-plugin-cds | 3.2.0                      |
+| Node.js                | v22.11.0                   |
 
 ## Takeaway
 
