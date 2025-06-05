@@ -17,7 +17,7 @@ In this sample, we will start from scratch / zero to deploying an [CAP](https://
 - [make](https://www.gnu.org/software/make/)
 - [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 - [Pack](../prerequisites/README.md#pack)
-- [NodeJS 18 or higher](https://nodejs.org/en/download/)
+- [NodeJS 20 or higher](https://nodejs.org/en/download/)
 - [SAP CAP](../prerequisites/README.md#sap-cap)
 - SAP Hana Cloud Instance
 - [SAP Hana Cloud Instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
@@ -66,6 +66,8 @@ make run-local
   ]
 }
 ```
+
+> Note: The standalone approuter is being used for a simpler sample and **is not a must**. It should be possible to use the managed approuter as well as have you CAP APIs being exposed via Fiori or UI5 applications and accessed using workzone.
 
 ### Configure environment variables
 
@@ -130,6 +132,25 @@ Now take a moment to understand the generated Helm chart in the [chart](./booksh
 - [bookshop/chart/Chart.yaml](bookshop/chart/Chart.yaml) contains the details about the chart and all its dependencies. <!-- markdown-link-check-disable-line -->
 - [bookshop/chart/values.yaml](bookshop/chart/values.yaml) contains all the details to configure the chart deployment. You will notice that it has sections for `hana deployer`, `cap application` as well as required `service instances` and `service bindings` <!-- markdown-link-check-disable-line -->
 
+- Add Istio destination rule for approuter. Please check the [approuter documentation](https://www.npmjs.com/package/@sap/approuter) for details about `PLATFORM_COOKIE_NAME` configuration.
+
+```shell
+make add-istio-destination-rule
+```
+
+- Update the [bookshop/chart/values.yaml](bookshop/chart/values.yaml) <!-- markdown-link-check-disable-line -->
+  to add the environment variables for the **approuter section** that is used for cookie.
+
+```yaml
+  health:
+    liveness:
+      path: /
+    readiness:
+      path: /
+  env:
+    PLATFORM_COOKIE_NAME: KYMA_APP_SESSION_ID # This is the cookie name used by the approuter to store session information
+```
+
 ### Build and deploy
 
 - Add containerize
@@ -161,6 +182,10 @@ make undeploy
 ```shell
 make cleanup
 ```
+
+## Detailed Path
+
+For following the detailed path where you build the artifacts and deploy them step by step, please refer to [the detailed path](./the-detailed-path.md).
 
 ## Takeaway
 

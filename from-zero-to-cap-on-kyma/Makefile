@@ -38,6 +38,10 @@ prepare-kyma-for-deployment:
 	kubectl label namespace ${NAMESPACE} istio-injection=enabled --overwrite
 	./create-docker-pull-secret.sh
 
+add-istio-destination-rule:
+	mkdir -p bookshop/chart/templates && \
+		./add-destination-rule.sh > bookshop/chart/templates/destination-rule-approuter.yaml
+
 create-helm-chart:
 	cd bookshop && cds add helm && cd -
 
@@ -88,6 +92,7 @@ deploy-dry-run: cds-build
 	helm template ${HELM_RELEASE_NAME} ./bookshop/gen/chart \
 			--namespace ${NAMESPACE} \
 			--set global.image.tag=${APP_VERSION} \
+			--set approuter.env.PLATFORM_COOKIE_NAME=KYMA_APP_SESSION_ID \
 			--values bookshop/gen/chart/values.yaml \
 			--set-file xsuaa.jsonParameters=bookshop/xs-security.json
 
@@ -95,12 +100,14 @@ deploy: cds-build
 	helm upgrade --install ${HELM_RELEASE_NAME} ./bookshop/gen/chart \
 			--namespace ${NAMESPACE} \
 			--set global.image.tag=${APP_VERSION} \
+			--set approuter.env.PLATFORM_COOKIE_NAME=KYMA_APP_SESSION_ID \
 			--values bookshop/gen/chart/values.yaml \
 			--set-file xsuaa.jsonParameters=bookshop/xs-security.json \
 			--wait --wait-for-jobs
 
-check-pods:
-	kubectl get po --namespace ${NAMESPACE}
+check-status:
+	kubectl rollout status deployment bookshop-srv --namespace ${NAMESPACE} --timeout=8m
+	kubectl rollout status deployment bookshop-approuter --namespace ${NAMESPACE} --timeout=8m
 
 check-hana-deployer-logs:
 	kubectl -n ${NAMESPACE} logs -l app.kubernetes.io/name=hana-deployer
@@ -112,7 +119,7 @@ check-approuter-logs:
 	kubectl -n ${NAMESPACE} logs -l app.kubernetes.io/name=approuter
 
 undeploy:
-	helm del ${HELM_RELEASE_NAME} --namespace ${NAMESPACE}
+	helm del ${HELM_RELEASE_NAME} --namespace ${NAMESPACE} --wait
 
 cleanup:
 	kubectl delete namespace ${NAMESPACE}
