@@ -95,9 +95,13 @@ export DOCKER_HOST=unix://${HOME}/.docker/run/docker.sock
 
 ### Prepare for deployment
 
-Let's do a bit of groundwork before we deploy our Helm Chart. In Kyma/Kubernetes, the workloads and required configurations will be deployed in namespaces.
+- Let's do a basic check to see if the cluster is reachable. Running any of the basic commands such as `kubectl cluster-info` or `kubectl get pods` or `kubectl get namespaces` successfully should confirm that. If an error occurs, please check your kubeconfig file and ensure that it is correctly set up to point to your Kyma cluster. Also check if the cluster was provisioned successfully in the SAP BTP Cockpit under your subaccount.
 
-- We will create a namespace. You can skip this step if you already have a namespace
+- Let's do a bit of groundwork before we deploy our Helm Chart. In Kyma/Kubernetes, the workloads and required configurations will be deployed in namespaces.
+
+- We will create a namespace. You can skip this step if you already have a namespace. You can use any non-system namespace of your choice to deploy the sample application.
+
+> Note: system namespaces are such as `kube-system`, `istio-system`, `kyma-system` etc. It is not recommended to deploy your applications in these namespaces.
 
 ```shell
 make create-namespace
