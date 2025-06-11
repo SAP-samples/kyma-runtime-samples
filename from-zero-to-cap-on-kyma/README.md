@@ -1,14 +1,15 @@
 # Overview
 
-In this sample, we will start from scratch / zero to deploying an [CAP](https://cap.cloud.sap/docs/) NodeJS application on Kyma runtime.
+Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sap/docs/) NodeJS application on SAP BTP, Kyma runtime.
 
 ![cap-bookshop](assets/cap-booksop.png)
 
-- You will create a sample Node.JS based CAP application (Bookshop)
-- Using cds, you will create the necessary artifacts and configurations required to deploy on Kyma.
-- Last, but not least, you will deploy and verify your running CAP application on SAP BTP, Kyma runtime.
+- You create a sample NodeJS-based CAP application, namely the Bookshop.
+- You use Core Data Services (CDS) to create the necessary artifacts and configurations required to deploy the application on Kyma.
+- You deploy and verify your running CAP application on SAP BTP, Kyma runtime.
 
-> Note: For simplification most of the commands have been defined using the [Makefile](Makefile). In case you want to understand what the actual command is, run `make <command> --just-print`
+> [!Note]
+> For simplification most of the commands are defined using the [Makefile](Makefile). If you want to understand what the actual command is, run `make <command> --just-print`.
 
 ## Prerequisites
 
@@ -24,177 +25,180 @@ In this sample, we will start from scratch / zero to deploying an [CAP](https://
 
 ## CAP Application
 
-- Initialize the Cap Bookshop sample
+1. Initialize the CAP Bookshop sample.
 
-```shell
-make init
-```
+   ```shell
+   make init
+   ```
 
-Let's take a minute to inspect our cap application. It is a simple Bookshop sample where you can access Book entries via API calls.
+   The initialized application is a simple Bookshop sample where you can access Book entries using API calls.
+      - Data model defined in [./bookshop/db/schema.cds](./bookshop/db/schema.cds). <!-- markdown-link-check-disable-line -->
+      - CDS defined in [./bookshop/srv/cat-service.cds](./bookshop/srv/cat-service.cds). <!-- markdown-link-check-disable-line -->
 
-- Data model defined in [./bookshop/db/schema.cds](./bookshop/db/schema.cds) <!-- markdown-link-check-disable-line -->
-- Core Data Service defined in [./bookshop/srv/cat-service.cds](./bookshop/srv/cat-service.cds) <!-- markdown-link-check-disable-line -->
+   > [!NOTE]
+   > CAP promotes getting started with minimal upfront setup, based on convention over configuration, and a grow-as-you-go approach, adding settings and tools later on, only when you need them. For more information, see [Introduction to CAP](https://cap.cloud.sap/docs/about/).
 
-Directly from CAP website, *CAP promotes getting started with minimal upfront setup, based on convention over configuration, and a grow-as-you-go approach, adding settings and tools later on, only when you need them.*
+2. Run the application locally.
 
-- Run the application locally
+   ```shell
+   make run-local
+   ```
 
-```shell
-make run-local
-```
+3. Access the CAP Srv at <http://localhost:4004>.
+4. Terminate the local running app with `^C`.
 
-- Access the CAP Srv at <http://localhost:4004>
-- Terminate the local running app with `^C`
+## Deploying to Kyma
 
-## Deploy to Kyma
+### Adding the Default Route for Application Router
 
-### Add default route for App router
+1. Update the [bookshop/app/router/xs-app.json](bookshop/app/router/xs-app.json) to add a default route for the app router. This is required to access the CAP application via the URL. The end json should look as below: <!-- markdown-link-check-disable-line -->
 
-- Update the [bookshop/app/router/xs-app.json](bookshop/app/router/xs-app.json) <!-- markdown-link-check-disable-line -->
-  to add a default route for the app router. This is required to access the CAP application via the URL. The end json should look as below:
+   ```json
+   {
+     "welcomeFile": "/odata/v4/catalog/Books",
+     "routes": [
+       {
+         "source": "^/(.*)$",
+         "target": "$1",
+         "destination": "srv-api",
+         "csrfProtection": true
+       }
+     ]
+   }
+   ```
 
-```json
-{
-  "welcomeFile": "/odata/v4/catalog/Books",
-  "routes": [
-    {
-      "source": "^/(.*)$",
-      "target": "$1",
-      "destination": "srv-api",
-      "csrfProtection": true
-    }
-  ]
-}
-```
+   > [!Note]
+   > The standalone Application Router is used to simplify the setup and **is not a must**. It should be also possible to use the managed approuter because your CAP APIs are exposed via Fiori or UI5 applications and accessed using workzone.
 
-> Note: The standalone approuter is being used for a simpler sample and **is not a must**. It should be possible to use the managed approuter as well as have you CAP APIs being exposed via Fiori or UI5 applications and accessed using workzone.
+### Configuring Environment Variables
 
-### Configure environment variables
+1. Set up the required environment variables:
 
-- Set up required environment variables
+   - In shell
 
-  - In shell
+      ```shell
+      export KUBECONFIG=<your-kubeconfig-file-path>
+      export NAMESPACE=<your-kyma-namespace>
+      ```
 
-    ```shell
-    export KUBECONFIG=<your-kubeconfig-file-path>
-    export NAMESPACE=<your-kyma-namespace>
-    ```
+   - In Windows powershell
 
-  - In Windows powershell
+      ```powershell
+      $ENV:KUBECONFIG="<your-kubeconfig-file-path>"
+      $ENV:NAMESPACE="<your-kyma-namespace>"
+      ```
 
-    ```powershell
-    $ENV:KUBECONFIG="<your-kubeconfig-file-path>"
-    $ENV:NAMESPACE="<your-kyma-namespace>"
-    ```
+2. **[Mac users]** Export the DOCKER_HOST.
 
-- For mac users, export the DOCKER_HOST
+   ```shell
+   export DOCKER_HOST=unix://${HOME}/.docker/run/docker.sock
+   ```
 
-```shell
-export DOCKER_HOST=unix://${HOME}/.docker/run/docker.sock
-```
+### Preparing for Deployment
 
-### Prepare for deployment
+1. Do a basic check to see if the cluster is reachable. Running any of the basic commands such as `kubectl cluster-info` or `kubectl get pods` or `kubectl get namespaces` successfully should confirm that. If an error occurs, check your kubeconfig file and ensure that it is correctly set up to point to your Kyma cluster. Also, check if the cluster was provisioned successfully in the SAP BTP cockpit under your subaccount.
 
-- Let's do a basic check to see if the cluster is reachable. Running any of the basic commands such as `kubectl cluster-info` or `kubectl get pods` or `kubectl get namespaces` successfully should confirm that. If an error occurs, please check your kubeconfig file and ensure that it is correctly set up to point to your Kyma cluster. Also check if the cluster was provisioned successfully in the SAP BTP Cockpit under your subaccount.
+2. Create a namespace. You can skip this step if you already have a namespace. You can use any non-system namespace of your choice to deploy the sample application.
 
-- Let's do a bit of groundwork before we deploy our Helm Chart. In Kyma/Kubernetes, the workloads and required configurations will be deployed in namespaces.
+   > [!Note]
+   > The following are system namespaces:
+   > - `kube-system`
+   > - `istio-system`
+   > - `kyma-system`
+   > It is not recommended to deploy your applications in the system namespaces.
 
-- We will create a namespace. You can skip this step if you already have a namespace. You can use any non-system namespace of your choice to deploy the sample application.
+   ```shell
+   make create-namespace
+   ```
 
-> Note: system namespaces are such as `kube-system`, `istio-system`, `kyma-system` etc. It is not recommended to deploy your applications in these namespaces.
+3. Enable Istio injection for the namespace. Set the kubeconfig context to point to the namespace and create the Docker image pull Secret.
 
-```shell
-make create-namespace
-```
+   ```shell
+   make prepare-kyma-for-deployment
+   ```
 
-- Now let's enable Istio injection for the namespace. Set the kubeconfig context to point to the namespace and create the docker image pull secret.
+### Creating Helm Charts
 
-```shell
-make prepare-kyma-for-deployment
-```
-
-### Create Helm chart
-
-Now that we have our artifacts in place, lets shift our focus to deploying the application.
+Having the artifacts in place, focus to deploying the application.
 
 First we need the configurations to tell Kyma what and how we want to deploy.
 
-We will use [Helm Charts](https://helm.sh/) to define  the required configurations and then deploy them on Kyma runtime.
+The sample uses [Helm charts](https://helm.sh/) to define the required configurations and then deploy them on the Kyma runtime.
 
-`cds` can intelligently inspect what all is defined in your cap application and generate the necessary configurations (Helm charts) to deploy it on Kyma runtime.
+`cds` can intelligently inspect what is defined in your CAP application and generate the necessary configurations (Helm charts) to deploy the application on Kyma runtime.
 
-- Create Helm chart
+1. Create a Helm chart.
 
-```shell
-make create-helm-chart
-```
+   ```shell
+   make create-helm-chart
+   ```
 
-Now take a moment to understand the generated Helm chart in the [chart](./bookshop/chart) directory. <!-- markdown-link-check-disable-line -->
+   Take a moment to understand the generated Helm chart in the [chart](./bookshop/chart) directory. <!-- markdown-link-check-disable-line -->
 
-Helm chart Structure will look as below. The full helm chart will be automatically generated by `cds` under `gen` folder.
-![helm-chart](assets/helm-chart-structure.png)
+   The Helm chart structure should look as below. The full Helm chart is automatically generated by `cds` under the `gen` folder.
 
-- [bookshop/chart/Chart.yaml](bookshop/chart/Chart.yaml) contains the details about the chart and all its dependencies. <!-- markdown-link-check-disable-line -->
-- [bookshop/chart/values.yaml](bookshop/chart/values.yaml) <!-- markdown-link-check-disable-line --> contains all the details to configure the chart deployment. You will notice that it has sections for `hana deployer`, `cap application` as well as required `service instances` and `service bindings`
+   ![helm-chart](assets/helm-chart-structure.png)
 
-- Add Istio destination rule for approuter. Please check the [approuter documentation](https://www.npmjs.com/package/@sap/approuter) for details about `PLATFORM_COOKIE_NAME` configuration.
+   - [bookshop/chart/Chart.yaml](bookshop/chart/Chart.yaml) contains the details about the chart and all its dependencies.<!-- markdown-link-check-disable-line -->
+   - [bookshop/chart/values.yaml](bookshop/chart/values.yaml) <!-- markdown-link-check-disable-line --> contains all the details to configure the chart deployment. You will notice that it has sections for `hana deployer`, `cap application` as well as required `service instances` and `service bindings.`
 
-```shell
-make add-istio-destination-rule
-```
+2. Add Istio Destination Rule for the Application Router. Please check the [Approuter documentation](https://www.npmjs.com/package/@sap/approuter) for details about the `PLATFORM_COOKIE_NAME` configuration.
 
-- Update the [bookshop/chart/values.yaml](bookshop/chart/values.yaml) <!-- markdown-link-check-disable-line -->
-  to add the environment variables for the **approuter section** that is used for cookie.
+   ```shell
+   make add-istio-destination-rule
+   ```
 
-```yaml
-  health:
-    liveness:
-      path: /
-    readiness:
-      path: /
-  env:
-    PLATFORM_COOKIE_NAME: KYMA_APP_SESSION_ID # This is the cookie name used by the approuter to store session information
-```
+3. Update the [bookshop/chart/values.yaml](bookshop/chart/values.yaml) to add the environment variables for the **approuter section** that is used for cookies. <!-- markdown-link-check-disable-line -->
 
-### Build and deploy
+   ```yaml
+     health:
+       liveness:
+         path: /
+       readiness:
+         path: /
+     env:
+       PLATFORM_COOKIE_NAME: KYMA_APP_SESSION_ID # This is the cookie name used by the approuter to store session information
+   ```
 
-- Add containerize
+### Building and Deploying
 
-```shell
-make add-containerize
-```
+1. Add containerize.
 
-- Build and deploy to Kyma runtime
+   ```shell
+   make add-containerize
+   ```
 
-```shell
-make cds-build-deploy
-```
+2. Build and deploy to Kyma runtime.
 
-### Verify your deployment
+   ```shell
+   make cds-build-deploy
+   ```
 
-- Access the application via the app router URL. It will be of the form <https://bookshop-approuter-${NAMESPACE}.${KYMA_CLUSTER_DOMAIN}>
+### Verifying the Deployment
 
-### Cleanup
+To verify your deployment, access the application using the app router URL. It should be similar to this one: <https://bookshop-approuter-${NAMESPACE}.${KYMA_CLUSTER_DOMAIN}>.
 
-- Delete the helm chart. This will delete the helm chart. Thereby all deployed applications, service instances and their bindings will be cleaned.
+### Cleaning Up
 
-```shell
-make undeploy
-```
+1. Delete the Helm chart. Deleting the Helm chart you remove all the deployed applications, service instances, and their bindings.
 
-- Remove the namespace and bookshop cap application folder
+   ```shell
+   make undeploy
+   ```
 
-```shell
-make cleanup
-```
+2. Remove the namespace and the Bookshop CAP application folder.
+
+   ```shell
+   make cleanup
+   ```
 
 ## Detailed Path
 
-For following the detailed path where you build the artifacts and deploy them step by step, please refer to [the detailed path](./the-detailed-path.md).
+For more information on the built artifacts and deploying them step by step, see [Detailed Path](./the-detailed-path.md).
 
 ## CAP Version
 
-Latest verified on following CAP version.
+The sample uses the following CAP versions.
 
 | bookshop               | "Add your repository here" |
 |------------------------|----------------------------|
@@ -209,8 +213,6 @@ Latest verified on following CAP version.
 | @sap/eslint-plugin-cds | 3.2.0                      |
 | Node.js                | v22.11.0                   |
 
-## Takeaway
+## Related Information
 
-*CAP supports grow-as-you-go model. Once you have familiarized yourself with CAP basics, you can go further and add capabilities such as authentication, multitenancy, extensibility, messaging and many more.*
-
-You can explore CAP further on <https://cap.cloud.sap/docs/>
+[SAP Cloud Application Programming Model](https://cap.cloud.sap/docs/)
