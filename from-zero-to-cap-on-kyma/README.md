@@ -112,6 +112,8 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
    ```
 
 3. Enable Istio injection for the namespace. Set the kubeconfig context to point to the namespace and create the Docker image pull Secret.
+   
+   > Note: You will need a Docker API Key so that Kubernetes can pull the Docker images from your Docker account.
 
    ```shell
    make prepare-kyma-for-deployment
