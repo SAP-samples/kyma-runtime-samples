@@ -80,7 +80,8 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 ### Configuring Environment Variables
 
 1. Set up the required environment variables.
-   > Note: You will download the kubeconfig file from your Kyma runtime instance in the SAP BTP cockpit. or, if you are using default, it might be available in your local machine under `~/.kube/config`.
+> [!Note] 
+> You can download the kubeconfig file from your Kyma runtime instance in the SAP BTP cockpit. If you are using default, you should also be able to access the kubeconfig from your local machine under `~/.kube/config`.
    - In shell
 
       ```shell
