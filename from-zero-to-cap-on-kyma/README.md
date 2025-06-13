@@ -101,12 +101,12 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 
 2. Create a namespace. You can skip this step if you already have a namespace. You can use any non-system namespace of your choice to deploy the sample application.
 
-   > [!Note]
-   > The following are system namespaces:
-   > - `kube-system`
-   > - `istio-system`
-   > - `kyma-system`
-   > It is not recommended to deploy your applications in the system namespaces.
+> [!Note]
+> The following are system namespaces:
+> - `kube-system`
+> - `istio-system`
+> - `kyma-system`
+> It is not recommended to deploy your applications in the system namespaces.
 
    ```shell
    make create-namespace
