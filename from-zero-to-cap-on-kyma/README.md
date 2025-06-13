@@ -14,6 +14,7 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 ## Prerequisites
 
 - [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
+   > Note: if you are using BTP trial account, use trial subaccount that supports SAP Hana. At the time of writing SAP Hana is available in the US, but not in Signapore
 - [Docker](../prerequisites/README.md#docker)
 - [make](https://www.gnu.org/software/make/)
 - [Kubernetes tooling](../prerequisites/README.md#kubernetes)
@@ -21,6 +22,7 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 - [NodeJS 20 or higher](https://nodejs.org/en/download/)
 - [SAP CAP](../prerequisites/README.md#sap-cap)
 - SAP Hana Cloud Instance
+   > Note: If using trial, make sure your subaccount location supports SAP Hana Cloud
 - Entitlement for `hdi-shared` plan for Hana cloud service in your SAP BTP subaccount.
 - [SAP Hana Cloud Instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
 
@@ -74,7 +76,7 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 ### Configuring Environment Variables
 
 1. Set up the required environment variables:
-
+   > Note: You will download the kubeconfig file from your Kyma runtime instance in the SAP BTP cockpit. or, if you are using default, it might be available in your local machine under `~/.kube/config`.
    - In shell
 
       ```shell
@@ -102,7 +104,7 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 2. Create a namespace. You can skip this step if you already have a namespace. You can use any non-system namespace of your choice to deploy the sample application.
 
 > [!Note]
-> The following are system namespaces:
+> The following are some of the system namespaces:
 > - `kube-system`
 > - `istio-system`
 > - `kyma-system`
@@ -134,7 +136,7 @@ The sample uses [Helm charts](https://helm.sh/) to define the required configura
 
 `cds` can intelligently inspect what is defined in your CAP application and generate the necessary configurations (Helm charts) to deploy the application on Kyma runtime.
 
-1. Create a Helm chart.
+1. Create a Helm chart. When asked for the registry server, if you are using docker hub, enter your use name. For private registries, enter the registry server URL.
 
    ```shell
    make create-helm-chart
