@@ -176,7 +176,9 @@ The sample uses [Helm charts](https://helm.sh/) to define the required configura
 
 `cds` can intelligently inspect what is defined in your CAP application and generate the necessary configurations (Helm charts) to deploy the application on Kyma runtime.
 
-1. Create a Helm chart. When asked for the registry server, if you are using docker hub, enter your use name. For private registries, enter the registry server URL.
+1. Create a Helm chart. When asked for the registry server:
+   * If you're using Docker Hub, enter your username. 
+   * If you're using a private registry, enter the registry server URL.
 
    ```shell
    make create-helm-chart
