@@ -24,7 +24,7 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 - Entitlement for `hdi-shared` plan for Hana cloud service in your SAP BTP subaccount.
 - [SAP Hana Cloud Instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
 
-## CAP Application
+## Initializing CAP Application
 
 1. Initialize the CAP Bookshop sample.
 
