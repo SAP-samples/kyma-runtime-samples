@@ -24,7 +24,9 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 - [NodeJS 20 or higher](https://nodejs.org/en/download/)
 - [SAP CAP](../prerequisites/README.md#sap-cap)
 - SAP Hana Cloud Instance
-   > Note: If using trial, make sure your subaccount location supports SAP Hana Cloud
+
+> [!Note]
+> If you're using an SAP BTP trial account, make sure your subaccount location supports SAP Hana Cloud.
 - Entitlement for `hdi-shared` plan for Hana cloud service in your SAP BTP subaccount.
 - [SAP Hana Cloud Instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
 
