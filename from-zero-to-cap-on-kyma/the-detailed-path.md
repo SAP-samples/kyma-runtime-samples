@@ -21,6 +21,7 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 - [NodeJS 20 or higher](https://nodejs.org/en/download/)
 - [SAP CAP](../prerequisites/README.md#sap-cap)
 - SAP Hana Cloud Instance
+- Entitlement for `hdi-shared` plan for Hana cloud service in your SAP BTP subaccount.
 - [SAP Hana Cloud Instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
 
 ## Initializing CAP Application
@@ -35,8 +36,8 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
       - Data model defined in [./bookshop/db/schema.cds](./bookshop/db/schema.cds). <!-- markdown-link-check-disable-line -->
       - CDS defined in [./bookshop/srv/cat-service.cds](./bookshop/srv/cat-service.cds). <!-- markdown-link-check-disable-line -->
 
-> [!NOTE]
-> CAP promotes getting started with minimal upfront setup, based on convention over configuration, and a grow-as-you-go approach, adding settings and tools later on, only when you need them. For more information, see [Introduction to CAP](https://cap.cloud.sap/docs/about/).
+   > [!NOTE]
+   > CAP promotes getting started with minimal upfront setup, based on convention over configuration, and a grow-as-you-go approach, adding settings and tools later on, only when you need them. For more information, see [Introduction to CAP](https://cap.cloud.sap/docs/about/).
 
 2. Run the application locally
 
@@ -117,7 +118,11 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 
 3. Enable Istio injection for the namespace. Set the kubeconfig context to point to the namespace and create the Docker image pull Secret.
   
-  > Note: You will need a Docker API Key so that Kubernetes can pull the Docker images from your Docker account.
+   > [!Note]
+   > - You will need a Docker API Key so that Kubernetes can pull the Docker images from your Docker account.
+   > - `docker server` could be e.g. `https://index.docker.io/v1/` or your private docker registry server. **For this example, you may use the public Docker registry. However the recommended approach is to use a private Docker registry**.
+   > - `docker user` is the username of your docker registry account.
+   > - `docker password` is the API Key of your docker registry account.
 
    ```shell
    make prepare-kyma-for-deployment

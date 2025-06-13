@@ -21,6 +21,7 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 - [NodeJS 20 or higher](https://nodejs.org/en/download/)
 - [SAP CAP](../prerequisites/README.md#sap-cap)
 - SAP Hana Cloud Instance
+- Entitlement for `hdi-shared` plan for Hana cloud service in your SAP BTP subaccount.
 - [SAP Hana Cloud Instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
 
 ## CAP Application
@@ -68,7 +69,7 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
    ```
 
    > [!Note]
-   > The standalone Application Router is used to simplify the setup and **is not a must**. It should be also possible to use the managed approuter because your CAP APIs are exposed via Fiori or UI5 applications and accessed using workzone.
+   > The standalone Application Router is used to simplify the setup and **is not a must**. It should also be possible to use the managed approuter because your CAP APIs are exposed via Fiori or UI5 applications and accessed using workzone.
 
 ### Configuring Environment Variables
 
@@ -112,8 +113,12 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
    ```
 
 3. Enable Istio injection for the namespace. Set the kubeconfig context to point to the namespace and create the Docker image pull Secret.
-   
-   > Note: You will need a Docker API Key so that Kubernetes can pull the Docker images from your Docker account.
+
+   > [!Note]
+   > - You will need a Docker API Key so that Kubernetes can pull the Docker images from your Docker account.
+   > - `docker server` could be e.g. `https://index.docker.io/v1/` or your private docker registry server. **For this example, you may use the public Docker registry. However the recommended approach is to use a private Docker registry**.
+   > - `docker user` is the username of your docker registry account.
+   > - `docker password` is the API Key of your docker registry account.
 
    ```shell
    make prepare-kyma-for-deployment
