@@ -14,7 +14,9 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 ## Prerequisites
 
 - [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
-   > Note: if you are using BTP trial account, use trial subaccount that supports SAP Hana. At the time of writing SAP Hana is available in the US, but not in Signapore
+
+> [!Note]
+> If you're using an SAP BTP trial account, use a subaccount that supports SAP Hana Cloud. At the time of creating the sample (June 2025), SAP Hana Cloud is available in the US, but not in Singapore.
 - [Docker](../prerequisites/README.md#docker)
 - [make](https://www.gnu.org/software/make/)
 - [Kubernetes tooling](../prerequisites/README.md#kubernetes)
