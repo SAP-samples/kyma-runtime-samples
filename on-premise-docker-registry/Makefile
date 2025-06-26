@@ -57,7 +57,7 @@ docker-login:
 
 create-test-image:
 	docker build --no-cache --platform=linux/amd64 -t ${IMAGE_NAME} .
-	docker push ${IMAGE_NAME}
+	docker push --tls-verify=false ${IMAGE_NAME}
 
 create-secret-to-pull-image:
 	kubectl -n ${NAMESPACE} create secret docker-registry on-premise-reg \
