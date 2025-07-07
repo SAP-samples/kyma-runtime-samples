@@ -49,7 +49,7 @@ spec:
           readOnly: true
         env:
         - name: CLUSTER_DOMAIN
-          value: c1320db.kyma.ondemand.com
+          value: {your-cluster-domain}
         - name: XS_APP_LOG_LEVEL
           value: debug
         - name: REQUEST_TRACE
