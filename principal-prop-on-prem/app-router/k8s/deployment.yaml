@@ -34,7 +34,7 @@ spec:
         app: app-router
     spec:
       containers:
-      - image: sapse/approuter:11.3.2
+      - image: sapse/approuter:19.0.0
         name: app-router
         ports:
         - containerPort: 5000
@@ -47,21 +47,22 @@ spec:
         - name: xsuaa-credentials
           mountPath: /etc/secrets/sapcp/xsuaa/principal-prop-on-prem-xsuaa
           readOnly: true
-        - mountPath: /etc/secrets/sapcp/destination/on-prem-backend
-          name: destination-credentials
-          readOnly: true
-        - mountPath: /etc/secrets/sapcp/connectivity/connectivity-service-binding
-          name: connectivity-proxy-details
-          readOnly: true
         env:
         - name: CLUSTER_DOMAIN
-          value: {your-cluster-domain}
+          value: c1320db.kyma.ondemand.com
         - name: XS_APP_LOG_LEVEL
           value: debug
         - name: REQUEST_TRACE
           value: "true"
         - name: DEV_ENV_TRACES
           value: "true"
+        - name: destinations
+          valueFrom:
+            configMapKeyRef:
+              name: destinations
+              key: destinations
+        - name: PLATFORM_COOKIE_NAME
+          value: "KYMA_APP_SESSION_ID"
       volumes:
       - name: approuter-config-volume
         configMap:
