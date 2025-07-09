@@ -8,7 +8,7 @@
   "dependencies": {
     "@sap-cloud-sdk/http-client": "^2.6.0",
     "@sap/cds": ">=5.4.5",
-    "@sap/xssec": "^3.2.7",
+    "@sap/xssec": "^3.2.17",
     "express": "^4.17.1",
     "hdb": "^0.19.4",
     "passport": "^0.6.0"
