@@ -1,4 +1,18 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: destinations
+data:
+  destinations: >-
+    [
+        {
+          "name": "on-prem-backend-tp",
+          "url": "http://principal-prop-on-prem-dest.sap-transp-proxy-system",
+          "forwardAuthToken": true
+        }
+    ]
+---
+apiVersion: v1
 data:
   xs-app.json: |-
     {
@@ -10,9 +24,9 @@ data:
         "routes": [
             {
                 "source": "^/sap/com/onprem/(.*)$",
-                "destination": "on-prem-backend",
+                "destination": "on-prem-backend-tp",
                 "target": "$1",
-                "authenticationType": "xsuaa"
+                "authenticationType": "none"
             }
         ]
     }

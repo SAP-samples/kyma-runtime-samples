@@ -1,0 +1,7 @@
+apiVersion: destination.connectivity.api.sap/v1
+kind: Destination 
+metadata:
+  name: principal-prop-on-prem-dest 
+spec:   
+  destinationRef:
+    name: "on-prem-backend"
