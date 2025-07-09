@@ -9,7 +9,7 @@
   },
   "author": "LU",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "got": "^9.6.0",
     "mssql": "^7.2.0"
   }
