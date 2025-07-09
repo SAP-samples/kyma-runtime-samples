@@ -11,7 +11,7 @@
   "author": "tsvetan.angelov01@sap.com",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "node-forge": "^1.3.0"
   },
   "engines": {
