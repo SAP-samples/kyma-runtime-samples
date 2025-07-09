@@ -1,7 +1,0 @@
-{ 
-   "name": "api-mssql-function",
-   "version": "1.0.0",
-   "dependencies": {
-       "mssql": "6.2.0"
-   }
- }

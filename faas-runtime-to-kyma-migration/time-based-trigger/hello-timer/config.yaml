@@ -1,5 +1,0 @@
-name: hello-timer
-namespace: default
-runtime: nodejs14
-source:
-    sourceType: inline
