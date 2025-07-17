@@ -29,12 +29,12 @@ start-docker-registry:
 	docker run -d \
 		-v docker-reg-vol:/var/lib/registry \
 		-v $(CWD)/certs:/certs \
-		-v $(CWD)/config/config.yml:/etc/docker/registry/config.yml \
+		-v $(CWD)/config/config.yml:/etc/distribution/config.yml \
 		-v $(CWD)/secret/htpasswd:/secret/htpasswd \
 		-p ${DOCKER_REG_PORT}:443 \
 		--restart=always \
 		--name ${DOCKER_REG_CONTAINER_NAME} \
-		registry:2.8.2
+		registry:3.0.0
 
 stop-docker-registry:
 	docker stop ${DOCKER_REG_CONTAINER_NAME}
