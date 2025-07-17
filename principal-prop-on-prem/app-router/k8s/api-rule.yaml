@@ -1,17 +1,17 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   labels:
     sample: principal-prop-on-prem
   name: principal-prop-on-prem
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: principal-prop-on-prem
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - principal-prop-on-prem
   rules:
-    - path: /.*
+    - path: /*
       methods: ["GET", "POST", "PUT", "DELETE"]
+      noAuth: true
       service:
         name: app-router
         port: 5000
-      accessStrategies:
-        - handler: allow
