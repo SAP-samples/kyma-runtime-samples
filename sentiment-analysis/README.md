@@ -47,15 +47,32 @@ The architecture diagram describes use case flow.
 
 - [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 
+- A namespace created with [Sidecar Injection](https://kyma-project.io/#/istio/user/02-operation-guides/operations/02-20-enable-sidecar-injection) enabled.
+
 - [SAP Commerce Cloud environment connected to SAP BTP Kyma runtime.](https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/83df31ad3b634c0783ced522107d2e73.html)  v2011 or greater in order to use the Webhooks feature.
 
 - (Optional) [SAP Sales Cloud (Cloud for Customer) connected to SAP BTP Kyma runtime](https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/83df31ad3b634c0783ced522107d2e73.html) if you enable the `c4cUpdateFlag` (see below)
+
+### SAP Cloud Identity Services
+The Webhook handler function by default is protected by an jwt access strategy.  As of Kyma version 2.19, the Ory Oathkeeper and Ory Hydra modules for managing access to APIs has been removed.  They were replaced by Istio components that provide the necessary functions.  You can read more in the following blog posts and documentation:
+
+[SAP BTP, Kyma Runtime API Gateway future architecture based on Istio | SAP Blogs ](ttps://blogs.sap.com/2023/02/10/sap-btp-kyma-runtime-api-gateway-future-architecture-based-on-istio/)
+
+[SAP BTP, Kyma runtime ORY Hydra OAuth2 Client migration | SAP Blogs](https://blogs.sap.com/2023/06/06/sap-btp-kyma-runtime-ory-hydra-oauth2-client-migration/)
+
+[Create OpenID Connect Application for Client Credentials Flow - SAP Help Portal](https://help.sap.com/docs/identity-authentication/identity-authentication/client-cred-create-openid-connect-application-for-client-credentials-flow)
+
+[Configure Secrets for API Authentication - SAP Help Portal](https://help.sap.com/docs/identity-authentication/identity-authentication/auth-configure-secrets-for-api-authentication)
+
+- Capture the the client ID and secret from your Application Client Authentication settings in SAP Cloud Identity Services then update [webhooks.impex](commerce-impex/webhooks.impex)
+
+- Capture the issuer and token_endpoint for your SAP CIS tenant from `https:/<SAP-CIS-tenant>/.well-known/openid-configuration` and update [api-access.yaml](lambdas/customer-review-webhook/k8s/api-access.yaml) for the Webhook handler function.
 
 ## Configuration
 
 The extension requires a `Secret` named `sentiment-analysis` configured in the Kyma namespace containing the following values:
 
-- `baseSite`:  The SAP Commerce Cloud baseSite value e.g. `electronics`, required by the SAP Commerce Cloud OCC API.
+- `baseSite`:  The SAP Commerce Cloud baseSite value e.g. `electronics-spa`, required by the SAP Commerce Cloud OCC API. Note that due to the OCC API endpoint being used for User data, only B2C channel baseSite are supported. In order to use this extension with a B2B site, [lambdas/sentiment-analysis/handler.js](lambdas/sentiment-analysis/handler.js) must be adapted to use the relevant OCC calls for the B2B channel (i.e. `getOrgUser` instead of `users` )
 
 - `c4cUpdateFlag`: Feature flag to enable the calls to SAP Sales Cloud to create customer and service ticket for negative reviews. If value is `true` then the feature is enabled.
 
@@ -100,7 +117,7 @@ commerce-impex/projectdata-register-integration-object.impex
 
 See the SAP Commmerce Help topic on  [Data Management with Impex](https://help.sap.com/docs/SAP_COMMERCE/d0224eca81e249cb821f2cdf45a82ace/1b6dd3451fc04c3aa8e95937e9ef2471.html?q=impex).
 
-Add the Integration Object to the registered Kyma Destination Target using SAP Commerce Cloud Backoffice as described in **Expose Your API – Existing Destination Target** section in this [blog post](https://blogs.sap.com/2022/10/14/commerce-cloud-exposing-integration-apis-to-sap-btp-kyma-runtime-with-oauth2/) on SAP Community
+Add the Integration Object to the registered Kyma Destination Target using SAP Commerce Cloud Backoffice as described in **Expose Your API – Existing Destination Target** section in this [blog post](https://blogs.sap.com/2022/10/14/commerce-cloud-exposing-integration-apis-to-sap-btp-kyma-runtime-with-oauth2/) on SAP Community.  Once the Integration Object API is registered with the System in BTP and the Application in Kyma, extract the Central Application Gateway URL from the corresponding Application in Kyma and update the `gateway_url_review` value in the `sentiment-analysis` secret.
 
 ### Content Moderation Service
 

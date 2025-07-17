@@ -131,7 +131,9 @@ async function getUserDetails(userId, isAnonymous, traceCtxHeaders) {
         console.log(`get user details: ${url}`);
         let response = await axios.get(url, { headers: traceCtxHeaders })
             .catch(function (error) {
-                console.log('Error on getUserDetails');
+                console.log('*** START Error on getUserDetails');
+                logerror(error);
+                console.log('*** END Error on getUserDetails');
             });
         firstName = response.data.firstName;
         lastName = response.data.lastName;
@@ -148,6 +150,31 @@ async function getUserDetails(userId, isAnonymous, traceCtxHeaders) {
     };
 
     return customerDetailsC4C;
+}
+
+async function logerror(error) {
+    if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log('*** error.response.data');
+        console.log(error.response.data);
+        console.log('*** error.response.status');
+        console.log(error.response.status);
+        console.log('*** error.response.headers');
+        console.log(error.response.headers);
+    } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log('*** error.request');
+        console.log(error.request);
+    } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('*** error.message');
+        console.log('Error', error.message);
+    }
+    console.log('*** error.config');
+    console.log(error.config);
 }
 
 // getReviewDetails() not needed since we now get the review details in the event.  
@@ -174,7 +201,9 @@ async function updateReview(isNegative, isRude, content, traceCtxHeaders) {
 
     let response = await axios.post(`${reviewServiceURL}`, content, { headers: traceCtxHeaders })
         .catch(function (error) {
-            console.log('Error on updateReview:' + error);
+            console.log('*** Error on updateReview:' + error);
+            logerror(error);
+            console.log('*** Error on updateReview:' + error);
         });
 }
 
