@@ -1,8 +1,0 @@
-server:
-  port: 8080
-spring:
-  jackson:
-    default-property-inclusion: NON_NULL
-application:
-  tenant.name: "TBD"
-  service.path: "TBD"

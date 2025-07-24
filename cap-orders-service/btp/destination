@@ -1,8 +1,0 @@
-#Fri Aug 05 19:28:02 UTC 2022
-URL=http\://localhost\:3000
-Name=localmock
-ProxyType=OnPremise
-Type=HTTP
-Authentication=BasicAuthentication
-Description=localmock
-User=kyma

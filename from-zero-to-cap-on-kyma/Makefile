@@ -50,13 +50,13 @@ add-containerize:
 		cds add containerize && \
 		cd -
 
-cds-build-deploy:
+cds-build:
+	cds build -in bookshop --production
+
+cds-build-deploy: cds-build
 	cd bookshop && \
 		cds up -2 k8s && \
 		cd -
-
-cds-build:
-	cds build -in bookshop --production
 
 build-hana-deployer: cds-build
 	DOCKER_DEFAULT_PLATFORM=linux/amd64 pack build ${HANA_DEPLOYER} --tag ${HANA_DEPLOYER_IMAGE} \

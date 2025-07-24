@@ -1,8 +1,8 @@
-# Overview
+# From Zero to CAP on Kyma
 
 Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sap/docs/) NodeJS application on SAP BTP, Kyma runtime.
 
-![cap-bookshop](assets/cap-booksop.png)
+![cap-bookshop](assets/from-zero-to-cap.drawio.svg)
 
 - You create a sample NodeJS-based CAP application, namely the Bookshop.
 - You use Core Data Services (CDS) to create the necessary artifacts and configurations required to deploy the application on Kyma.
@@ -74,14 +74,16 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
    }
    ```
 
-   > [!Note]
-   > The standalone Application Router is used to simplify the setup and **is not a must**. It should also be possible to use the managed approuter because your CAP APIs are exposed via Fiori or UI5 applications and accessed using workzone.
+> [!Note]
+> The standalone Application Router is used to simplify the setup and **is not a must**. It should also be possible to use the managed approuter because your CAP APIs are exposed via Fiori or UI5 applications and accessed using workzone.
 
 ### Configuring Environment Variables
 
 1. Set up the required environment variables:
-> [!Note] 
+
+> [!Note]
 > You can download the kubeconfig file from your Kyma runtime instance in the SAP BTP cockpit. If you have already configured the default Kubeconfig, you should also be able to access the kubeconfig from your local machine under `~/.kube/config`.
+
    - In shell
 
       ```shell
@@ -121,11 +123,11 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 
 3. Enable Istio injection for the namespace. Set the kubeconfig context to point to the namespace and create the Docker image pull Secret.
 
-   > [!Note]
-   > - You will need a Docker API Key so that Kubernetes can pull the Docker images from your Docker account.
-   > - `docker server` could be e.g. `https://index.docker.io/v1/` or your private docker registry server. **For this example, you may use the public Docker registry. However the recommended approach is to use a private Docker registry**.
-   > - `docker user` is the username of your docker registry account.
-   > - `docker password` is the API Key of your docker registry account.
+> [!Note]
+> - You need a Docker API Key so that Kubernetes can pull the Docker images from your Docker account.
+> - `docker server` could be, for example, `https://index.docker.io/v1/` or your private Docker registry server; **for this sample, you may use the public Docker registry; however, the recommended approach is to use a private Docker registry**
+> - `docker user` is the username of your Docker registry account
+> - `docker password` is the API Key of your Docker registry account
 
    ```shell
    make prepare-kyma-for-deployment
@@ -142,7 +144,8 @@ The sample uses [Helm charts](https://helm.sh/) to define the required configura
 `cds` can intelligently inspect what is defined in your CAP application and generate the necessary configurations (Helm charts) to deploy the application on Kyma runtime.
 
 1. Create a Helm chart. When asked for the registry server:
-   * If you're using Docker Hub, enter your username. 
+
+   * If you're using Docker Hub, enter your username.
    * If you're using a private registry, enter the registry server URL.
 
    ```shell

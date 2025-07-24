@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ include "cap-orders-service.fullname" . }}
-data:
-  CC_PROXY_HOST: {{ .Values.cc.proxyhost | quote }}
-  CC_PROXY_PORT: {{ .Values.cc.proxyport | quote }}
-  MOCK_HOST: {{ .Values.mockhost | quote }}
-  ALERT_NOTIF_SRV: {{ .Values.alertnotifsrv | quote }}

@@ -1,8 +1,8 @@
-# Detailed Path
+# From Zero to CAP on Kyma - Detailed Path
 
 Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sap/docs/) NodeJS application on SAP BTP, Kyma runtime.
 
-![cap-bookshop](assets/cap-booksop.png)
+![cap-bookshop](assets/from-zero-to-cap.drawio.svg)
 
 - You create a sample NodeJS-based CAP application, namely the Bookshop.
 - You use Core Data Services (CDS) to create the necessary artifacts and configurations required to deploy the application on Kyma.

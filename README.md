@@ -29,7 +29,6 @@ Running various samples requires access to the Kyma runtime. There are also othe
 | Name                                                                                                                           | Description                                                                                                                                                           | References |
 | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | [Java-based extension with API exposed via Microgateway](./sample-extension-java/README.md)                                    | This sample demonstrates how to build and deploy a Java-based microservice as an extension and expose the API                                                         | -          |
-| [Micronaut based extension with API exposed via Microgateway](./sample-extension-micronaut/README.md)                          | This sample demonstrates how to build and deploy a Micronaut microservice as an extension and expose the API                                                          | -          |
 | [Java-based microservice as an Event Trigger using CloudEvents SDK](./sample-event-trigger-java/README.md)                     | This sample demonstrates how to build and deploy a Java-based microservice as an Event Trigger using the CloudEvents SDK                                              | -          |
 | [Scala AKKA HTTP based extesnsion with API exposed via Microgateway](./sample-extension-scala/README.md)                       | This sample demonstrates how to build and deploy a Scala Based Akka-HTTP microservice as an extension and expose the API                                              | -          |
 | [Sample deploying a websocket based extension on Kyma](./sample-websockets/README.md)                                          | This sample demonstrates using websockets with Kyma when building extensions and applications                                                                         | -          |
@@ -65,29 +64,13 @@ Running various samples requires access to the Kyma runtime. There are also othe
 
 | Name                                                                 | Description                                                                                                                                                                                 | References                                                        |
 |----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| [CAP Orders Service](./cap-orders-service/README.md)                 | This sample provides a secured CAP service application deployment onto HANA that utilizes the Destination Service, Connectivity Proxy and configured for Helm using Cloud Native Buildpacks |                                                                   |
-| [CAP on Kyma - Cloud Native Buildpacks](./cap-service/README-CNB.md) | This sample provides a secured CAP Service application deployed onto HANA and configured for Helm using Cloud Native Buildpacks                                                             |                                                                   |
-| [CAP on Kyma](./cap-service/README.md)                               | This sample provides a CAP Service application configured with the sample `FAQs` APIs                                                                                                       | - |
 | [From Zero to CAP on Kyma](./from-zero-to-cap-on-kyma/README.md)     | Starting from scratch build a CAP application and deploy it to Kyma runtime                                                                                                                 |                                                                   |
-
-## FAAS Migration
-
-| Name                                                                 | Description                                                                                                        | References |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------- |
-| [FAAS to Kyma migration](./faas-runtime-to-kyma-migration/README.md) | This sample helps you migrate the most common scenarios from deprecated SAP FaaS Runtime Functions to Kyma runtime |            |
 
 ## SAP Cloud SDK
 
 | Name                                                                                                     | Description                                                                                                                       | References                                                                                                                                 |
 | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| [SAP Cloud SDK Java based extension with API exposed via Microgateway](./sample-cloudsdk-java/README.md) | This sample describes the steps and configurations to build and deploy microservice-based extensions using SAP Cloud SDK for Java | -                                                                                                                                          |
 | [SAP Cloud SDK Java Client Certificate Authentication](./cloudsdk-client-cert-auth/README.md)            | This sample show how to connect to an external system secured with Client Certificate Authentication using SAP Cloud SDK          | [Post](https://blogs.sap.com/2022/01/11/use-sap-cloud-sdk-on-kyma-runtime-to-connect-to-external-systems-with-client-cert-authentication/) |
-
-## Open Service Broker
-
-| Name                                                      | Description                                                                                     | References |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------- |
-| [Azure MS SQL database](./database-azure-mssql/README.md) | This sample provisions the MS SQL database within Microsoft Azure using the Open Service Broker | -          |
 
 ## Utilities
 
@@ -103,14 +86,6 @@ Running various samples requires access to the Kyma runtime. There are also othe
 | [HANA Cloud NodeJS API](./hana-nodejs/README.md)                               | This sample demonstrates how SAP HANA Cloud can be utilized within the Kyma runtime | -          |
 | [GeoServer for a geospatial middleware over HANA Cloud](./geoserver/README.md) | This sample provides a GeoServerinstance with the plugin for SAP HANA Connectivity  | -          |
 
-## MS SQL/Azure SQL
-
-| Name                                                                      | Description                                                                                                 | References                                                                     |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [MS SQL database](./database-mssql/README.md)                             | This sample demonstrates how to containerize and deploy a MS SQL database                                   | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-mssql-deployment.html) |
-| [Golang MS SQL database API](./api-mssql-go/README.md)                    | This sample provides a Golang API endpoint for communication with a MS SQL databases                        | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-api-mssql-golang.html) |
-| [Serverless Function MS SQL database API](./api-mssql-function/README.md) | This sample provides a Kyma Serverless Function as an API endpoint for communication with a MS SQL database | -                                                                              |
-
 ## Advanced scenarios
 
 | Name                                                                                                                          | Description                                                                                                                              | References                                                                                                                                             |
@@ -120,7 +95,6 @@ Running various samples requires access to the Kyma runtime. There are also othe
 | [Cloud Integration Multi-cloud](./pi-scenario/README.md)                                                                      | This sample details how to bi-directionally connect SAP Process Integration and Kyma                                                     | -                                                                                                                                                      |
 | [Cloud Integration Neo](./pi-scenario/README-neo.md)                                                                          | This sample details how to bi-directionally connect SAP Process Integration and Kyma in NEO                                              | -                                                                                                                                                      |
 | [gRPC Python](./grpc-python/README.md)                                                                                        | This sample demonstrates gRPC connectivity                                                                                               | -                                                                                                                                                      |
-| [Self-learning FAQ Chatbot based on SAP Conversational AI](./chatbot-conversational_AI/README.md)                             | This sample provides a tutorial and the code to set up an FAQ chatbot in SAP Conversational AI (CAI)                                     | [Post](https://blogs.sap.com/2021/11/15/sap-conversational-ai-chatbot-learning-from-stack-overflow-via-a-kubernetes-cronjob-deployed-in-kyma-runtime/) |
 | [Next.js app with Kyma eventing & Go backend connected to SAP HANA Cloud database](./nextjs-app-with-kyma-eventing/README.md) | This sample provides a tutorial for a conference registration app using Next.js                                                          | [Post](https://blogs.sap.com/2022/02/24/going-jamstack-with-kyma-runtime-building-a-high-performance-web-app/)                                         |
 | [Data Backup and Restore](./data-backup-and-restore/README.md)                                                                | This sample demonstrates performing a backup and restore for a stateful application where data is stored using Persistence Volume Claim. | -                                                                                                                                                      |
 | [HandsOn DSAG Technology Days 2022](./dsagtt22/)                                                                              | This sample gives a walk-through setting up a scenario combining on prem systems with Kyma Functions and the Event Mesh                  | -                                                                                                                                                      |
@@ -130,13 +104,6 @@ Running various samples requires access to the Kyma runtime. There are also othe
 | [Using the on-premise Docker registry with Kyma runtime](./on-premise-docker-registry/README.md)                              | This sample demonstrates how to pull images from the on-premise Docker registry for applications deployed on Kyma runtime                | -                                                                                                                                                      |
 | [KEDA Cron based scaler](./keda-cron-scaler/README.md)                                                                        | This sample demonstrates how to leverage KEDA Cron scaler for efficient scaling strategies.                                              | -                                                                                                                                                      |
 | [SAP Cloud Logging](./sap-cloud-logging/README.md)                                                                        | This sample explains how to integrate SAP Cloud Loghing with Kyma runtime and ship logs, metrics and traces.                                              | -                                                                                                                                                      |
-
-## Multitenancy and SaaS
-
-| Name                                                                     | Description                                                                                                    | References |
-| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ---------- |
-| [SAAS Provisioning Sample](./saas-provisioning/README.md)                | This sample demonstrates how the SAP SAAS Provisioning service can be used to develop a mulitenant application | -          |
-| [Sample Mutitanenat Extension](./sample-multitenant-extension/README.md) | This sample demonstrates how to build a multitenant extension                                                  | -          |
 
 ## Authentication and Authorization
 

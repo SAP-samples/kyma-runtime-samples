@@ -12,11 +12,12 @@ spec:
   strategy: {}
   template:
     metadata:
-      annotations:
-        container.apparmor.security.beta.kubernetes.io/nginx: runtime/default
       labels:
         app: nginx
     spec:
+      securityContext:
+        appArmorProfile:
+          type: RuntimeDefault
       automountServiceAccountToken: false
       volumes:
         - name: nginx-conf
