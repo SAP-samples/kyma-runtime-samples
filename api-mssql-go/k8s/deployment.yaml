@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-mssql-go
+  labels:
+    app: api-mssql-go
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-mssql-go
+  template:
+    metadata:
+      labels:
+        app: api-mssql-go
+    spec:
+      containers:
+        - image: jcawley5/api-mssql-go:latest #change it to your image
+          imagePullPolicy: Always
+          name: api-mssql-go
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: MYAPP_database
+              valueFrom:
+                configMapKeyRef:
+                  name: api-mssql-go
+                  key: database
+            - name: MYAPP_host
+              valueFrom:
+                configMapKeyRef:
+                  name: api-mssql-go
+                  key: host
+            - name: MYAPP_port
+              valueFrom:
+                configMapKeyRef:
+                  name: api-mssql-go
+                  key: port
+            - name: MYAPP_username
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: mssql
+            - name: MYAPP_password
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: mssql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-mssql-go
+  labels:
+    app: api-mssql-go
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8000
+      protocol: TCP
+  selector:
+    app: api-mssql-go

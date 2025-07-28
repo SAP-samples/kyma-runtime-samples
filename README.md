@@ -86,6 +86,13 @@ Running various samples requires access to the Kyma runtime. There are also othe
 | [HANA Cloud NodeJS API](./hana-nodejs/README.md)                               | This sample demonstrates how SAP HANA Cloud can be utilized within the Kyma runtime | -          |
 | [GeoServer for a geospatial middleware over HANA Cloud](./geoserver/README.md) | This sample provides a GeoServerinstance with the plugin for SAP HANA Connectivity  | -          |
 
+## MS SQL/Azure SQL
+
+| Name                                                                      | Description                                                                                                 | References                                                                     |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [MS SQL database](./database-mssql/README.md)                             | This sample demonstrates how to containerize and deploy a MS SQL database                                   | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-mssql-deployment.html) |
+| [Golang MS SQL database API](./api-mssql-go/README.md)                    | This sample provides a Golang API endpoint for communication with a MS SQL databases                        | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-api-mssql-golang.html) |
+
 ## Advanced scenarios
 
 | Name                                                                                                                          | Description                                                                                                                              | References                                                                                                                                             |

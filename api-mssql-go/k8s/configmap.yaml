@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-mssql-go
+  labels:
+    app: api-mssql-go
+data:
+  database: DemoDB
+  host: mssql.dev.svc.cluster.local
+  port: "1433"

@@ -1,0 +1,9 @@
+apiVersion: eventing.kyma-project.io/v1alpha2
+kind: Subscription
+metadata:
+  name: api-mssql-go-event-sub
+spec:
+  sink: 'http://api-mssql-go.dev.svc.cluster.local:80/orderCodeEvent'
+  source: mp-commerce-mock
+  types:
+    - order.created.v1
