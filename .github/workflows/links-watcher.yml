@@ -20,7 +20,7 @@ jobs:
 
       - name: Check Links in README
         id: lychee
-        uses: lycheeverse/lychee-action@v1.5.4
+        uses: lycheeverse/lychee-action@v1.8.0
         with:
           args: --verbose --no-progress --max-concurrency 2 --exclude-mail --exclude-loopback './**/*.md'
           output: ./lychee/out.md
