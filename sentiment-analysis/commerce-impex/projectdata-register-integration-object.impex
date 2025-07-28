@@ -31,7 +31,3 @@ UserGroup ; integrationadmingroup        ;                ;          ;          
 ;                                        ;                ;          ; User                           ; +    ; +      ; +      ; +      ; +
 ;                                        ;                ;          ; Address                        ; +    ; +      ; +      ; +      ; +
 $END_USERRIGHTS; ; ; ; ;
-
-## Update to the correct url and destinationTarget values
-INSERT_UPDATE ExposedDestination;id[unique=true];url;endpoint(id)[unique=true];additionalProperties(key,value)[map-delimiter=|];destinationTarget(id)[default=Default_Template];active[default=true];credential(id)
-;cc-customerproductreview;{ccv2.services.api.url.0}/odata2webservices/CustomerProductReview;cc-customerreview;;;;odatauser-client
