@@ -27,7 +27,7 @@ jobs:
           tags: |
             type=semver,pattern={{version}},value=${{ env.LABEL }}
       - name: Build and push Docker image
-        uses: docker/build-push-action@v3.1.0
+        uses: docker/build-push-action@v4.1.1
         with:
           context: "{{defaultContext}}:dsagtt22/ordermicroservice/database-mssql"
           push: true
