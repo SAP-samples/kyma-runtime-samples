@@ -1,7 +1,0 @@
-{ 
-  "name": "alert-notif-test",
-  "version": "1.0.0",
-  "dependencies": {
-    "@sap_oss/alert-notification-client": "1.1.0"
-  }
-}

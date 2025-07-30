@@ -6,6 +6,8 @@ data:
   onpremise_proxy_port: "20003"
   onpremise_proxy_rfc_port: "20001"
   onpremise_socks5_proxy_port: "20004"
+  tags: '["connectivity"]'
+  type: connectivity
 kind: ConfigMap
 metadata:
   creationTimestamp: null
