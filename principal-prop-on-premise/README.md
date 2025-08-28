@@ -32,8 +32,7 @@ The following diagram presents a flow in which a logged-in user fetches their sa
    > Make sure you synchronize the list with your Cloud Connector by using the **Synchronize** button.
    > ![trust](./assets/trust.png)
 
-2. [Configure a CA Certificate](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/d0c4d5675d4f4bc78a5b7a7b8687c841.html) for principal propagation. 
- * Use Option 3 (as of version 2.10): Generate a self-signed certificate from the [Install a local CA Cerificate](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/configure-ca-certificate-for-principal-propagation?version=Cloud#install-a-local-ca-certificate) section.
+2. [Configure a CA Certificate](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/d0c4d5675d4f4bc78a5b7a7b8687c841.html) for principal propagation. Use Option 3 (as of version 2.10): Generate a self-signed certificate from the [Install a local CA Cerificate](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/configure-ca-certificate-for-principal-propagation?version=Cloud#install-a-local-ca-certificate) section.
 
     ![ca](assets/ca.png)
 
