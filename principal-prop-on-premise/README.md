@@ -10,14 +10,14 @@ You can use either XSUAA or SAP Identity Authentication Service (IAS) as an exte
 
 The following diagram presents a flow in which a logged-in user fetches their sales data from the on-premise system. Using a standalone SAP application router, an API `sap/com/onprem/mysales` is hosted in the Kyma runtime. This API calls the on-premise system using the Connectivity Proxy module.
 
-![flow](assets/pp-on-prem.svg)
+![flow](assets/pp-on-prem.drawio.svg)
 
 ## Prerequisites
 
 * [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
 * [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 * [Cloud Connector on your laptop or test system](../prerequisites/README.md#sap-cloud-connector)
-* [Node.js](https://nodejs.org/en/download/) | The Node.js runtime, including the node package manager NPM. Install the **LTS** version.
+* [Node.js](https://nodejs.org/en/download/) - the Node.js runtime, including the node package manager NPM. Install the **LTS** version.
 * [OpenSSL](https://www.openssl.org/) or another similar tool to generate certificates
 
 ## Procedure
@@ -27,12 +27,13 @@ The following diagram presents a flow in which a logged-in user fetches their sa
 > ### Note:
 > This section uses the official SAP BTP Connectivity service documentation on [Configuring Principal Propagation](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/c84d4d0b12d34890b334998185f49e88.html).
 
-1. [Configure Trusted Entities in the Cloud Connector](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/set-up-trust-for-principal-propagation?version=Cloud#loioa4ee70f0274248f8bbc7594179ef948d__configure_trust)
+1. [Configure Trusted Entities in the Cloud Connector](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/set-up-trust-for-principal-propagation?version=Cloud#loioa4ee70f0274248f8bbc7594179ef948d__configure_trust).
    > ### Note: 
-   > Make sure you synchronize by using the **Synchronize** button.
+   > Make sure you synchronize the list with your Cloud Connector by using the **Synchronize** button.
    > ![trust](./assets/trust.png)
 
-2. [Configure a CA Certificate](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/d0c4d5675d4f4bc78a5b7a7b8687c841.html) for principal propagation. Use Option 3: (As of version 2.10) Generate a self-signed certificate from the [Install a local CA Cerificate](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/configure-ca-certificate-for-principal-propagation?version=Cloud#install-a-local-ca-certificate) section.
+2. [Configure a CA Certificate](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/d0c4d5675d4f4bc78a5b7a7b8687c841.html) for principal propagation. 
+ * Use Option 3 (as of version 2.10): Generate a self-signed certificate from the [Install a local CA Cerificate](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/configure-ca-certificate-for-principal-propagation?version=Cloud#install-a-local-ca-certificate) section.
 
     ![ca](assets/ca.png)
 
@@ -40,7 +41,7 @@ The following diagram presents a flow in which a logged-in user fetches their sa
      
    ![subject-pattern](assets/subject-pattern.png)
 
-4. [Setup a System Certificate](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/3f974eae3cba4dafa274ec59f69daba6.html). Use the third option - generating a self-signed certificate.
+4. [Install a System Certificate for Mutual Authentication](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/3f974eae3cba4dafa274ec59f69daba6.html). Use the third option - generating a self-signed certificate.
 
 ### Configuring the On-Premise Backend
 
@@ -69,7 +70,7 @@ You can run the on-premise backend on your laptop or in a test system. For simpl
 
 4. Update the mock sales data in [on-prem-backend/sales.json](on-prem-backend/sales.json) to provide your `{logged-in-user-email}`.
 
-5. Run the app locally.
+5. Run the application locally.
 
    ```shell script
    # go to the nodejs project
@@ -86,7 +87,7 @@ You can run the on-premise backend on your laptop or in a test system. For simpl
 
    ![cc-1](assets/cc-1.png)
 
-7. Configure the resources to path and all sub-paths
+7. Configure the resources to **Path And All Sub-Paths**.
    
    ![cc-2](assets/cc-2.png)
 
@@ -102,7 +103,7 @@ You can run the on-premise backend on your laptop or in a test system. For simpl
 
 2. Enable the Connectivity Proxy module in the Kyma runtime. For more information, see [Kyma Modules](https://help.sap.com/docs/btp/sap-business-technology-platform/kyma-modules) and [Adding and Deleting a Kyma Module](https://help.sap.com/docs/btp/sap-business-technology-platform/enable-and-disable-kyma-module).
 
-3. Create a destination Configuration in BTP Cockpit.
+3. Create a Destination Configuration in the SAP BTP cockpit.
   ![destination-config](assets/destination-config.png)
 
 4. Create an XSUAA instance. Update the [app-router/k8s/xsuaa-instance.yaml](app-router/k8s/xsuaa-instance.yaml) to provide `{your-cluster-domain}`.
@@ -130,7 +131,7 @@ You can run the on-premise backend on your laptop or in a test system. For simpl
    kubectl -n $NS apply -f app-router/k8s/config.yaml
    ```
 
-8. Deploy the application router. Update the [app-router/k8s/deployment.yaml](app-router/k8s/deployment.yaml) to provide `{your-cluster-domain}`
+8. Deploy the application router. Update the [app-router/k8s/deployment.yaml](app-router/k8s/deployment.yaml) to provide `{your-cluster-domain}`.
 
    ```shell script
    kubectl -n $NS apply -f app-router/k8s/deployment.yaml
@@ -144,7 +145,7 @@ You can run the on-premise backend on your laptop or in a test system. For simpl
 
 ## Testing
 
-Access the sales data for the logged-in user <https://principal-prop-on-prem.{your-cluster-domain}/sap/com/onprem/mysales>.
+Access the sales data for the logged-in user by adjusting the URL: <https://principal-prop-on-prem.{your-cluster-domain}/sap/com/onprem/mysales>.
 
 ## Troubleshooting
 
