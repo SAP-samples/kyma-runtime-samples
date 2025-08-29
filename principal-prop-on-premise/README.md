@@ -4,7 +4,7 @@ This sample provides details on how to configure principal propagation when you 
 
 ## Context
 
-The principal propagation relies on the exchange of the JWT token received in Kyma. The exchanged token is then forwarded to the SAP Cloud Connector and is used to identify the logged-in user.
+The principal propagation relies on exchanging the JWT token received in Kyma. The exchanged token is then forwarded to the SAP Cloud Connector and is used to identify the logged-in user.
 
 You can use either XSUAA or SAP Identity Authentication Service (IAS) as an external identity provider with user federation.
 
