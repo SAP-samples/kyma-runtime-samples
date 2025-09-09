@@ -10,7 +10,7 @@ You can use either XSUAA or SAP Identity Authentication Service (IAS) as an exte
 
 The following diagram presents a flow in which a logged-in user fetches their sales data from the on-premise system. Using a standalone SAP application router, an API `sap/com/onprem/mysales` is hosted in the Kyma runtime. This API calls the on-premise system using the Connectivity Proxy module.
 
-![flow](assets/pp-on-prem.drawio.svg)
+![flow](assets/pp-on-prem.drawio.png)
 
 ## Prerequisites
 
