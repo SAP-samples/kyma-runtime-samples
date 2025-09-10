@@ -1,0 +1,116 @@
+# yaml-language-server: $schema=./values.schema.json
+
+global:
+  domain: <your-domain> #change-it you kyma default or custom domain on which app will be exposed
+  imagePullSecret:
+    name: "your-docker-pull-secret" #change-it precreate a secret if the images are pulled from private registry
+  image:
+    registry: "your-docker-registry-server" #change-it your docker registry server
+    tag: latest
+srv:
+  bindings:
+    auth:
+      serviceInstanceName: xsuaa
+    service-manager:
+      serviceInstanceName: service-manager
+  image:
+    repository: bookshop-external-srv
+  resources:
+    limits:
+      ephemeral-storage: 1G
+      memory: 500M
+    requests:
+      ephemeral-storage: 1G
+      cpu: 500m
+      memory: 500M
+  health:
+    liveness:
+      path: /health
+    readiness:
+      path: /health
+  networkSecurity:
+    allowNamespaceInternal: true
+sidecar:
+  bindings:
+    auth:
+      serviceInstanceName: xsuaa
+    saas-registry:
+      serviceInstanceName: saas-registry
+    service-manager:
+      serviceInstanceName: service-manager
+  image:
+    repository: bookshop-external-sidecar
+  resources:
+    limits:
+      ephemeral-storage: 1G
+      memory: 500M
+    requests:
+      ephemeral-storage: 1G
+      cpu: 500m
+      memory: 500M
+  health:
+    liveness:
+      path: /health
+    readiness:
+      path: /health
+  env:
+    SUBSCRIPTION_URL: https://${tenant_subdomain}-{{ .Release.Name }}-approuter-{{ .Release.Namespace }}.{{ .Values.global.domain }}
+  networkSecurity:
+    allowNamespaceInternal: true
+approuter:
+  bindings:
+    auth:
+      serviceInstanceName: xsuaa
+  image:
+    repository: bookshop-external-approuter
+  env:
+    TENANT_HOST_PATTERN: ^(.*)-{{ .Release.Name }}-approuter-{{ .Release.Namespace }}.{{ .Values.global.domain }} # change if expose.host is set
+  resources:
+    limits:
+      ephemeral-storage: 1G
+      memory: 500M
+    requests:
+      ephemeral-storage: 1G
+      cpu: 500m
+      memory: 500M
+  health:
+    liveness:
+      path: /
+    readiness:
+      path: /
+  envFrom:
+    - configMapRef:
+        name: "{{ .Release.Name }}-approuter-configmap"
+xsuaa:
+  serviceOfferingName: xsuaa
+  servicePlanName: application
+  parameters:
+    tenant-mode: shared
+    oauth2-configuration:
+      redirect-uris:
+        - https://*.{{ tpl .Values.global.domain . }}/**
+    xsappname: bookshop-external-{{ .Release.Namespace }}
+service-manager:
+  serviceOfferingName: service-manager
+  servicePlanName: container
+saas-registry:
+  serviceOfferingName: saas-registry
+  servicePlanName: application
+  parameters:
+    appName: bookshop-external-{{ .Release.Namespace }}
+    xsappname: bookshop-external-{{ .Release.Namespace }}
+    displayName: bookshop-external
+    description: A simple CAP project.
+    category: "CAP Application"
+    appUrls:
+      onSubscriptionAsync: true
+      onUnSubscriptionAsync: true
+      onUpdateDependenciesAsync: true
+      callbackTimeoutMillis: 300000
+      getDependencies: https://{{ .Release.Name }}-sidecar-{{ .Release.Namespace }}.{{ .Values.global.domain }}/-/cds/saas-provisioning/dependencies
+      onSubscription: https://{{ .Release.Name }}-sidecar-{{ .Release.Namespace }}.{{ .Values.global.domain }}/-/cds/saas-provisioning/tenant/{tenantId}
+backendDestinations:
+  srv-api:
+    service: srv
+  mtx-api:
+    service: sidecar

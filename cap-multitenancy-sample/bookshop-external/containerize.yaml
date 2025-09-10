@@ -1,0 +1,30 @@
+_schema-version: '1.0'
+repository: <your-docker-registry-server> #change-it your docker registry server
+tag: latest
+before-all:
+  - npx cds build --production
+modules:
+  - name: bookshop-external-srv
+    build-parameters:
+      buildpack:
+        type: nodejs
+        builder: builder-jammy-base
+        path: gen/srv
+        env:
+          BP_NODE_RUN_SCRIPTS: ""
+  - name: bookshop-external-sidecar
+    build-parameters:
+      buildpack:
+        type: nodejs
+        builder: builder-jammy-base
+        path: gen/mtx/sidecar
+        env:
+          BP_NODE_RUN_SCRIPTS: ""
+  - name: bookshop-external-approuter
+    build-parameters:
+      buildpack:
+        type: nodejs
+        builder: builder-jammy-base
+        path: app/router
+        env:
+          BP_NODE_RUN_SCRIPTS: ""

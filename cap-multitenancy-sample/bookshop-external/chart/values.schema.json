@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "required": [
+    "srv",
+    "global"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "global": {
+      "$id": "#/properties/global",
+      "type": "object",
+      "x-ignore-untested": true,
+      "additionalProperties": true,
+      "properties": {
+        "imagePullSecret": {
+          "$id": "#/properties/global/imagePullSecret",
+          "additionalProperties": true,
+          "type": "object",
+          "properties": {
+            "name": {
+              "$ref": "#/definitions/KubernetesName"
+            },
+            "dockerconfigjson": {
+              "type": "string"
+            }
+          },
+          "dependencies": {
+            "name": {
+              "not": {
+                "required": [
+                  "dockerconfigjson"
+                ]
+              }
+            },
+            "dockerconfigjson": {
+              "not": {
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "image": {
+          "$id": "#/properties/global/image",
+          "type": "object",
+          "required": [],
+          "additionalProperties": true,
+          "properties": {
+            "tag": {
+              "$id": "#/properties/image/global/properties/tag",
+              "$ref": "#/definitions/ImageTag"
+            },
+            "registry": {
+              "$id": "#/properties/image/global/properties/registry",
+              "$ref": "#/definitions/ImageRegistry"
+            }
+          }
+        },
+        "imagePullPolicy": {
+          "$ref": "#/definitions/ImagePullPolicy"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "KubernetesName": {
+      "type": "string",
+      "$comment": "running `kubectl create secret generic invalid_name` will print this regex",
+      "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$"
+    },
+    "ImageRegistry": {
+      "type": "string",
+      "title": "Image registry",
+      "pattern": "^[\\w-./:]+$"
+    },
+    "ImageTag": {
+      "title": "Image tag",
+      "type": "string",
+      "$comment": "Copied from https://github.com/containers/image/blob/18d58d29fdc4fc32fb8a8a6d186b829b217f1bf5/docker/reference/regexp.go#L68-L70",
+      "pattern": "^((?:(?:[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9])(?:(?:\\.(?:[a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]))+)?(?::[0-9]+)?/)?[a-z0-9]+(?:(?:(?:[._]|__|[-]*)[a-z0-9]+)+)?(?:(?:/[a-z0-9]+(?:(?:(?:[._]|__|[-]*)[a-z0-9]+)+)?)+)?)(?::([\\w][\\w.-]{0,127}))?(?:@([A-Za-z][A-Za-z0-9]*(?:[-_+.][A-Za-z][A-Za-z0-9]*)*[:][[:xdigit:]]{32,}))?$"
+    },
+    "ImagePullPolicy": {
+      "title": "ImagePullPolicy",
+      "type": "string",
+      "enum": [
+        "Always",
+        "IfNotPresent",
+        "Never"
+      ]
+    }
+  }
+}
