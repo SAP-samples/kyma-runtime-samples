@@ -1,0 +1,16 @@
+{
+  "welcomeFile": "/odata/v4/catalog/Books",
+  "routes": [
+    {
+      "source": "^/-/cds/.*",
+      "destination": "mtx-api",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/(.*)$",
+      "target": "$1",
+      "destination": "srv-api",
+      "csrfProtection": true
+    }
+  ]
+}

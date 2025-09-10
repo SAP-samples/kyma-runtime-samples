@@ -1,0 +1,99 @@
+GET http://localhost:4005/-/cds/saas-provisioning/dependencies?tenantId=t1
+Content-Type: application/json
+Authorization: Basic yves:
+### @name: Get dependencies
+
+POST http://localhost:4005/-/cds/deployment/subscribe HTTP/1.1
+Content-Type: application/json
+Authorization: Basic yves:
+
+{
+  "tenant": "t1"
+}
+### @name: subscribe t1
+
+POST http://localhost:4005/-/cds/deployment/subscribe HTTP/1.1
+Content-Type: application/json
+Authorization: Basic yves:
+
+{
+  "tenant": "t2"
+}
+### @name: subscribe t2
+
+GET http://localhost:4004/odata/v4/catalog/Books HTTP/1.1
+Content-Type: application/json
+Authorization: Basic alice:
+### @name: get books alice
+
+GET http://localhost:4004/odata/v4/catalog/Books HTTP/1.1
+Content-Type: application/json
+Authorization: Basic erin:
+### @name: get books erin
+
+PUT http://localhost:4005/-/cds/saas-provisioning/tenant/t2 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic alice:
+
+{
+  "subscribedTenantId": "t2",
+  "subscribedSubdomain": "subdomain1",
+  "eventType": "CREATE"
+}
+### create tenant resources required for onboarding
+
+DELETE http://localhost:4005/-/cds/saas-provisioning/tenant/t2 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic erin:
+### deboard tenant
+
+POST http://localhost:4005/-/cds/deployment/unsubscribe HTTP/1.1
+Content-Type: application/json
+Authorization: Basic erin:
+
+{
+  "tenant": "t2"
+}
+### @name: unsubscribe
+
+POST http://localhost:4005/-/cds/model-provider/getCsn HTTP/1.1
+Content-Type: application/json
+Authorization: Basic erin:
+
+{
+  "tenant": "t2",
+  "toggles": ["*"]
+}
+### @name getCSN
+
+POST http://localhost:4005/-/cds/model-provider/getEdmx HTTP/1.1
+Content-Type: application/json
+Authorization: Basic erin:
+
+{
+  "tenant": "t1",
+  "toggles": ["*"],
+  "service": "CatalogService",
+  "locale": "en"
+}
+### getEDmx
+
+GET http://localhost:4005/-/cds/saas-provisioning/tenant/t1 HTTP/1.1
+Content-Type: application/json
+Authorization: Basic erin:
+### getTenant
+
+GET http://localhost:4005/-/cds/saas-provisioning/tenant HTTP/1.1
+Content-Type: application/json
+Authorization: Basic erin:
+### get all tenants
+
+POST http://localhost:4005/-/cds/saas-provisioning/upgrade HTTP/1.1
+Content-Type: application/json
+Authorization: Basic erin:
+prefer: respond-async
+
+{
+  "tenants": ["t1", "t2"]
+}
+### upgrade tenant
