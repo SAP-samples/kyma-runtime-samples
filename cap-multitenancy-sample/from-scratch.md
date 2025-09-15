@@ -2,156 +2,158 @@
 
 ![mt-bookshop](./assets/bookshop-mt.png)
 
-## Reference
-
-- [CAP Documentation](https://cap.cloud.sap/docs/get-started/)
-- [CAP Multitenancy](https://cap.cloud.sap/docs/guides/multitenancy/)
-- [Deploy to Kyma](https://cap.cloud.sap/docs/guides/deployment/to-kyma)
-
 ## Prerequisites
 
 - [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
 
 > [!Note]
-> If you're using an SAP BTP trial account, use a subaccount that supports SAP Hana Cloud. At the time of creating the sample (June 2025), SAP Hana Cloud is available in the US, but not in Singapore.
+> If you're using an SAP BTP trial account, use a subaccount that supports SAP Hana Cloud. At the time of creating the sample (September 2025), SAP Hana Cloud is available in the US, but not in Singapore.
 
 - [Docker](../prerequisites/README.md#docker)
 - [Kubernetes tooling](../prerequisites/README.md#kubernetes)
+- kubectl configured to the namespace where you want to deploy the application
 - [Pack](../prerequisites/README.md#pack)
 - [NodeJS 22 or higher](https://nodejs.org/en/download/)
 - [SAP CAP](../prerequisites/README.md#sap-cap)
-- SAP Hana Cloud Instance
+- SAP Hana Cloud instance
 
 > [!Note]
 > If you're using an SAP BTP trial account, make sure your subaccount location supports SAP Hana Cloud.
 
-- Entitlement for `hdi-shared` plan for Hana cloud service in your SAP BTP subaccount.
-- [SAP Hana Cloud Instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
+- Entitlement for `hdi-shared` plan for SAP Hana Cloud in your SAP BTP subaccount
+- [SAP Hana Cloud instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
 
-## Initial setup
+- [curl](https://curl.se/)
+
+## Procedure
 
 - Delete the existing `bookshop-external` directory if you have cloned the repo.
 
 - Initialize the project
 
-```shell
-cds init bookshop-external --add tiny-sample,nodejs,multitenancy
-```
+    ```shell
+    cds init bookshop-external --add tiny-sample,nodejs,multitenancy
+    ```
 
 - **Navigate to bookshop-external directory**.
 
-> Note: All subsequent commands should be run from this directory.
+> [!Note]
+> All subsequent commands should be run from this directory.
 
-```shell
-cd bookshop-external
-```
+  ```shell
+  cd bookshop-external
+  ```
 
-- Add sqlite
+1. Add sqlite
 
-```shell
-cds add sqlite --for development
-```
+    ```shell
+    cds add sqlite --for development
+    ```
 
-- For local testing, create a new profile that contains the multitenancy configuration:
+2. For local testing, create a new profile that contains the multitenancy configuration:
 
-```shell
-cds add multitenancy --for local-multitenancy
-```
+    ```shell
+    cds add multitenancy --for local-multitenancy
+    ```
 
-- Enable xsuaa, hana
+3. Enable xsuaa, hana
 
-```shell
-cds add xsuaa,hana --for production
-```
+    ```shell
+    cds add xsuaa,hana --for production
+    ```
 
-- For cds build
+4. For cds build
 
-```shell
-npm install
-cds build --production
-```
+    ```shell
+    npm install
+    cds build --production
+    ```
 
-### Running the application locally
+5. Start a sidecar.
 
-- Start sidecar
+    ```shell
+    cds watch mtx/sidecar
+    ```
 
-```shell
-cds watch mtx/sidecar
-```
+6. In another terminal, start the CAP application.
 
-- Start CAP app
+    ```shell
+    cds watch --profile local-multitenancy
+    ```
 
-```shell
-cds watch --profile local-multitenancy
-```
+7. Add tenants. Run the following commands in a new terminal or use [test.rest](./test.rest).
 
-- Add tenants. Run the following commands or use [test.rest](./test.rest)
+    ```shell
+    cds subscribe t1 --to http://localhost:4005 -u yves:
+    cds subscribe t2 --to http://localhost:4005 -u yves:
+    ```
 
-```shell
-cds subscribe t1 --to http://localhost:4005 -u yves:
-cds subscribe t2 --to http://localhost:4005 -u yves:
-```
+7. Get data for both users
 
-- Get data for both users
-
-```shell
-http http://localhost:4004/odata/v4/catalog/Books -a alice:
-http http://localhost:4004/odata/v4/catalog/Books -a erin:
-```
+  ```shell
+  curl -u alice: http://localhost:4004/odata/v4/catalog/Books
+  curl -u erin: http://localhost:4004/odata/v4/catalog/Books
+  ```
 
 ### Approuter
 
-- Add approuter
+1. Add approuter
 
-```shell
-cds add approuter --for production
-```
+    ```shell
+    cds add approuter --for production
+    ```
 
-- Update the [bookshop-external/app/router/xs-app.json](bookshop-external/app/router/xs-app.json) to add a default route for the app router. This is required to access the CAP application via the URL. The end json should look as below:
+2. Update the [bookshop-external/app/router/xs-app.json](bookshop-external/app/router/xs-app.json) to add a default route for the app router. This is required to access the CAP application via the URL. The end json should look as below:
 
-```json
-{
-    "welcomeFile": "/odata/v4/catalog/Books",
-    //rest of the configuration
-}
-```
+    ```json
+    {
+        "welcomeFile": "/odata/v4/catalog/Books",
+        //rest of the configuration
+    }
+    ```
 
 ## Deploy to Kyma
 
 ### Build docker images
 
-- Add helm and containerize
+1. Add helm and containerize
 
-```shell
-cds add helm,containerize
-```
+    ```shell
+    cds add helm,containerize
+    ```
 
-- Build and deploy the helm chart to Kyma
+2. Build and deploy the helm chart to Kyma
 
-```bash
-cds build --production
-cds up -2 k8s
-```
+    ```bash
+    cds build --production
+    cds up -2 k8s
+    ```
 
 ## Verify
 
-- Simulate the subscribe flow by subscribing from a different subaccount in the same Global account in BTP cockpit.
+1. Simulate the subscribe flow by subscribing from a different subaccount in the same global account in SAP BTP cockpit.
 
-- Access the subscribed application.
+2. Access the subscribed application.
 
-## Cleanup
+### Clean Up
 
-- Unsubscribe the tenant from the BTP cockpit.
-- Undelloy the helm chart
+1. Unsubscribe the tenant from SAP BTP cockpit.
+2. Undeploy the Helm chart.
 
-```bash
-helm del --wait --timeout=10m bookshop-external
-```
+  ```bash
+  helm del --wait --timeout=10m bookshop-external
+  ```
 
 ## Troubleshooting
 
-- Helm command to upgrade / install the chart
+Use Helm commands to upgrade/install/reinstall the chart. For example:
 
-```bash
-helm upgrade --install bookshop-external ./gen/chart  --wait --wait-for-jobs --timeout=10m --set-file xsuaa.jsonParameters=xs-security.json
-```
+  ```bash
+  helm upgrade --install bookshop-external ./gen/chart  --wait --wait-for-jobs --timeout=10m --set-file xsuaa.jsonParameters=xs-security.json
+  ```
+
+## Related Information
+
+- [CAP Documentation](https://cap.cloud.sap/docs/get-started/)
+- [CAP Multitenancy](https://cap.cloud.sap/docs/guides/multitenancy/)
+- [Deploy to Kyma](https://cap.cloud.sap/docs/guides/deployment/to-kyma)
