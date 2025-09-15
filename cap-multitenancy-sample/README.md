@@ -2,12 +2,6 @@
 
 ![mt-bookshop](./assets/bookshop-mt.png)
 
-## Reference
-
-- [CAP Documentation](https://cap.cloud.sap/docs/get-started/)
-- [CAP Multitenancy](https://cap.cloud.sap/docs/guides/multitenancy/)
-- [Deploy to Kyma](https://cap.cloud.sap/docs/guides/deployment/to-kyma)
-
 ## Prerequisites
 
 - [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
@@ -29,44 +23,46 @@
 - Entitlement for `hdi-shared` plan for SAP Hana Cloud in your SAP BTP subaccount
 - [SAP Hana Cloud instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
 
+- [curl](https://curl.se/)
+
 ## Procedure
 
 ### Run the Application Locally
+
 1. Navigate to the `bookshop-external` directory.
 
 > [!Note]
->  All subsequent commands should be run from this directory.
+> All subsequent commands should be run from this directory.
 
-```shell
-cd bookshop-external
-```
-
+  ```shell
+  cd bookshop-external
+  ```
 
 2. Start a sidecar.
 
-```shell
-cds watch mtx/sidecar
-```
+  ```shell
+  cds watch mtx/sidecar
+  ```
 
 3. In another terminal, start the CAP application.
 
-```shell
-cds watch --profile local-multitenancy
-```
+  ```shell
+  cds watch --profile local-multitenancy
+  ```
 
 4. Add tenants. Run the following commands in a new terminal or use [test.rest](./test.rest).
 
-```shell
-cds subscribe t1 --to http://localhost:4005 -u yves:
-cds subscribe t2 --to http://localhost:4005 -u yves:
-```
+  ```shell
+  cds subscribe t1 --to http://localhost:4005 -u yves:
+  cds subscribe t2 --to http://localhost:4005 -u yves:
+  ```
 
 5. Get data for both users.
 
-```shell
-http http://localhost:4004/odata/v4/catalog/Books -a alice:
-http http://localhost:4004/odata/v4/catalog/Books -a erin:
-```
+  ```shell
+  curl -u alice: http://localhost:4004/odata/v4/catalog/Books
+  curl -u erin: http://localhost:4004/odata/v4/catalog/Books
+  ```
 
 ### Deploy to Kyma
 
@@ -81,10 +77,10 @@ http http://localhost:4004/odata/v4/catalog/Books -a erin:
 
 3. Build the Docker images and deploy the Helm chart to Kyma.
 
-```bash
-cds build --production
-cds up -2 k8s
-```
+  ```bash
+  cds build --production
+  cds up -2 k8s
+  ```
 
 ### Verify
 
@@ -97,14 +93,20 @@ cds up -2 k8s
 1. Unsubscribe the tenant from SAP BTP cockpit.
 2. Undeploy the Helm chart.
 
-```bash
-helm del --wait --timeout=10m bookshop-external
-```
+  ```bash
+  helm del --wait --timeout=10m bookshop-external
+  ```
 
 ## Troubleshooting
 
 Use Helm commands to upgrade/install/reinstall the chart. For example:
 
-```bash
-helm upgrade --install bookshop-external ./gen/chart  --wait --wait-for-jobs --timeout=10m --set-file xsuaa.jsonParameters=xs-security.json
-```
+  ```bash
+  helm upgrade --install bookshop-external ./gen/chart  --wait --wait-for-jobs --timeout=10m --set-file xsuaa.jsonParameters=xs-security.json
+  ```
+
+## Related Information
+
+- [CAP Documentation](https://cap.cloud.sap/docs/get-started/)
+- [CAP Multitenancy](https://cap.cloud.sap/docs/guides/multitenancy/)
+- [Deploy to Kyma](https://cap.cloud.sap/docs/guides/deployment/to-kyma)
