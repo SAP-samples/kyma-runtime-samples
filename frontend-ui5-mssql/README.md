@@ -19,7 +19,7 @@ This sample demonstrates how to:
 - SAP BTP, Kyma runtime instance
 - [Docker](https://www.docker.com/)
 - [Node.js](https://nodejs.org/en/)
-- [UI5 Tooling](https://sap.github.io/ui5-tooling/)
+- [UI5 Tooling](https://ui5.github.io/cli/stable/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) configured to use the `KUBECONFIG` file downloaded from the Kyma runtime.
 
 ## Steps

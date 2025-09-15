@@ -87,7 +87,7 @@ The choice of Java is of course up to you, however we love to see you use [SAP M
 
 |Tool|Description
 |-|-
-[UI5 Tooling](https://sap.github.io/ui5-tooling/) | The SAP UI5 tooling
+[UI5 Tooling](https://ui5.github.io/cli/stable/) | The SAP UI5 tooling
 
 ## SAP Cloud Connector
 
