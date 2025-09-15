@@ -17,84 +17,85 @@
 
 - [Docker](../prerequisites/README.md#docker)
 - [Kubernetes tooling](../prerequisites/README.md#kubernetes)
-- Kubectl configured to the namespace where you want to deploy the application
+- kubectl configured to the namespace where you want to deploy the application
 - [Pack](../prerequisites/README.md#pack)
 - [NodeJS 22 or higher](https://nodejs.org/en/download/)
 - [SAP CAP](../prerequisites/README.md#sap-cap)
-- SAP Hana Cloud Instance
+- SAP Hana Cloud instance
 
 > [!Note]
 > If you're using an SAP BTP trial account, make sure your subaccount location supports SAP Hana Cloud.
 
-- Entitlement for `hdi-shared` plan for Hana cloud service in your SAP BTP subaccount.
-- [SAP Hana Cloud Instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
+- Entitlement for `hdi-shared` plan for SAP Hana Cloud in your SAP BTP subaccount
+- [SAP Hana Cloud instance mapped to Kyma](https://blogs.sap.com/2022/12/15/consuming-sap-hana-cloud-from-the-kyma-environment/)
 
-## Initial setup
+## Procedure
 
-- **Navigate to bookshop-external directory**.
+### Run the Application Locally
+1. Navigate to the `bookshop-external` directory.
 
-> Note: All subsequent commands should be run from this directory.
+> [!Note]
+>  All subsequent commands should be run from this directory.
 
 ```shell
 cd bookshop-external
 ```
 
-### Running the application locally
 
-- Start sidecar
+2. Start a sidecar.
 
 ```shell
 cds watch mtx/sidecar
 ```
 
-- In another terminal, start CAP app
+3. In another terminal, start the CAP application.
 
 ```shell
 cds watch --profile local-multitenancy
 ```
 
-- Run the commands from a new terminal to add tenants. Run the following commands or use [test.rest](./test.rest)
+4. Add tenants. Run the following commands in a new terminal or use [test.rest](./test.rest).
 
 ```shell
 cds subscribe t1 --to http://localhost:4005 -u yves:
 cds subscribe t2 --to http://localhost:4005 -u yves:
 ```
 
-- Get data for both users
+5. Get data for both users.
 
 ```shell
 http http://localhost:4004/odata/v4/catalog/Books -a alice:
 http http://localhost:4004/odata/v4/catalog/Books -a erin:
 ```
 
-## Deploy to Kyma
+### Deploy to Kyma
 
-- Update the following in [bookshop-external/chart/values.yaml](bookshop-external/chart/values.yaml)
+1. Update the following parameters in [`bookshop-external/chart/values.yaml`](bookshop-external/chart/values.yaml):
 
-  - `global.domain`: your kyma domain
-  - `global.imagePullSecret.name`: your docker pull secret name if images are pulled from private registry
-  - `global.image.registry`: your docker registry server
+  - **global.domain**: your Kyma domain
+  - **global.imagePullSecret.name**: your Docker pull secret name if images are pulled from a private registry
+  - **global.image.registry**: your Docker registry server
 
-- Update the following in [bookshop-external/containerize.yaml](bookshop-external/containerize.yaml)
-  - `repository`: your docker registry server
+2. Update the following parameter in [`bookshop-external/containerize.yaml`](bookshop-external/containerize.yaml):
+  - **repository**: your Docker registry server
 
-- Build the docker images and deploy the helm chart to Kyma
+3. Build the Docker images and deploy the Helm chart to Kyma.
 
 ```bash
 cds build --production
 cds up -2 k8s
 ```
 
-## Verify
+### Verify
 
-- Simulate the subscribe flow by subscribing from a different subaccount in the same Global account in BTP cockpit.
+1. Simulate the subscribe flow by subscribing from a different subaccount in the same global account in SAP BTP cockpit.
 
-- Access the subscribed application.
+2. Access the subscribed application.
 
-## Cleanup
+### Clean Up
 
-- Unsubscribe the tenant from the BTP cockpit.
-- Undelloy the helm chart
+1. Unsubscribe the tenant from SAP BTP cockpit.
+2. Undeploy the Helm chart.
 
 ```bash
 helm del --wait --timeout=10m bookshop-external
@@ -102,7 +103,7 @@ helm del --wait --timeout=10m bookshop-external
 
 ## Troubleshooting
 
-- Helm command to upgrade / install / reinstall the chart
+Use Helm commands to upgrade/install/reinstall the chart. For example:
 
 ```bash
 helm upgrade --install bookshop-external ./gen/chart  --wait --wait-for-jobs --timeout=10m --set-file xsuaa.jsonParameters=xs-security.json
