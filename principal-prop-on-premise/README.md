@@ -6,7 +6,7 @@ This sample provides details on how to configure principal propagation when you 
 
 The principal propagation relies on exchanging the JWT token received in Kyma. The exchanged token is then forwarded to the SAP Cloud Connector and is used to identify the logged-in user.
 
-You can use either XSUAA or SAP Identity Authentication Service (IAS) as an external identity provider with user federation.
+You can use either XSUAA or SAP Cloud Identity Services as an external identity provider with user federation.
 
 The following diagram presents a flow in which a logged-in user fetches their sales data from the on-premise system. Using a standalone SAP application router, an API `sap/com/onprem/mysales` is hosted in the Kyma runtime. This API calls the on-premise system using the Connectivity Proxy module.
 
@@ -32,7 +32,7 @@ The following diagram presents a flow in which a logged-in user fetches their sa
    > Make sure you synchronize the list with your Cloud Connector by using the **Synchronize** button.
    > ![trust](./assets/trust.png)
 
-2. [Configure a CA Certificate](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/d0c4d5675d4f4bc78a5b7a7b8687c841.html) for principal propagation. Use Option 3 (as of version 2.10): Generate a self-signed certificate from the [Install a local CA Cerificate](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/configure-ca-certificate-for-principal-propagation?version=Cloud#install-a-local-ca-certificate) section.
+2. [Configure a CA Certificate](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/d0c4d5675d4f4bc78a5b7a7b8687c841.html) for principal propagation. Use Option 3 (as of version 2.10): Generate a self-signed certificate from the [Install a local CA Certificate](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/configure-ca-certificate-for-principal-propagation?version=Cloud#install-a-local-ca-certificate) section.
 
     ![ca](assets/ca.png)
 
@@ -42,9 +42,9 @@ The following diagram presents a flow in which a logged-in user fetches their sa
 
 4. [Install a System Certificate for Mutual Authentication](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/3f974eae3cba4dafa274ec59f69daba6.html). Use the third option - generating a self-signed certificate.
 
-### Configuring the On-Premise Backend
+### Configuring the On-Premise System
 
-You can run the on-premise backend on your laptop or in a test system. For simplicity, use the same system where your SAP Cloud Connector is running.
+You can run the on-premise system on your laptop or in a test system. For simplicity, use the same system where your SAP Cloud Connector is running.
 
 1. Download the CA certificate from the Cloud Connector under the `certs` directory as `ca_cert.der`.
 
@@ -96,7 +96,7 @@ You can run the on-premise backend on your laptop or in a test system. For simpl
 
    ```shell script
    export NS={your-namespace}
-   # only required once to enable istio sidecar. Ignore if done already
+   # only required once to enable Istio sidecar. Ignore if done already
    kubectl label namespaces $NS istio-injection=enabled
    ```
 
@@ -124,7 +124,7 @@ You can run the on-premise backend on your laptop or in a test system. For simpl
    ```shell script
    kubectl -n $NS apply -f app-router/k8s/connectivity-proxy-info.yaml
    ```
-7. Create the configuration required for application router.
+7. Create the configuration required for the application router.
 
    ```shell script
    kubectl -n $NS apply -f app-router/k8s/config.yaml
@@ -136,7 +136,7 @@ You can run the on-premise backend on your laptop or in a test system. For simpl
    kubectl -n $NS apply -f app-router/k8s/deployment.yaml
    ```
 
-9. Expose it over the internet using API Rule.
+9. Expose it over the internet using the APIRule resource.
 
    ```shell script
    kubectl -n $NS apply -f app-router/k8s/api-rule.yaml
