@@ -1,6 +1,6 @@
 # Overview
 
-![mt-bookshop](./assets/bookshop-mt.png)
+![mt-bookshop](./assets/bookshop-mt-drawio.png)
 
 A simple end-to-end sample to demonstrate building and deploying a multitenant CAP application to Kyma.
 
