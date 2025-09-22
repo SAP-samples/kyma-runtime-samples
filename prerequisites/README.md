@@ -77,12 +77,12 @@ The choice of Java is of course up to you, however we love to see you use [SAP M
 |[Go](https://golang.org/doc/install) | The Go language
 
 ## SAP CAP
-
+<!-- markdown-link-check-disable -->
 |Tool|Description
 |-|-
 |[NPM CAP Package](https://www.npmjs.com/package/@sap/cds-dk) | Install the CAP package via `npm i -g @sap/cds-dk`
 | [Containerize Build Tool](https://www.npmjs.com/package/ctz) | Build tool to containerize cloud applications.
-
+<!-- markdown-link-check-enable -->
 ## SAP UI5
 
 |Tool|Description
