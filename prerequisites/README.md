@@ -31,7 +31,7 @@ Usually besides a vanilla installation of the tools depending on your OS you wil
 
 ## Kyma
 
-Basis for all samples is the SAP BTP, Kyma runtime. Hence, you need a SAP BTP account with a Kyma instance. You find more information to get one [here](https://www.sap.com/products/business-technology-platform/trial.html).
+Basis for all samples is the SAP BTP, Kyma runtime. Hence, you need a SAP BTP account with a Kyma instance. You find more information to get one [here](https://www.sap.com/products/technology-platform/trial.html).
 
 ## JavaScript/TypeScript
 
