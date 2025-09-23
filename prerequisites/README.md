@@ -31,7 +31,7 @@ Usually besides a vanilla installation of the tools depending on your OS you wil
 
 ## Kyma
 
-Basis for all samples is the SAP BTP, Kyma runtime. Hence, you need a SAP BTP account with a Kyma instance. You find more information to get one [here](https://www.sap.com/products/business-technology-platform/trial.html).
+Basis for all samples is the SAP BTP, Kyma runtime. Hence, you need a SAP BTP account with a Kyma instance. You find more information to get one [here](https://www.sap.com/products/technology-platform/trial.html).
 
 ## JavaScript/TypeScript
 
@@ -77,12 +77,12 @@ The choice of Java is of course up to you, however we love to see you use [SAP M
 |[Go](https://golang.org/doc/install) | The Go language
 
 ## SAP CAP
-
+<!-- markdown-link-check-disable -->
 |Tool|Description
 |-|-
 |[NPM CAP Package](https://www.npmjs.com/package/@sap/cds-dk) | Install the CAP package via `npm i -g @sap/cds-dk`
 | [Containerize Build Tool](https://www.npmjs.com/package/ctz) | Build tool to containerize cloud applications.
-
+<!-- markdown-link-check-enable -->
 ## SAP UI5
 
 |Tool|Description

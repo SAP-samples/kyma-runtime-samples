@@ -139,4 +139,4 @@ The provided sample Function calls the on-premise sample application by proxying
 
 ## Related Information
 
-For more information on principal propagation, see the [VeridisQuo. Reaching SAP LOB destinations with connectivity proxy and principal propagation](https://blogs.sap.com/2022/04/07/veridisquo.-reaching-sap-lob-destinations-with-connectivity-proxy-and-principal-propagation./) blog post and [this sample](../principal-prop-on-prem).
+For more information on principal propagation, see the [VeridisQuo. Reaching SAP LOB destinations with connectivity proxy and principal propagation](https://blogs.sap.com/2022/04/07/veridisquo.-reaching-sap-lob-destinations-with-connectivity-proxy-and-principal-propagation./) blog post and [this sample](../principal-prop-on-premise).
