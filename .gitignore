@@ -24,7 +24,7 @@ yarn-debug.log*
 yarn-error.log*
 sample-websockets/frontend/creds
 grpc-python/kyma.pem
-.gitignore
+
 grpc-python/__pycache__/orders_pb2_grpc.cpython-38.pyc
 grpc-python/__pycache__/orders_pb2.cpython-38.pyc
 .vscode
