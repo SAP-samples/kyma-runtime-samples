@@ -1,0 +1,27 @@
+apiVersion: v2
+name: bookshop-external
+description: A simple CAP project.
+type: application
+version: 1.0.0
+appVersion: 1.0.0
+annotations:
+  app.kubernetes.io/managed-by: cds-dk/helm
+dependencies:
+  - name: web-application
+    alias: srv
+    version: ">0.0.0"
+  - name: web-application
+    alias: approuter
+    version: ">0.0.0"
+  - name: web-application
+    alias: sidecar
+    version: ">0.0.0"
+  - name: service-instance
+    alias: saas-registry
+    version: ">0.0.0"
+  - name: service-instance
+    alias: xsuaa
+    version: ">0.0.0"
+  - name: service-instance
+    alias: service-manager
+    version: ">0.0.0"

@@ -18,7 +18,7 @@ spec:
         app: sample-event-trigger-java
     spec:
       containers:
-      - image: gabbi/sample-event-trigger-java:0.0.2 # change it to your image
+      - image: gabbi/sample-event-trigger-java:0.0.4 # change it to your image
         name: sample-event-trigger-java
         resources: {}
         ports:

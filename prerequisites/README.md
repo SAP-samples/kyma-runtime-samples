@@ -23,6 +23,7 @@ Usually besides a vanilla installation of the tools depending on your OS you wil
 |Tool|Description
 |-|-
 |[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) | Kubernetes command-line tool, that allows you to run commands against Kubernetes clusters
+| [Get Kyma runtime Kubeconfig](https://help.sap.com/docs/btp/sap-business-technology-platform/access-kyma-instance-using-kubectl) | Access a Kyma Instance Using kubectl
 |[krew](https://krew.sigs.k8s.io/) | Plugin manager for `kubectl` command-line tool
 |[kubelogin](https://github.com/int128/kubelogin) | `kubectl` plugin for Kubernetes OpenID Connect (OIDC) authentication
 |[Helm](https://helm.sh/) | The package manager for Kubernetes
@@ -30,7 +31,7 @@ Usually besides a vanilla installation of the tools depending on your OS you wil
 
 ## Kyma
 
-Basis for all samples is the SAP BTP, Kyma runtime. Hence, you need a SAP BTP account with a Kyma instance. You find more information to get one [here](https://www.sap.com/products/business-technology-platform/trial.html).
+Basis for all samples is the SAP BTP, Kyma runtime. Hence, you need a SAP BTP account with a Kyma instance. You find more information to get one [here](https://www.sap.com/products/technology-platform/trial.html).
 
 ## JavaScript/TypeScript
 
@@ -76,16 +77,17 @@ The choice of Java is of course up to you, however we love to see you use [SAP M
 |[Go](https://golang.org/doc/install) | The Go language
 
 ## SAP CAP
-
+<!-- markdown-link-check-disable -->
 |Tool|Description
 |-|-
 |[NPM CAP Package](https://www.npmjs.com/package/@sap/cds-dk) | Install the CAP package via `npm i -g @sap/cds-dk`
-
+| [Containerize Build Tool](https://www.npmjs.com/package/ctz) | Build tool to containerize cloud applications.
+<!-- markdown-link-check-enable -->
 ## SAP UI5
 
 |Tool|Description
 |-|-
-[UI5 Tooling](https://sap.github.io/ui5-tooling/) | The SAP UI5 tooling
+[UI5 Tooling](https://ui5.github.io/cli/stable/) | The SAP UI5 tooling
 
 ## SAP Cloud Connector
 

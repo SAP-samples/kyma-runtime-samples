@@ -1,37 +1,36 @@
-# Standalone approuter on SAP BTP, Kyma runtime
+# Standalone Application Router on SAP BTP, Kyma Runtime
 
-## Overview
+## Context
 
-SAP BTP, Kyma runtime is used to develop applications and extensions.
+SAP BTP, Kyma runtime is used to develop applications and extensions. The development process requires:
 
-This also brings in the following requirements:
-
-- Serve static content
-- Authenticate and authorize users
-- Forward to the appropriate identity provider for login
-- Rewrite URLs
-- Dispatch requests to other microservices while propagating user information
+- Serving static content
+- Authenticating and authorizing users
+- Forwarding to the appropriate identity provider for logging in
+- Rewriting URLs
+- Dispatching requests to other microservices while propagating user information
 
 All these and more capabilities are provided by [SAP Application Router](https://help.sap.com/products/BTP/65de2977205c403bbc107264b8eccf4b/01c5f9ba7d6847aaaf069d153b981b51.html).
 
-There are two options to use the Application Router capabilities in SAP BTP, Kyma runtime.
+You can use the application router capabilities in SAP BTP, Kyma runtime either as:
 
-- Managed Application Router
-- Standalone Application Router deployed on SAP BTP, Kyma runtime.
+- Managed Application Router, or
+- Standalone Application Router deployed on SAP BTP, Kyma runtime
 
-You can learn about both options in this [blog](https://blogs.sap.com/2021/12/09/using-sap-application-router-with-kyma-runtime/)
+For more information on both options, see the [Using SAP Application Router with Kyma runtime](https://blogs.sap.com/2021/12/09/using-sap-application-router-with-kyma-runtime/) blog post.
 
-In this sample, we will deploy a Standalone Application Router deployed on SAP BTP, Kyma runtime.
+This sample shows how to deploy a standalone Application Router on SAP BTP, Kyma runtime.
 
 ## Scenario
 
-We will deploy an approuter, expose it over the internet via APIRule. It will be exposing a backend API via its configured destinations and routes.
+In this scenario, you deploy an application router and expose it over the internet using an APIRule custom resource. The APIRule exposes a backend API using configured destinations and routes.
 
-As a simple backend, we will use an HttpBin application that returns the request headers as a response. Good for understanding flows and troubleshooting.
+The backend is a simple HttpBin application that returns request headers as a response.
 
-![scenario](assets/scenario.svg)
+![scenario](./assets/scenario.drawio.svg)
 
-> Note: Standalone approuter is deployed with 2 replicas. Session stickiness is achieved by configuring the [Destination rule](k8s/deployment.yaml)
+> [!Note]
+> A standalone application router is deployed with 2 replicas. To achieve session affinity, you must configure the [DestinationRule](k8s/deployment.yaml). Session affinity allows all subsequent traffic and requests from an initial client session to be passed to the same replica.
 
 ## Prerequisites
 
@@ -40,49 +39,49 @@ As a simple backend, we will use an HttpBin application that returns the request
 
 ## Steps
 
-- Export environment variables
+1. Export environment variables:
 
-```shell
-export NS={your-namespace}
-```
+   ```shell
+   export NS={your-namespace}
+   ```
 
-- Create the namespace and enable istio-injection if not already done.
+2. Create a namespace and enable istio-injection, if not done yet:
 
-```shell
-kubectl create namespace ${NS}
-kubectl label namespaces ${NS} istio-injection=enabled
-```
+   ```shell
+   kubectl create namespace ${NS}
+   kubectl label namespaces ${NS} istio-injection=enabled
+   ```
 
-- Deploy the backend service
+3. Deploy the backend service:
 
-```shell
-kubectl -n ${NS} apply -f k8s/httpbin.yaml
-```
+   ```shell
+   kubectl -n ${NS} apply -f k8s/httpbin.yaml
+   ```
 
-- Create the XSUAA Instance. Update the [service instance definition](k8s/xsuaa-service-instance.yaml). Replace {CLUSTER_DOMAIN} with the domain of your cluster.
+4. Create the XSUAA instance. Update the [service instance definition](k8s/xsuaa-service-instance.yaml). Replace {CLUSTER_DOMAIN} with the domain of your cluster.
 
-```shell
-kubectl -n ${NS} apply -f k8s/xsuaa-service-instance.yaml
-```
+   ```shell
+   kubectl -n ${NS} apply -f k8s/xsuaa-service-instance.yaml
+   ```
 
-- Create the destinations and routes configurations for the approuter
+5. Create the destinations and routes configurations for the application router:
 
-```shell
-kubectl -n ${NS} apply -f k8s/config.yaml
-```
+   ```shell
+   kubectl -n ${NS} apply -f k8s/config.yaml
+   ```
 
-- Deploy the approuter
+6. Deploy the application router:
 
-```shell
-kubectl -n ${NS} apply -f k8s/deployment.yaml
-```
+   ```shell
+   kubectl -n ${NS} apply -f k8s/deployment.yaml
+   ```
 
-- Expose the approuter via APIRule.
+7. Expose the application router using APIRule:
 
-```shell
-kubectl -n ${NS} apply -f k8s/api-rule.yaml
-```
+   ```shell
+   kubectl -n ${NS} apply -f k8s/api-rule.yaml
+   ```
 
-## Accessing the Application
+## Access the Application
 
-The approuter is exposed at <https://my-approuter.{CLUSTER_DOMAIN}>. Access the URL <https://my-approuter.{CLUSTER_DOMAIN}/sap/com/httpbin/headers> to get all the request headers
+The application router is exposed at <https://my-approuter.{CLUSTER_DOMAIN}>. Access the URL <https://my-approuter.{CLUSTER_DOMAIN}/sap/com/httpbin/headers> to get all the request headers.
