@@ -3,12 +3,12 @@ kind: APIRule
 metadata:
   labels:
     app: commerce-mock-lite
-  name: commerce-mock
+  name: commerce-mock-lite
 spec:
   hosts:
     - commerce
   service:
-    name: commerce-mock
+    name: commerce-mock-lite
     port: 10000
   gateway: kyma-system/kyma-gateway
   rules:
