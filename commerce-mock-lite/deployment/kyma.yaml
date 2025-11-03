@@ -1,17 +1,17 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   labels:
     app: commerce-mock-lite
-  name: commerce-mock-lite
+  name: commerce-mock
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  hosts:
+    - commerce
   service:
-    name: commerce-mock-lite
+    name: commerce-mock
     port: 10000
-    host: commerce-lite
+  gateway: kyma-system/kyma-gateway
   rules:
-    - path: /.*
+    - path: /*
       methods: ["GET","POST","PUT","DELETE","HEAD"]
-      accessStrategies:
-        - handler: allow
+      noAuth: true
