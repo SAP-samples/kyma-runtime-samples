@@ -33,6 +33,7 @@ To run the mock using `SAP Business Technology Platform, Kyma Runtime` as a runt
 
 ```bash
 kubectl create namespace mocks
+kubectl label namespace mocks istio-injection=enabled --overwrite
 ```
 
 2. Deploy the mock:
@@ -46,10 +47,23 @@ These commands expose the UI and API of the mock via an `APIRule` resource and m
 
 ## Run Commerce Mock on Kubernetes
 
-1. Set up the Namespace:
+
+1. Add the Istio and API Gateway modules:
+
+```bash
+kubectl create ns kyma-system
+kubectl label namespace kyma-system istio-injection=enabled --overwrite
+kubectl apply -f https://github.com/kyma-project/istio/releases/latest/download/istio-manager.yaml
+kubectl apply -f https://github.com/kyma-project/istio/releases/latest/download/istio-default-cr.yaml
+kubectl apply -f https://github.com/kyma-project/api-gateway/releases/latest/download/api-gateway-manager.yaml
+kubectl apply -f https://github.com/kyma-project/api-gateway/releases/latest/download/apigateway-default-cr.yaml
+```
+
+2. Set up the namespace:
 
 ```bash
 kubectl create namespace mocks
+kubectl label namespace mocks istio-injection=enabled --overwrite
 ```
 
 2. Deploy the mock:
