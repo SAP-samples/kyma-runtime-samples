@@ -1,6 +1,8 @@
 apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
+  labels:
+    app: commerce-mock
   name: commerce-mock
 spec:
   hosts:
