@@ -1,7 +1,7 @@
 autopep8==1.5.6
 binaryornot==0.4.4
 boolean.py==3.8
-certifi==2020.12.5
+certifi==2023.7.22
 chardet==4.0.0
 grpcio==1.37.0
 grpcio-tools==1.37.0
