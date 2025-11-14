@@ -12,7 +12,7 @@ This sample demonstrates how to:
 
 * Create a development Namespace in the Kyma runtime.
 * Create and deploy an ASP.NET application in the Kyma runtime.
-* Expose the ASP.NET application using [APIRules](https://kyma-project.io/docs/components/api-gateway#custom-resource-api-rule).
+* Expose the ASP.NET application using [APIRules](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/README).
 * Call the APIs.
 
 ## Prerequisites

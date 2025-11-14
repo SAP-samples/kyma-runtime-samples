@@ -10,7 +10,7 @@ This sample demonstrates how to:
 
 * Create a development Namespace in the Kyma runtime.
 * Create and deploy a Scala AKKA-HTTP microservice in the Kyma runtime.
-* Expose the microservice using [APIRules](https://kyma-project.io/docs/components/api-gateway#custom-resource-api-rule).
+* Expose the microservice using [APIRules](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/README).
 * Explore the APIs.
 
 ## Prerequisites
