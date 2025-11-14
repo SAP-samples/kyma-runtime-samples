@@ -50,7 +50,7 @@ echo "Attempting to deploy database schema and data..."
 echo "Using PostgreSQL initialization script..."
 
 # Run dedicated database initialization script
-node init-db.js || echo ":x: Schema deployment failed, but continuing..."
+node init-db.js || echo "❌ Schema deployment failed, but continuing..."
 
 # Start the CAP application
 echo "Starting CAP application..."
