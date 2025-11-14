@@ -10,7 +10,7 @@ This sample demonstrates how to:
 
 * Create a development Namespace in the Kyma runtime.
 * Create and deploy an ASP.NET Core-based application in the Kyma runtime.
-* Expose the ASP.NET Core application using [APIRules](https://kyma-project.io/docs/kyma/latest/05-technical-reference/00-custom-resources/apix-01-apirule/#documentation-content).
+* Expose the ASP.NET Core application using [APIRules](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/README).
 * Call the API.
 
 ## ToDo App
