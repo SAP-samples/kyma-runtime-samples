@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bookstore-postgres-config
+  namespace: cap-bookstore
+data:
+  CDS_REQUIRES_KIND: "postgres"
+  NODE_ENV: "production"
