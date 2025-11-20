@@ -2,7 +2,6 @@ apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: bookstore-api
-  namespace: cap-bookstore
   labels:
     app: bookstore
 spec:
