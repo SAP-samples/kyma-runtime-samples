@@ -9,7 +9,6 @@ spec:
   - {YOUR_HOSTNAME}
   service:
     name: bookstore-service
-    namespace: cap-bookstore
     port: 80
   gateway: kyma-system/kyma-gateway
   rules:
