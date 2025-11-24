@@ -10,7 +10,7 @@ This API is protected with OAuth2 which also must be configured in SAP Commerce.
 
 It is configured to pull the source code directly from Git. 
 
-[handler.js](handler.js) - Javscript source code for the webhook handler - updated for Kyma v2.10 (see [Set asynchronous communication between Functions](https://kyma-project.io/docs/kyma/latest/03-tutorials/00-serverless/svls-11-set-asynchronous-connection-of-functions#create-the-emitter-function) )
+[handler.js](handler.js) - Javscript source code for the webhook handler - updated for Kyma v2.10 (see [Set asynchronous communication between Functions](https://kyma-project.io/external-content/serverless/docs/user/tutorials/01-90-set-asynchronous-connection#create-the-emitter-function))
 
 [package.json](package.json) - Dependencies for the function
 

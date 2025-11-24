@@ -12,7 +12,7 @@ This sample demonstrates how to:
 
 * Create a development Namespace in the Kyma runtime.
 * Create and deploy a Spring Boot application in the Kyma runtime.
-* Expose the Spring Boot application using [APIRules](https://kyma-project.io/docs/components/api-gateway#custom-resource-api-rule).
+* Expose the Spring Boot application using [APIRules](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/README).
 * Explore the APIs.
 
 ## Prerequisites

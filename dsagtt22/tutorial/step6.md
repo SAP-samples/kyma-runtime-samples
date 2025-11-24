@@ -170,7 +170,7 @@ As we have all configuration in place we can start with the implementation of th
   } 
   ```
 
-  > 📝 **Tip** - All data send to a Kyma Function is stored in the `event` object. The main purpose of this object is to transfer CloudEvents to the Kyma Function. However, the object is also used to transfer the data of incoming HTTP requests (like in our case). To transport the information the `extensions` object of the `event` parameter is used and contains the desired information. You find more information about the `event` object in the [Kyma documentation](https://kyma-project.io/docs/kyma/latest/05-technical-reference/svls-08-function-specification/#event-object).
+  > 📝 **Tip** - All data send to a Kyma Function is stored in the `event` object. The main purpose of this object is to transfer CloudEvents to the Kyma Function. However, the object is also used to transfer the data of incoming HTTP requests (like in our case). To transport the information the `extensions` object of the `event` parameter is used and contains the desired information. You find more information about the `event` object in the [Kyma documentation](https://github.com/kyma-project/serverless/blob/main/docs/user/technical-reference/07-70-function-specification.md#event-object).
 
 - Next we call a function that to fetch the orders based on the material ID. For now we just implement the function call in the body of the main function:
 
