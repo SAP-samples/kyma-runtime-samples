@@ -29,9 +29,6 @@ WORKDIR /app
 COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
 COPY --chown=nodejs:nodejs . .
 
-# Remove unnecessary files
-RUN rm -rf .git .vscode *.md
-
 # Switch to non-root user
 USER nodejs
 
