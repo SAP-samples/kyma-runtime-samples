@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fooocus
+  labels:
+    istio-injection: enabled
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fooocus
+  namespace: fooocus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fooocus
+  template:
+    metadata:
+      labels:
+        app: fooocus
+    spec:
+      # Ensure it runs on GPU node
+      nodeSelector:
+        nvidia.com/gpu.present: "true"
+
+      containers:
+        - name: fooocus
+          image: ghcr.io/lllyasviel/fooocus:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 7865
+          resources:
+            limits:
+              nvidia.com/gpu: 1   # request 1 GPU
+              cpu: "2"
+            requests:
+              nvidia.com/gpu: 1
+              cpu: "1"
+              memory: "8Gi"
+          volumeMounts:
+            - name: models
+              mountPath: /app/models
+            - name: outputs
+              mountPath: /app/outputs
+
+      volumes:
+        - name: models
+          emptyDir: {}      # change to PVC if you want persistent models
+        - name: outputs
+          emptyDir: {}      # change to PVC if you want persistent outputs
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fooocus
+  namespace: fooocus
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 7865
+      protocol: TCP
+      name: http
+  selector:
+    app: fooocus
+
+---
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: fooocus
+  namespace: fooocus
+spec:
+  gateway: kyma-system/kyma-gateway
+  hosts:
+    - fooocus
+  service:
+    name: fooocus
+    port: 80
+  rules:
+    - path: /*
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
+      noAuth: true
