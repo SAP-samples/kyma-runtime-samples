@@ -9,7 +9,7 @@
 - kubectl installed and configured to access your Kyma cluster
 - A worker pool with GPU nodes available in your Kyma cluster
 
-### Setting Up GPU Worker Pool
+### Setting Up a GPU Worker Pool
 
 1. Go to the SAP BTP cockpit and update your Kyma instance by adding a new worker pool named `gpu`.
 2. Add some nodes with the GPU support, for example, `g6.xlarge`.
@@ -47,7 +47,6 @@
 
 > [!Note]
 > The [gpu-operator-values.yaml](gpu-operator-values.yaml) file is configured for driver version 570, which is compatible with current Garden Linux kernel versions in Kyma clusters. If you need a different driver version, adjust the `driver.version` field in the values file accordingly (download the file and modify it locally before installation).
-
 
 3. The GPU operator deploys several components as DaemonSets and Deployments. Monitor the installation.
 
