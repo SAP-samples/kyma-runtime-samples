@@ -16,7 +16,7 @@ In this sample, we will connect to an external system that is secured with **Cli
 * JDK 11 or higher
 * [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * Kubectl configured to connect to your provisioned Kyma runtime using downloaded KUBECONFIG
-* [Make](https://www.gnu.org/software/make/)
+* [Make](https://www.gnu.org/software/make/)<!-- markdown-link-check-disable-line -->
 * [docker](https://www.docker.com/products/docker-desktop)
 
 ## Setup

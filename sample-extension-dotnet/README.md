@@ -12,14 +12,14 @@ This sample demonstrates how to:
 
 * Create a development Namespace in the Kyma runtime.
 * Create and deploy an ASP.NET application in the Kyma runtime.
-* Expose the ASP.NET application using [APIRules](https://kyma-project.io/docs/components/api-gateway#custom-resource-api-rule).
+* Expose the ASP.NET application using [APIRules](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/04-10-apirule-custom-resource.html).
 * Call the APIs.
 
 ## Prerequisites
 
 * SAP BTP, Kyma runtime instance
 * [Docker](https://www.docker.com/)
-* [make](https://www.gnu.org/software/make/)
+* [make](https://www.gnu.org/software/make/)<!-- markdown-link-check-disable-line -->
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) configured to use the `KUBECONFIG` file downloaded from the Kyma runtime
 
 ## Steps

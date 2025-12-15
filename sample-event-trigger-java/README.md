@@ -26,7 +26,7 @@ This sample demonstrates how to:
 
 * [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
 * [Docker](../prerequisites/README.md#docker)
-* [make](https://www.gnu.org/software/make/)
+* [make](https://www.gnu.org/software/make/)<!-- markdown-link-check-disable-line -->
 * [Gradle](https://gradle.org/)
 * [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 * [Java 17+](https://openjdk.java.net/projects/jdk/17/)
