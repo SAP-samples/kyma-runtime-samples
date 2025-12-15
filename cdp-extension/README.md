@@ -4,7 +4,7 @@
 
 This example includes a **Kyma Serverless Function**, *cdp-extension*, that is exposed as an **SAP Customer Data Platform Extension endpoint**, and demonstrates how to:
 
-* Create an [SAP Customer Data Platform Extension](https://help.sap.com/viewer/8438f051ded544d2ba1303e67fc5ff86/PROD/en-US/67ac7304cead44a9a6b762f583fe1fe1.html) endpoint using a [Kyma Serverless Function](https://kyma-project.io/docs/kyma/latest/01-overview/main-areas/serverless/svls-01-overview/#documentation-content)
+* Create an [SAP Customer Data Platform Extension](https://help.sap.com/viewer/8438f051ded544d2ba1303e67fc5ff86/PROD/en-US/67ac7304cead44a9a6b762f583fe1fe1.html) endpoint using a [Kyma Serverless Function](https://kyma-project.io/external-content/serverless/docs/user/00-10-from-code-to-function.html)
 * Deploy a Kyma Serverless Function and an API Rule with **JWT Access strategy** using the [Kubernetes command-line tool](https://kubernetes.io/docs/reference/kubectl/overview/)
 * Alternately, deploy a Kyma Serverless Function and an API Rule with **JWT Access strategy** using the Kyma Console User Interface
 * Explore [api.sap.com](https://api.sap.com/) and try out REST API calls using a sandbox environment
@@ -24,8 +24,8 @@ This example includes a **Kyma Serverless Function**, *cdp-extension*, that is e
 * [SAP Customer Data Platform Sources and Destinations](https://help.sap.com/viewer/8438f051ded544d2ba1303e67fc5ff86/PROD/en-US/f4b17b0302e248da805fd9e4530934e5.html)
 * [Using Kyma with SAP Customer Data Platform Extensions](https://help.sap.com/viewer/8438f051ded544d2ba1303e67fc5ff86/PROD/en-US/8722f8e5157b4cf9be5f0177906a0351.html)
 * [What is Kyma Environment?](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/468c2f3c3ca24c2c8497ef9f83154c44.html)
-* [What is a Kyma Serverless Function?](https://kyma-project.io/docs/kyma/latest/01-overview/main-areas/serverless/svls-01-overview/#documentation-content)
-* [What is a Kyma API Rule?](https://kyma-project.io/docs/kyma/latest/05-technical-reference/00-custom-resources/apix-01-apirule/#documentation-content)
+* [What is a Kyma Serverless Function?](https://kyma-project.io/external-content/serverless/docs/user/00-10-from-code-to-function.html)
+* [What is a Kyma APIRule?](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/04-10-apirule-custom-resource.html)
 * [Project Kyma Documentation](https://kyma-project.io/)
 * [Administration and Operations in the Kyma Environment](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/b8e16869e64a4abe93cc194aa6fdacf5.html)
 

@@ -141,5 +141,5 @@ Additionally, the number of nodes (VMs) was reduced from 4 to 3.
 
 ## Related Links
 
-- <https://medium.com/@CloudifyOps/optimizing-kubernetes-workloads-with-keda-custom-metric-driven-pod-autoscaling-7332e674fdc6>
+- <https://medium.com/@CloudifyOps/optimizing-kubernetes-workloads-with-keda-custom-metric-driven-pod-autoscaling-7332e674fdc6><!-- markdown-link-check-disable-line -->
 - <https://doc.kaas.thalesdigital.io/docs/Features/keda>

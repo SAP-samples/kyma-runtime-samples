@@ -10,14 +10,14 @@ This sample demonstrates how to:
 
 * Create a development Namespace in the Kyma runtime.
 * Create and deploy a Scala AKKA-HTTP microservice in the Kyma runtime.
-* Expose the microservice using [APIRules](https://kyma-project.io/docs/components/api-gateway#custom-resource-api-rule).
+* Expose the microservice using [APIRules](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/04-10-apirule-custom-resource.html).
 * Explore the APIs.
 
 ## Prerequisites
 
 * SAP BTP, Kyma runtime instance
 * [Docker](https://www.docker.com/)
-* [make](https://www.gnu.org/software/make/)
+* [make](https://www.gnu.org/software/make/)<!-- markdown-link-check-disable-line -->
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) configured to use the `KUBECONFIG` file downloaded from the Kyma runtime
 * [Java 11+](https://openjdk.java.net/projects/jdk/11/)
 * [sbt](https://www.scala-sbt.org/)
