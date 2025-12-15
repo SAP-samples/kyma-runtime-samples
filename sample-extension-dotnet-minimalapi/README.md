@@ -77,24 +77,23 @@ sample-extension-dotnet-minimalapi-774fbc5c7b-x44pd   2/2     Running   0       
 1. Create an APIRule. In the APIRule, specify the Kubernetes Service that is exposed:
 
 ```yaml
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: sample-extension-dotnet-minimalapi
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - sample-extension-dotnet-minimalapi
   rules:
-    - accessStrategies:
-        - config: {}
-          handler: noop
+    - noAuth: true
       methods:
         - GET
         - POST
         - PUT
         - DELETE
-      path: /.*
+      path: /*
   service:
-    host: sample-extension-dotnet-minimalapi
     name: sample-extension-dotnet-minimalapi
     port: 5046
 ```  

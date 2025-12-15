@@ -1,15 +1,14 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: {{ .Values.services.app.name }}
 spec:
   gateway: {{ .Values.gateway }}
-  host: {{ .Values.services.app.name }}-{{ .Release.Namespace }}.{{ .Values.clusterDomain }}
+  hosts: 
+  - {{ .Values.services.app.name }}-{{ .Release.Namespace }}.{{ .Values.clusterDomain }}
   rules:
-    - path: /.*
-      accessStrategies:
-        - config: {}
-          handler: noop
+    - path: /*
+      noAuth: true
       methods:
         - HEAD
         - GET

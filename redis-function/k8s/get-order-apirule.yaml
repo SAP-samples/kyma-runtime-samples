@@ -1,17 +1,16 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: get-order
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: get-order
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - get-order
   service:
     name: get-order
     port: 80
   rules:
-    - path: /.*
-      accessStrategies:
-        - config: {}
-          handler: noop
+    - path: /*
+      noAuth: true
       methods:
         - GET

@@ -1,19 +1,19 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: cpi-api-read-oauth
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: cpi-api-read-oauth
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - cpi-api-read-oauth
   service:
     name: orders-list-api
     port: 80
   rules:
-  - accessStrategies:
-    - config:
-        required_scope:
-        - read
-      handler: oauth2_introspection
+  - jwt:
+      authentications:
+        - issuer: <YOUR_ISSUER_URL>
+          jwksUri: <YOUR_JWKS_URI>
     methods:
     - GET
     - POST
@@ -21,4 +21,4 @@ spec:
     - PATCH
     - DELETE
     - HEAD
-    path: /.*
+    path: /*
