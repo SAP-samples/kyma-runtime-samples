@@ -5,17 +5,19 @@
 
 ## Prerequisites
 
-- Helm 3.x installed
-- kubectl installed and configured to access your Kyma cluster
-- A worker pool with GPU nodes available in your Kyma cluster
+- Helm 3.x installed. For more information, see the [Kubernetes](https://github.com/SAP-samples/kyma-runtime-samples/tree/main/prerequisites#kubernetes) section.
+- kubectl installed and configured to access your Kyma cluster. For more information, see the [Kubernetes](https://github.com/SAP-samples/kyma-runtime-samples/tree/main/prerequisites#kubernetes) section.
+- You have an SAP BTP, Kyma runtime instance.
+
+## Procedure
 
 ### Setting Up a GPU Worker Pool
+
+Follor these step, to set up a worker pool with GPU nodes available in your Kyma cluster. For more information, see [Additional Worker Node Pools](https://help.sap.com/docs/btp/sap-business-technology-platform/provisioning-and-update-parameters-in-kyma-environment?version=Cloud#additional-worker-node-pools).
 
 1. Go to the SAP BTP cockpit and update your Kyma instance by adding a new worker pool named `gpu`.
 2. Add some nodes with the GPU support, for example, `g6.xlarge`.
 3. Set auto-scaling min nodes to `0` and max nodes to a desired number, for example, `2`. This way, when no GPU workloads are running, the cluster scales down to zero GPU nodes, saving costs.
-
-## Procedure
 
 ### Installation
 
