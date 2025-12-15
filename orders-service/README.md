@@ -8,7 +8,7 @@ This example contains:
 
 - A sample application (microservice) written in [Go](http://golang.org). It can expose HTTP endpoints used to create, read, and delete basic order JSON entities, as described in the [service's OpenAPI specification](docs/openapi.yaml). This service can run with either a default in-memory database or the external Redis database.
 
-- A [serverless](https://kyma-project.io/#/serverless-manager/user/README) Function with the ability to expose HTTP endpoints used to read all order records or post single orders. Just like the microservice, the Function can run with either the default in-memory database or the external Redis instance. See the source code of this Function in the [`function.yaml`](./deployment/orders-function.yaml)) file under the **spec.source** field.
+- A serverless Function with the ability to expose HTTP endpoints used to read all order records or post single orders. Just like the microservice, the Function can run with either the default in-memory database or the external Redis instance. See the source code of this Function in the [`function.yaml`](./deployment/orders-function.yaml)) file under the **spec.source** field. For more information, see [Serverless Module](https://kyma-project.io/external-content/serverless/docs/user/README.html).
 
 To see this microservice and Function in action, see the [getting started guides](https://github.com/kyma-project/kyma/blob/release-1.24/docs/getting-started/01-overview.md) and learn more about exposing services and Functions through API Rule CRs. You will also learn how to bind them to an external application like Redis and subscribe them to events from a sample mock application.
 
