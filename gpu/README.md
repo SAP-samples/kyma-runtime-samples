@@ -1,4 +1,4 @@
-# Running GPU Workload in a Kyma Cluster
+# Running GPU Workloads in a Kyma Cluster
 
 > [!Note]
 > This sample is based on [NVIDIA GPU Operator Installation Guide for Gardener](https://github.com/gardener/gardener-ai-conformance/blob/main/v1.33/NVIDIA-GPU-Operator.md).
