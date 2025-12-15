@@ -1,0 +1,27 @@
+cdi:
+  enabled: true
+  default: true
+toolkit:
+  installDir: /opt/nvidia
+driver:
+  imagePullPolicy: Always
+  usePrecompiled: true
+  # Use a driver version that has a published image for your kernel
+  # If 580 is required, ensure the corresponding image exists in ghcr.io and that you have access.
+  # version: 580
+  # repository: ghcr.io/gardenlinux/gardenlinux-nvidia-installer/proprietary
+  version: 570
+  repository: ghcr.io/gardenlinux/gardenlinux-nvidia-installer
+node-feature-discovery:
+  worker:
+    config:
+      sources:
+        custom:
+          - name: "gardenlinux-version"
+            labelsTemplate: |
+              {{ range .system.osrelease }}feature.node.kubernetes.io/system-os_release.VERSION_ID=0
+              {{ end }}
+            matchFeatures:
+              - feature: system.osrelease
+                matchExpressions:
+                  GARDENLINUX_VERSION: {op: Exists}
