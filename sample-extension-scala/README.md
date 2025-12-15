@@ -74,28 +74,27 @@ sample-extension-scala-76b545f95b-xh6fx   2/2     Running   0          4m10s
 
 * Create an APIRule. In the APIRule, specify the Kubernetes Service that is exposed:
 
-    ```yaml
-    apiVersion: gateway.kyma-project.io/v1alpha1
-    kind: APIRule
-    metadata:
-      name: sample-extension-scala
-    spec:
-      gateway: kyma-gateway.kyma-system.svc.cluster.local
-      rules:
-        - accessStrategies:
-            - config: {}
-              handler: noop
-          methods:
-            - GET
-            - POST
-            - PUT
-            - DELETE
-          path: /.*
+```yaml
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: sample-extension-scala
+spec:
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - sample-extension-scala
+  rules:
+    - noAuth: true
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      path: /*
       service:
-        host: sample-extension-scala
         name: sample-extension-scala
         port: 8080
-    ```  
+```
 
 This sample snippet exposes the `sample-extension-scala` Service. The Service is specified in the **spec.service.name** field.
 The `sample-extension-scala` subdomain is specified in the **spec.service.host** field.

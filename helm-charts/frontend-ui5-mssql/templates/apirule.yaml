@@ -1,17 +1,16 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: {{include "frontend-ui5-mssql.fullname" .}}
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-   host: {{include "frontend-ui5-mssql.fullname" .}}
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - {{include "frontend-ui5-mssql.fullname" .}}
   service:
     name: {{include "frontend-ui5-mssql.fullname" .}}
     port: {{.Values.service.port}}
   rules:
-    - path: /.*
-      accessStrategies:
-        - config: {}
-          handler: noop
+    - path: /*
+      noAuth: true
       methods:
         - GET

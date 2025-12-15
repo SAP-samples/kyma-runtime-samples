@@ -1,17 +1,16 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: cc-sample
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: cc-sample
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - cc-sample
   service:
     name: cc-sample
     port: 80
   rules:
-  - accessStrategies:
-    - config: {}
-      handler: allow
+  - noAuth: true
     methods:
     - GET
     - POST
@@ -19,4 +18,4 @@ spec:
     - DELETE
     - PATCH
     - HEAD
-    path: /.*
+    path: /*

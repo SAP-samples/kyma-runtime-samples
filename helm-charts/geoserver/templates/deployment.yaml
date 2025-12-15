@@ -58,20 +58,19 @@ spec:
   selector:
     app: geoserver
 ---
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: geoserver
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: {{.Release.Name}}-{{.Release.Namespace}}
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - {{.Release.Name}}-{{.Release.Namespace}}
   service:
     name: geoserver
     port: 8080
   rules:
-  - accessStrategies:
-    - config: {}
-      handler: allow
+  - noAuth: true
     methods:
     - GET
     - POST
@@ -79,4 +78,4 @@ spec:
     - PATCH
     - DELETE
     - HEAD
-    path: /.*
+    path: /*
