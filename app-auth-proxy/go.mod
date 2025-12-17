@@ -12,7 +12,7 @@ require (
 	github.com/rbcervilla/redisstore/v8 v8.0.0
 	github.com/sirupsen/logrus v1.7.0
 	github.com/vrischmann/envconfig v1.3.0
-	golang.org/x/net v0.0.0-20201006153459-a7d1128ccaa0
+	golang.org/x/net v0.7.0
 	golang.org/x/oauth2 v0.0.0-20200902213428-5d25da1a8d43
 	gopkg.in/square/go-jose.v2 v2.5.1 // indirect
 )
