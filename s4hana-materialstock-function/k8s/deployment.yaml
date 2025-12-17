@@ -5,7 +5,7 @@ metadata:
   labels:
     app: s4hana-materialstock
 spec:
-  runtime: nodejs16
+  runtime: nodejs22
   source:
     inline:
       dependencies: "{ \n  \"name\": \"material-stock\",\n  \"version\": \"1.0.0\",\n  \"dependencies\":
