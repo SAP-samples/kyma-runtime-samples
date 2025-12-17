@@ -12,7 +12,7 @@ MarkupSafe==1.1.1
 protobuf==3.15.8
 pycodestyle==2.7.0
 python-debian==0.1.39
-requests==2.25.1
+requests==2.31.0
 reuse==0.12.1
 six==1.15.0
 toml==0.10.2
