@@ -1,18 +1,17 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: delayedorderemailsender
-  spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+spec:
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - delayedorderemailsender.<YOUR HOST>
   rules:
-    - accessStrategies:
-        - config: {}
-          handler: noop
+    - noAuth: true
       methods:
         - GET
         - POST
-      path: /.*
+      path: /*
   service:
-    host: delayedorderemailsender.<YOUR HOST>
     name: delayedorderemailsender
     port: 80

@@ -1,33 +1,18 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: s4-address-validation
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: s4-address-validation
-  rules:
-    - accessStrategies:
-        - config:
-            required_scope: ["s4-bp-write"]
-          handler: oauth2_introspection
-      methods:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-        - PATCH
-        - HEAD
-      path: /.*
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - s4-address-validation
   service:
     name: s4-address-validation
     port: 80
----
-apiVersion: hydra.ory.sh/v1alpha1
-kind: OAuth2Client
-metadata:
-  name: s4-busi-partner
-spec:
-  grantTypes:
-    - "client_credentials"
-  scope: "s4-bp-write"
-  secretName: s4-busi-partner
+  rules:
+    - path: /*
+      methods: ["DELETE", "HEAD", "GET", "PATCH", "POST", "PUT"]
+      jwt:
+        authentications:
+        - issuer: <your-issuer-url>
+          jwksUri: <your-jwks-uri>

@@ -1,28 +1,3 @@
-apiVersion: servicecatalog.k8s.io/v1beta1
-kind: ServiceBinding
-metadata:
-  name: azure-sql-binding
-  labels:
-    app: api-mssql-go
-spec:
-  instanceRef:
-    name: <Service Binding Name>
----
-apiVersion: servicecatalog.kyma-project.io/v1alpha1
-kind: ServiceBindingUsage
-metadata:
-  name: azure-sql-binding-usage
-  labels:
-    app: api-mssql-go
-spec:
-  serviceBindingRef:
-    name: azure-sql-binding
-  usedBy:
-    kind: deployment
-    name: api-mssql-go
-  parameters:
-    envPrefix:
-      name: "MYAPP_"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -64,23 +39,18 @@ spec:
   selector:
     app: api-mssql-go
 ---
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: api-mssql-go
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: api-mssql-go
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - api-mssql-go
   service:
     name: api-mssql-go
     port: 80
   rules:
-    - path: /orders|/orders/.*
-      accessStrategies:
-        - config: {}
-          handler: noop
-      methods:
-        - GET
-        - POST
-        - PUT
-        - DELETE
+    - path: /orders/{**}
+      noAuth: true
+      methods: ["GET", "POST", "PUT", "DELETE"]

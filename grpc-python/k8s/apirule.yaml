@@ -1,22 +1,21 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: grpcorderserver
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: grpcorderserver
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - grpcorderserver
   service:
     name: grpcorderserver
     port: 50051
   rules:
-    - path: /.*
-      accessStrategies:
-        - config: {}
-          handler: allow
-      methods:
-        - GET
-        - POST
-        - PUT
-        - PATCH
-        - DELETE
-        - HEAD
+  - path: /*
+    noAuth: true
+    methods:
+      - GET
+      - POST
+      - PUT
+      - PATCH
+      - DELETE
+      - HEAD

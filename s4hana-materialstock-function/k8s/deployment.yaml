@@ -5,7 +5,7 @@ metadata:
   labels:
     app: s4hana-materialstock
 spec:
-  runtime: nodejs16
+  runtime: nodejs22
   source:
     inline:
       dependencies: "{ \n  \"name\": \"material-stock\",\n  \"version\": \"1.0.0\",\n  \"dependencies\":
@@ -18,20 +18,19 @@ spec:
         \   return response;\n  }\n}\n\nasync function getMaterialStock() {\n  return
         vdm.MaterialStock.requestBuilder()\n      .getAll().execute(destConfig);\n}"
 ---
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: s4hana-materialstock
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: s4hana-materialstock
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - s4hana-materialstock 
   service:
     name: s4hana-materialstock
     port: 80
   rules:
-    - path: /.*
-      accessStrategies:
-        - config: {}
-          handler: noop
+    - path: /*
+      noAuth: true
       methods:
         - GET

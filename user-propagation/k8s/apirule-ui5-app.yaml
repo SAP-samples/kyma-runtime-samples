@@ -1,14 +1,13 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: sample-ui5-app
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: sample-ui5-app
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - sample-ui5-app
   rules:
-  - accessStrategies:
-    - config: {}
-      handler: noop
+  - noAuth: true
     methods:
     - GET
     - POST
@@ -16,7 +15,7 @@ spec:
     - PATCH
     - DELETE
     - HEAD
-    path: /.*
+    path: /*
     service:
       name: kyma-identity-propagation-ui5
       port: 80

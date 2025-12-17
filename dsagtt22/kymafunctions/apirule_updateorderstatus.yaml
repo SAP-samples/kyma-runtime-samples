@@ -1,18 +1,17 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: updateorderstatus
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  hosts: 
+  - updateorderstatus.<YOUR HOST>
+  gateway: kyma-system/kyma-gateway
   rules:
-    - accessStrategies:
-        - config: {}
-          handler: noop
+    - noAuth: true
       methods:
         - POST
         - GET
-      path: /.*
+      path: /*
   service:
-    host: updateorderstatus.<YOUR HOST>
     name: updateorderstatus
     port: 80

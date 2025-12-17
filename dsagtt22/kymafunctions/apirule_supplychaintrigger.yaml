@@ -1,18 +1,17 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: supplychaintrigger
-  spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+spec:
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - supplychaintrigger.<YOUR HOST>
   rules:
-    - accessStrategies:
-        - config: {}
-          handler: noop
+    - noAuth: true
       methods:
         - POST
         - GET
-      path: /.*
+      path: /*
   service:
-    host: supplychaintrigger.<YOUR HOST>
     name: triggersupplyshortagemessage
     port: 80

@@ -45,21 +45,19 @@ spec:
 status:
   loadBalancer: {}
 ---
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: test-workload-on-prem-reg
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: test-workload-on-prem-reg
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - test-workload-on-prem-reg
   rules:
-  - accessStrategies:
-    - config: {}
-      handler: allow
+  - noAuth: true
     methods:
     - GET
-    path: /.*
+    path: /*
   service:
     name: test-workload-on-prem-reg
     port: 80
-status: {}

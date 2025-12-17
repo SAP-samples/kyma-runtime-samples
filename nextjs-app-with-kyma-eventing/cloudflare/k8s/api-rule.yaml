@@ -1,4 +1,4 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: app-your-domain-com
@@ -6,11 +6,11 @@ metadata:
   labels:
     app.kubernetes.io/name: app-your-domain-com
 spec:
-  gateway: app.conference-registration.svc.cluster.local
+  gateway: conference-registration/app
+  hosts: 
+  - app.your-domain.com
   rules:
-    - accessStrategies:
-        - handler: allow
-          config: {}
+    - noAuth: true
       methods:
         - GET
         - POST
@@ -18,8 +18,7 @@ spec:
         - DELETE
         - PATCH
         - HEAD
-      path: /.*
+      path: /*
   service:
-    host: app.your-domain.com
     name: conference-registration-app
     port: 80

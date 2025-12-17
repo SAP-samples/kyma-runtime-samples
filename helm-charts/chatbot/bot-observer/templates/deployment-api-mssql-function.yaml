@@ -21,18 +21,17 @@ spec:
     - name: username
       value: {{ .Values.apimssqlfunction.deployment.env.username }}
 ---
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: api-mssql-function
 spec:
   gateway: {{ .Values.apimssqlfunction.apirule.gateway }}
-  host: api-mssql-function
+  hosts: 
+  - api-mssql-function
   rules:
-    - path: /.*
-      accessStrategies:
-        - config: {}
-          handler: noop
+    - path: /*
+      noAuth: true
       methods:
         - GET
         - POST

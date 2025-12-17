@@ -85,31 +85,30 @@ The expected result shows that the Pod for the `sample-extension-java` Deploymen
 
 * Create an APIRule. In the APIRule, specify the Kubernetes Service that is exposed:
 
-    ```yaml
-    apiVersion: gateway.kyma-project.io/v1alpha1
-    kind: APIRule
-    metadata:
-      name: sample-extension-java
-    spec:
-      gateway: kyma-gateway.kyma-system.svc.cluster.local
-      rules:
-        - accessStrategies:
-            - config: {}
-              handler: noop
-          methods:
-            - GET
-            - POST
-            - PUT
-            - DELETE
-          path: /.*
+```yaml
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: sample-extension-java
+spec:
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - sample-extension-java
+  rules:
+    - noAuth: true
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      path: /*
       service:
-        host: sample-extension-java
         name: sample-extension-java
         port: 8080
-    ```  
+```  
 
-    This sample snippet exposes the `sample-extension-java` Service. The Service is specified in the **spec.service.name** field.
-    The `sample-extension-java` subdomain is specified in the **spec.service.host** field.
+This sample snippet exposes the `sample-extension-java` Service. The Service is specified in the **spec.service.name** field.
+The `sample-extension-java` subdomain is specified in the **spec.service.host** field.
 
 * Apply the APIRule:
 

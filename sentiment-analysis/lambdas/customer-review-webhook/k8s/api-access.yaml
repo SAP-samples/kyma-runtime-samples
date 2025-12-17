@@ -1,24 +1,19 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: sentiment-analysis-api-rule
 spec:
   gateway: kyma-system/kyma-gateway
-  host: cusrevwh-o
+  hosts: 
+  - cusrevwh-o
   service:
     name: customer-review-webhook
     port: 80
   rules:
-  - accessStrategies:
-    - config:
-        jwks_urls:
-        - {JWKS URL of your IDP} #e.g. SAP Cloud Identity Tenant
-        trusted_issuers:
-        - {Your IDP address} #e.g. SAP Cloud Identity Tenant
-      handler: jwt
+  - jwt:
+      authentications:
+        - jwksUri: "{JWKS URL of your IDP}" #e.g. SAP Cloud Identity Tenant
+          issuer: "{Your IDP address}" #e.g. SAP Cloud Identity Tenant
     methods:
     - POST
-    path: /.*
-    service:
-      name: customer-review-webhook
-      port: 80
+    path: /*

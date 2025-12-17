@@ -1,19 +1,18 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: daprwishlistappsdk
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - daprwishlistapp
   rules:
-    - accessStrategies:
-        - config: {}
-          handler: noop
+    - noAuth: true
       methods:
         - GET
         - POST
         - DELETE
-      path: /.*
+      path: /*
   service:
-    host: daprwishlistapp
     name: daprwishlistapp
     port: 7080

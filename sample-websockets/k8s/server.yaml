@@ -60,17 +60,16 @@ spec:
   protocolsettings: {}
   sink: http://websocket-server.dev.svc.cluster.local:8888/events
 ---
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: websocket-server
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: websocket-server
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - websocket-server
   rules:
-  - accessStrategies:
-    - config: {}
-      handler: noop
+  - noAuth: true
     methods:
     - GET
     - POST
@@ -78,8 +77,7 @@ spec:
     - PATCH
     - DELETE
     - HEAD
-    path: /.*
+    path: /*
     service:
       name: websocket-server
       port: 8888
-status: {}

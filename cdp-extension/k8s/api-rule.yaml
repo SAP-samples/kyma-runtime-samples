@@ -1,31 +1,19 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: cdp-extension
   namespace: cdp
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  rules:
-  - accessStrategies:
-    - config:
-        jwks_urls:
-        - https://accounts.DATA_CENTER/accounts.getJWTPublicKey?v2=true
-#       Example:
-#       - https://accounts.us1.gigya.com/accounts.getJWTPublicKey?v2=true
-        trusted_issuers:
-        - https://fidm.gigya.com/jwt/BUSINESS_UNIT_ID/
-#       Example:
-#       - https://fidm.gigya.com/jwt/1_0A00AAAAa-a0AAAAOaA0aA/
-      handler: jwt
-    methods:
-    - GET
-    - POST
-    - PUT
-    - PATCH
-    - DELETE
-    - HEAD
-    path: /.*
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - cdp-extension
   service:
-    host: cdp-extension
     name: cdp-extension
     port: 80
+  rules:
+  - path: /*
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"]
+    jwt:
+      authentications:
+      - jwksUri: https://accounts.DATA_CENTER/accounts.getJWTPublicKey?v2=true
+        issuer: https://fidm.gigya.com/jwt/BUSINESS_UNIT_ID/

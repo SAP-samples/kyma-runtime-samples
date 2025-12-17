@@ -1,20 +1,19 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: {{ include "sample-extension-micronaut.fullname" . }}
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  gateway: kyma-system/kyma-gateway
+  hosts:
+    - {{ .Chart.Name }}
   rules:
-    - accessStrategies:
-        - config: {}
-          handler: noop
+    - noAuth: true
       methods:
         - GET
         - POST
         - PUT
         - DELETE
-      path: /.*
+      path: /*
   service:
-    host: {{ .Chart.Name }}
     name: {{ include "sample-extension-micronaut.fullname" . }}
     port: 80

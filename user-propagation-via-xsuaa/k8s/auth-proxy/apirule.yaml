@@ -1,15 +1,14 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: c4c-user-prop-xsuaa
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: c4c-user-prop-xsuaa
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - c4c-user-prop-xsuaa
   rules:
-    - path: /.*
-      accessStrategies:
-        - config: {}
-          handler: noop
+    - path: /*
+      noAuth: true
       methods:
         - GET
         - POST
