@@ -11,7 +11,6 @@ spec:
       authentications:
         - jwksUri: https://{sap-cloud-identity-tenant}.ondemand.com/oauth2/certs
           issuer: https://{sap-cloud-identity-tenant}.ondemand.com
-      handler: jwt
     methods:
     - GET
     - HEAD

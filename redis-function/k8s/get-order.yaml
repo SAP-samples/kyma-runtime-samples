@@ -3,7 +3,7 @@ kind: Function
 metadata:
   name: get-order
 spec:
-  runtime: nodejs16
+  runtime: nodejs22
   env:
   - name: REDIS_PORT
     value: "6379"
