@@ -39,7 +39,7 @@ jobs:
           make build-image
           popd
       - name: Slack Notify
-        uses: rtCamp/action-slack-notify@v2.2.0
+        uses: rtCamp/action-slack-notify@v2.2.1
         if: ${{ failure() }}
         env:
           SLACK_MESSAGE: 'Build Failed for ${{ env.SAMPLE_NAME }}'
