@@ -4,7 +4,7 @@
 
 This example includes a **Kyma serverless function**, *cdc-extension*, that is exposed as a **SAP Customer Data Cloud extension endpoint**, and demonstrates how to:
 
-* Create an [SAP Customer Data Cloud extension](https://help.sap.com/viewer/8b8d6fffe113457094a17701f63e3d6a/GIGYA/en-US/4153ec2f70b21014bbc5a10ce4041860.html) endpoint using a [Kyma Serverless Function](https://kyma-project.io/external-content/serverless/docs/user/resources/06-10-function-cr)
+* Create an [SAP Customer Data Cloud extension](https://help.sap.com/viewer/8b8d6fffe113457094a17701f63e3d6a/GIGYA/en-US/4153ec2f70b21014bbc5a10ce4041860.html) endpoint using a [Kyma serverless function](https://kyma-project.io/external-content/serverless/docs/user/00-10-from-code-to-function.html)
 * Deploy a Kyma serverless function and an API Rule using the [Kubernetes command-line tool](https://kubernetes.io/docs/reference/kubectl/overview/)
 * Alternately, deploy a Kyma serverless function and an API Rule using the Kyma Console User Interface
 * Explore [api.sap.com](https://api.sap.com/) and try out REST API calls using a sandbox environment
@@ -26,10 +26,9 @@ This example includes a **Kyma serverless function**, *cdc-extension*, that is e
 ## Suggested introductory readings
 
 * [What is an SAP Customer Data Cloud Extension?](https://help.sap.com/viewer/8b8d6fffe113457094a17701f63e3d6a/GIGYA/en-US/4153ec2f70b21014bbc5a10ce4041860.html)
-* [An Introduction to SAP Customer Data Cloud Extensions (video)](https://microlearning.opensap.com/media/1_ucyxrfoj)
 * [What is Kyma Environment?](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/468c2f3c3ca24c2c8497ef9f83154c44.html)
-* [What is a Kyma Serverless Function?](https://kyma-project.io/external-content/serverless/docs/user/resources/06-10-function-cr)
-* [What is a Kyma API Rule?](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/README)
+* [What is a Kyma Serverless Function?](https://kyma-project.io/external-content/serverless/docs/user/00-10-from-code-to-function.html)
+* [What is a Kyma APIRule?](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/04-10-apirule-custom-resource.html)
 * [Project Kyma Documentation](https://kyma-project.io/)
 * [Administration and Operations in the Kyma Environment](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/b8e16869e64a4abe93cc194aa6fdacf5.html)
 

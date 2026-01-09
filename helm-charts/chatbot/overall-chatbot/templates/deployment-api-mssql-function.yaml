@@ -20,22 +20,21 @@ spec:
   reference: {{ .Values.apimssqlfunction.deployment.reference }}
   baseDir: {{ .Values.apimssqlfunction.deployment.basedir }} 
 ---
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: api-mssql-function
 spec:
   gateway: {{ .Values.apimssqlfunction.apirule.gateway }}
+  hosts:
+  - api-mssql-function
   rules:
-    - path: /.*
-      accessStrategies:
-        - config: {}
-          handler: noop
+    - path: /*
+      noAuth: true
       methods:
         - GET
         - POST
         - DELETE
   service:
-    host: api-mssql-function
     name: api-mssql-function
     port: 80

@@ -12,7 +12,7 @@ This sample demonstrates how to:
 
 * Create a development Namespace in the Kyma runtime.
 * Create and deploy a Spring Boot application in the Kyma runtime.
-* Expose the Spring Boot application using [APIRules](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/README).
+* Expose the Spring Boot application using [APIRules](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/04-10-apirule-custom-resource.html).
 * Explore the APIs.
 
 ## Prerequisites
@@ -85,31 +85,30 @@ The expected result shows that the Pod for the `sample-extension-java` Deploymen
 
 * Create an APIRule. In the APIRule, specify the Kubernetes Service that is exposed:
 
-    ```yaml
-    apiVersion: gateway.kyma-project.io/v1alpha1
-    kind: APIRule
-    metadata:
-      name: sample-extension-java
-    spec:
-      gateway: kyma-gateway.kyma-system.svc.cluster.local
-      rules:
-        - accessStrategies:
-            - config: {}
-              handler: noop
-          methods:
-            - GET
-            - POST
-            - PUT
-            - DELETE
-          path: /.*
+```yaml
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: sample-extension-java
+spec:
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - sample-extension-java
+  rules:
+    - noAuth: true
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      path: /*
       service:
-        host: sample-extension-java
         name: sample-extension-java
         port: 8080
-    ```  
+```  
 
-    This sample snippet exposes the `sample-extension-java` Service. The Service is specified in the **spec.service.name** field.
-    The `sample-extension-java` subdomain is specified in the **spec.service.host** field.
+This sample snippet exposes the `sample-extension-java` Service. The Service is specified in the **spec.service.name** field.
+The `sample-extension-java` subdomain is specified in the **spec.service.host** field.
 
 * Apply the APIRule:
 

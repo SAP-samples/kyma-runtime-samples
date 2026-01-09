@@ -18,7 +18,7 @@ Using this sample, you start from scratch to deploy a [CAP](https://cap.cloud.sa
 > [!Note]
 > If you're using an SAP BTP trial account, use a subaccount that supports SAP Hana Cloud. At the time of creating the sample (June 2025), SAP Hana Cloud is available in the US, but not in Singapore.
 - [Docker](../prerequisites/README.md#docker)
-- [make](https://www.gnu.org/software/make/)
+- [make](https://www.gnu.org/software/make/)<!-- markdown-link-check-disable-line -->
 - [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 - [Pack](../prerequisites/README.md#pack)
 - [NodeJS 20 or higher](https://nodejs.org/en/download/)

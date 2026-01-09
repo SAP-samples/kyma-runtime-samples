@@ -1,17 +1,17 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   labels:
     app: marketing-mock
   name: marketing-mock
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - marketing
   service:
     name: marketing-mock
     port: 10000
-    host: marketing
   rules:
-    - path: /.*
+    - path: /*
       methods: ["GET","POST","PUT","DELETE","HEAD"]
-      accessStrategies:
-        - handler: allow
+      noAuth: true

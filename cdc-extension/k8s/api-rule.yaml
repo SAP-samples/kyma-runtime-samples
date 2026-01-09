@@ -1,23 +1,16 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: cdc-extension
   namespace: cdc
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - cdc-extension
   rules:
-    - accessStrategies:
-        - config: {}
-          handler: allow
-      methods:
-        - GET
-        - POST
-        - PUT
-        - PATCH
-        - DELETE
-        - HEAD
-      path: /.*
+    - noAuth: true
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD"]
+      path: /*
   service:
-    host: cdc-extension
     name: cdc-extension
     port: 80
