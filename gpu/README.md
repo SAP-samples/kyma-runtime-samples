@@ -13,7 +13,7 @@
 
 ### Setting Up a GPU Worker Pool
 
-Follor these step, to set up a worker pool with GPU nodes available in your Kyma cluster. For more information, see [Additional Worker Node Pools](https://help.sap.com/docs/btp/sap-business-technology-platform/provisioning-and-update-parameters-in-kyma-environment?version=Cloud#additional-worker-node-pools).
+Follow these steps, to set up a worker pool with GPU nodes available in your Kyma cluster. For more information, see [Additional Worker Node Pools](https://help.sap.com/docs/btp/sap-business-technology-platform/provisioning-and-update-parameters-in-kyma-environment?version=Cloud#additional-worker-node-pools).
 
 1. Go to the SAP BTP cockpit and update your Kyma instance by adding a new worker pool named `gpu`.
 2. Add some nodes with the GPU support, for example, `g6.xlarge`.
