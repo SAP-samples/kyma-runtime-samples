@@ -1,14 +1,14 @@
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: conference-registration-app
   namespace: conference-registration
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - conference-registration-app
   rules:
-  - accessStrategies:
-    - config: {}
-      handler: allow
+  - noAuth: true
     methods:
     - GET
     - POST
@@ -16,8 +16,7 @@ spec:
     - PATCH
     - DELETE
     - HEAD
-    path: /.*
+    path: /*
   service:
-    host: conference-registration-app
     name: conference-registration-app
     port: 80

@@ -162,7 +162,7 @@ The c4c-extension c4c-extension Application microservice implements the extensio
 
 - Deploy the extension with user propagation.
 
-  - Update `DESTINATION_NAME` in [`deployment.yaml`](/k8s/c4c-extension/deployment.yaml) with the name of the destination created in SAP BTP.
+  - Update `DESTINATION_NAME` in [`deployment.yaml`](./k8s/c4c-extension/deployment.yaml) with the name of the destination created in SAP BTP.
 
   - Deploy the extension.
 

@@ -8,13 +8,13 @@ This step covers the creation of an email to notify the customer about the delay
 
 - be registered as a webhook for the `delayedorder<userID>` queue
 - fetch the information about the order including the email address from the order microservice
-- send an email by using the 3rd party service [Courier](https://www.courier.com/)
+- send an email by using the 3rd party service [Courier](https://www.courier.com/) <!-- markdown-link-check-disable-line -->
 
 ## Step 7.1 - Registering at Courier (OPTIONAL)
 
 > 📝 **Tip - DSAG Technologietage 2022** - If you are doing this hands-on as part of the DSAG Technologietage 2022 you can get an API key by the hands-on tutors, no need to register
 
-In order to be able to send email we want to make use of a third party service that takes care of this task. In this hands on we will use [Courier](https://www.courier.com/).
+In order to be able to send email we want to make use of a third party service that takes care of this task. In this hands on we will use [Courier](https://www.courier.com/). <!-- markdown-link-check-disable-line -->
 
 In order to send email you must first register yourself at <https://app.courier.com/>. There is no credit card required and the service offers a free tier for the sending email. The sign-up flow is self-explanatory, make sure to tick the email channel when setting up your account.
 
@@ -203,7 +203,7 @@ Now we can start with the code of the Kyma Function:
 
   > 🔎 **Observation** - We could have also provided the email as part of the message that triggered the Kyma Function. However, there might be a delay between the processing and the email might have changed, so it is a more stable setup to fetch the email in this Kyma Function again instead of transporting it via the queue (leaving aside any GDPR implications when transferring the email via the message queue).
 
-- With that we can now send an email to the customer (see [Courier Quick Starts - Using the SDK](https://www.courier.com/docs/guides/getting-started/nodejs/#using-the-sdk)):
+- With that we can now send an email to the customer (see [Courier Quick Starts - Using the SDK](https://www.courier.com/docs/guides/getting-started/nodejs/#using-the-sdk)): <!-- markdown-link-check-disable-line -->
 
   ```javascript
   module.exports = {

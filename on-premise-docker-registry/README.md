@@ -22,11 +22,11 @@ Here, Nginx as a reverse proxy forwards the HTTP requests for pulling Docker ima
 
 ## Prerequisites
 
-- [SAP BTP, Kyma runtime instance](../prerequisites/#kyma)
-- [Docker](../prerequisites/#docker)
-- [GNU Make](https://www.gnu.org/software/make/)
-- [Kubernetes tooling](../prerequisites/#kubernetes)
-- [Cloud Connector on your machine or test system](../prerequisites/#sap-cloud-connector)
+- [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
+- [Docker](../prerequisites/README.md#docker)
+- [GNU Make](https://www.gnu.org/software/make/)<!-- markdown-link-check-disable-line -->
+- [Kubernetes tooling](../prerequisites/README.md#kubernetes)
+- [Cloud Connector on your machine or test system](../prerequisites//README.md#sap-cloud-connector)
 - [Connectivity Proxy instance configured in Kyma](https://help.sap.com/docs/btp/sap-business-technology-platform/configure-sap-btp-connectivity-in-kyma-environment)
 - [OpenSSL](https://www.openssl.org/) or another similar tool to generate the certificates
 - [htpasswd](https://httpd.apache.org/docs/2.4/programs/htpasswd.html) installed

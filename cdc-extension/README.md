@@ -4,7 +4,7 @@
 
 This example includes a **Kyma serverless function**, *cdc-extension*, that is exposed as a **SAP Customer Data Cloud extension endpoint**, and demonstrates how to:
 
-* Create an [SAP Customer Data Cloud extension](https://help.sap.com/viewer/8b8d6fffe113457094a17701f63e3d6a/GIGYA/en-US/4153ec2f70b21014bbc5a10ce4041860.html) endpoint using a [Kyma serverless function](https://kyma-project.io/docs/kyma/latest/01-overview/main-areas/serverless/svls-01-overview/#documentation-content)
+* Create an [SAP Customer Data Cloud extension](https://help.sap.com/viewer/8b8d6fffe113457094a17701f63e3d6a/GIGYA/en-US/4153ec2f70b21014bbc5a10ce4041860.html) endpoint using a [Kyma serverless function](https://kyma-project.io/external-content/serverless/docs/user/00-10-from-code-to-function.html)
 * Deploy a Kyma serverless function and an API Rule using the [Kubernetes command-line tool](https://kubernetes.io/docs/reference/kubectl/overview/)
 * Alternately, deploy a Kyma serverless function and an API Rule using the Kyma Console User Interface
 * Explore [api.sap.com](https://api.sap.com/) and try out REST API calls using a sandbox environment
@@ -15,7 +15,7 @@ This example includes a **Kyma serverless function**, *cdc-extension*, that is e
 * All the functionality presented here are subject to change and may be changed by SAP at any time for any reason without notice.
 * For demonstration, this example uses an API Key to authenticate requests to SAP Data Quality Management. In a real-world scenario, either [OAuth 2.0](https://help.sap.com/viewer/d95546360fea44988eb614718ff7e959/Cloud/en-US/1fa6310be4e14ebb86c0411491bcff97.html) or [Client Certificate Authentication](https://help.sap.com/viewer/d95546360fea44988eb614718ff7e959/Cloud/en-US/7e983cce55604a8bb23a137483ea5dca.html) are to be used.
 
-#### Solution Architecture
+### Solution Architecture
 
 ![Solution Architecture](assets/cdc-extension-diagram.png)
 
@@ -26,16 +26,15 @@ This example includes a **Kyma serverless function**, *cdc-extension*, that is e
 ## Suggested introductory readings
 
 * [What is an SAP Customer Data Cloud Extension?](https://help.sap.com/viewer/8b8d6fffe113457094a17701f63e3d6a/GIGYA/en-US/4153ec2f70b21014bbc5a10ce4041860.html)
-* [An Introduction to SAP Customer Data Cloud Extensions (video)](https://microlearning.opensap.com/media/1_ucyxrfoj)
 * [What is Kyma Environment?](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/468c2f3c3ca24c2c8497ef9f83154c44.html)
-* [What is a Kyma Serverless Function?](https://kyma-project.io/docs/kyma/latest/01-overview/main-areas/serverless/svls-01-overview/#documentation-content)
-* [What is a Kyma API Rule?](https://kyma-project.io/docs/kyma/latest/05-technical-reference/00-custom-resources/apix-01-apirule/#documentation-content)
+* [What is a Kyma Serverless Function?](https://kyma-project.io/external-content/serverless/docs/user/00-10-from-code-to-function.html)
+* [What is a Kyma APIRule?](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/04-10-apirule-custom-resource.html)
 * [Project Kyma Documentation](https://kyma-project.io/)
 * [Administration and Operations in the Kyma Environment](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/b8e16869e64a4abe93cc194aa6fdacf5.html)
 
 ## Pre-requisites
 
-* Provision [SAP Customer Data Cloud from Gigya](https://www.sap.com/canada/products/crm/customer-data-management.html) and [setup an SAP Customer Data Cloud site](https://help.sap.com/viewer/8b8d6fffe113457094a17701f63e3d6a/GIGYA/en-US/41720d7370b21014bbc5a10ce4041860.html).
+* Provision [SAP Data Quality Management, microservices for location data](https://www.sap.com/products/technology-platform/data-quality-management.html) and [set up an SAP Customer Data Cloud site](https://help.sap.com/viewer/8b8d6fffe113457094a17701f63e3d6a/GIGYA/en-US/41720d7370b21014bbc5a10ce4041860.html).
 * [Get a Free Account on SAP BTP Trial](https://developers.sap.com/tutorials/hcp-create-trial-account.html)*
 * [Enable SAP BTP, Kyma Runtime](https://developers.sap.com/tutorials/cp-kyma-getting-started.html).
 * [Download and install the Kubernetes Command Line Tool](https://developers.sap.com/tutorials/cp-kyma-download-cli.html#d81e7789-ced4-4df6-b4a0-132d8c637077).

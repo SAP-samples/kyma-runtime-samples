@@ -6,4 +6,4 @@ Each function contains a handler file and a dependencies file depending on the F
 
 Each function also contains a `k8s` directory that contains the `Function` deployment file and either an `APIRule` or `Subscription` depending on if it is a syncronous or asyncronous process.
 
-The functions are configured to be pulled directly from Git.  A `Secret` named `git-creds-basic` and a `GitRepository` resource must be provided in the namespace.  See the [Kyma documentation](https://kyma-project.io/docs/kyma/latest/03-tutorials/00-serverless/svls-02-create-git-function/) for details.
+The functions are configured to be pulled directly from Git.  A `Secret` named `git-creds-basic` and a `GitRepository` resource must be provided in the namespace. See [Create a Git Function](https://kyma-project.io/external-content/serverless/docs/user/tutorials/01-11-create-git-function.html) for details.

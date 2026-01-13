@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-service
+  namespace: orders-service
+  labels:
+    app: orders-service
+    example: orders-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-service
+      example: orders-service
+  template:
+    metadata:
+      labels:
+        app: orders-service
+        example: orders-service
+    spec:
+      containers:
+        - name: orders-service
+          image: "eu.gcr.io/kyma-project/develop/orders-service:e8175c63"
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 20m
+              memory: 32Mi
+            requests:
+              cpu: 10m
+              memory: 16Mi
+          env:
+            - name: APP_PORT
+              value: "8080"
+            - name: APP_REDIS_PREFIX
+              value: "REDIS_"

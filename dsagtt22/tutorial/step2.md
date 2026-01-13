@@ -120,7 +120,7 @@ After the initial login you must set a new personal password. Next we configure 
 
 The final setup should then look like this:
 
-![Cloud Connector - Final Setup](../pics/step2_IP_CloudConnector-Final%20Setup.png).
+![Cloud Connector - Final Setup](../pics/step2_IP_CloudConnector-Final-Setup.png).
 
 > 📝 **Tip** - You can also cross-check the connection to the Cloud Connector in the SAP BTP Cockpit in the connected subaccount under **Connectivity** -> **Cloud Connectors**  
 

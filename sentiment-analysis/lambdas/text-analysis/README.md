@@ -10,7 +10,7 @@ It uses the `python39` function runtime .
 
 [handler.py](handler.py) - Javscript source code for the function
 
-[requirements.txt](package.json) - Dependencies for the function
+[requirements.txt](../sentiment-analysis/package.json) - Dependencies for the function
 
 [k8s/function.yaml](k8s/function.yaml) - `Function` configuration for the function
 

@@ -10,14 +10,14 @@ This sample demonstrates how to:
 
 * Create a development Namespace in the Kyma runtime.
 * Create and deploy a Scala AKKA-HTTP microservice in the Kyma runtime.
-* Expose the microservice using [APIRules](https://kyma-project.io/docs/components/api-gateway#custom-resource-api-rule).
+* Expose the microservice using [APIRules](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/04-10-apirule-custom-resource.html).
 * Explore the APIs.
 
 ## Prerequisites
 
 * SAP BTP, Kyma runtime instance
 * [Docker](https://www.docker.com/)
-* [make](https://www.gnu.org/software/make/)
+* [make](https://www.gnu.org/software/make/)<!-- markdown-link-check-disable-line -->
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) configured to use the `KUBECONFIG` file downloaded from the Kyma runtime
 * [Java 11+](https://openjdk.java.net/projects/jdk/11/)
 * [sbt](https://www.scala-sbt.org/)
@@ -74,28 +74,27 @@ sample-extension-scala-76b545f95b-xh6fx   2/2     Running   0          4m10s
 
 * Create an APIRule. In the APIRule, specify the Kubernetes Service that is exposed:
 
-    ```yaml
-    apiVersion: gateway.kyma-project.io/v1alpha1
-    kind: APIRule
-    metadata:
-      name: sample-extension-scala
-    spec:
-      gateway: kyma-gateway.kyma-system.svc.cluster.local
-      rules:
-        - accessStrategies:
-            - config: {}
-              handler: noop
-          methods:
-            - GET
-            - POST
-            - PUT
-            - DELETE
-          path: /.*
+```yaml
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: sample-extension-scala
+spec:
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - sample-extension-scala
+  rules:
+    - noAuth: true
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      path: /*
       service:
-        host: sample-extension-scala
         name: sample-extension-scala
         port: 8080
-    ```  
+```
 
 This sample snippet exposes the `sample-extension-scala` Service. The Service is specified in the **spec.service.name** field.
 The `sample-extension-scala` subdomain is specified in the **spec.service.host** field.

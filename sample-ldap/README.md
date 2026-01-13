@@ -10,9 +10,9 @@ In the sample flow, the users details are queried from the on-premise LDAP serve
 
 ## Prerequisites
 
-* [SAP BTP, Kyma runtime instance](../prerequisites/#kyma)
-* [Kubernetes tooling](../prerequisites/#kubernetes)
-* [Cloud Connector on your laptop or test system](../prerequisites/#sap-cloud-connector)
+* [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
+* [Kubernetes tooling](../prerequisites/README.md#kubernetes)
+* [Cloud Connector on your laptop or test system](../prerequisites/README.md#sap-cloud-connector)
 * [LDAP Server added as a virtual host in the cloud connector](https://help.sap.com/docs/CP_CONNECTIVITY/cca91383641e40ffbe03bdc78f00f681/f94810a111dd40fda07caffbbc02af87.html)
 
 ## Set up

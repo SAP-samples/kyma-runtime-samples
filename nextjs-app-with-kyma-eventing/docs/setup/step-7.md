@@ -10,7 +10,7 @@ For the first step, there are three options and you can choose one of them as pe
 
 * **Option 2**: [Transfer your domain to Cloudflare](https://developers.cloudflare.com/registrar/get-started/transfer-domain-to-cloudflare).
 
-* **Option 3**: Register your domain through another domain name registrar and then [add your domain to Cloudflare](https://community.cloudflare.com/t/step-1-adding-your-domain-to-cloudflare/64309).
+* **Option 3**: Register your domain through another domain name registrar and then [add your domain to Cloudflare](https://developers.cloudflare.com/learning-paths/get-started/add-domain-to-cf/).
 
   > **Note:** Cloudflare also offers a [**free plan**](https://www.cloudflare.com/plans/free/) with **CDN** and **Unmetered DDoS Protection for Layers 3-7** for personal or hobby projects that aren’t business-critical.
 
@@ -19,7 +19,7 @@ Your nameserver change may take up to **48 hours** to propagate. Therefore, it w
 
 ## 2. Create a Cloudflare API Token
 
-1. Log into the [Cloudflare Dashboard](https://dash.cloudflare.com/) and go to `User Profile` -> `API Tokens` or simply [click here](https://dash.cloudflare.com/profile/api-tokens). From the API Token home screen select `Create Token`. Then, under `Custom token`, select `Get Started`.
+1. Log into the [Cloudflare Dashboard](https://dash.cloudflare.com/) and go to `User Profile` -> `API Tokens` or simply [click here](https://dash.cloudflare.com/profile/api-tokens). From the API Token home screen select `Create Token`. Then, under `Custom token`, select `Get Started`. <!-- markdown-link-check-disable-line -->
 
     > **Note:** You need to generate an API token and not an API key.
 
@@ -97,7 +97,7 @@ Wait for the status of the `DNS Entry` to change to `READY` before proceeding wi
 
 * Check to ensure that the `DNS Provider` created in the previous step has a `READY` status.
 * Confirm that the API Token added to the Kubernetes Secret created in the `Create a Kubernetes Secret` step above has the required access to add DNS records to your domain name registrar's account.
-* Log into the [Cloudflare Dashboard](https://dash.cloudflare.com/) and go to `Websites` -> Select your account and domain -> `DNS` and verify that the common records of your domain name are displayed there. If there are no records there, then your nameserver change may not have propagated and you would need to wait for up to **48 hours** for them to be displayed.
+* Log into the [Cloudflare Dashboard](https://dash.cloudflare.com/) and go to `Websites` -> Select your account and domain -> `DNS` and verify that the common records of your domain name are displayed there. If there are no records there, then your nameserver change may not have propagated and you would need to wait for up to **48 hours** for them to be displayed. <!-- markdown-link-check-disable-line -->
 
 ## 6. Create an Issuer
 
@@ -240,7 +240,7 @@ After the Istio Gateway has been created, you can use it to create the API Rule 
 
 ## 10. Set your SSL mode in Cloudflare to Full
 
-1. Go to your [Cloudflare dashboard](https://dash.cloudflare.com/).
+1. Go to your [Cloudflare dashboard](https://dash.cloudflare.com/). <!-- markdown-link-check-disable-line -->
 
 2. Select your domain and go to `SSL/TLS` -> `Overview`. Then, select `Full (strict)`.
 

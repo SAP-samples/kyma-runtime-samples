@@ -8,8 +8,8 @@ As a next step, it demonstrates restoring the data from a volume snapshot.
 
 ## Prerequisites
 
-* [SAP BTP, Kyma runtime instance](../prerequisites/#kyma)
-* [Kubernetes tooling](../prerequisites/#kubernetes)
+* [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
+* [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 
 ## Set up the app
 
@@ -47,7 +47,7 @@ As a next step, it demonstrates restoring the data from a volume snapshot.
 
 ## Take Snapshot
 
-* Create a snapshot class. The driver specified `driver: disk.csi.azure.com` depends upon the hyperscaler used. Please refer to this [Kyma open source documentation, Gardener Section](https://kyma-project.io/docs/kyma/latest/04-operation-guides/operations/10-backup-kyma/#create-on-demand-volume-snapshots) to provide the appropriate value.
+* Create a snapshot class. The driver specified `driver: disk.csi.azure.com` depends upon the hyperscaler used. Please refer to this [Kyma open source documentation, Gardener Section](https://kyma-project.io/04-operation-guides/operations/10-backup-kyma.html#create-on-demand-volume-snapshots) to provide the appropriate value.
 
     ```shell script
     kubectl apply -f k8s/snapshot-class.yaml

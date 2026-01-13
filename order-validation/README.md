@@ -30,9 +30,9 @@ The architecture diagram describes use case flow.
 
 ## Prerequisites
 
-- [SAP BTP, Kyma runtime instance](../prerequisites#kyma)
+- [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
 
-- [Kubernetes tooling](../prerequisites#kubernetes)
+- [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 
 - [SAP Commerce Cloud environment connected to SAP BTP Kyma runtime.](https://help.sap.com/docs/BTP/65de2977205c403bbc107264b8eccf4b/83df31ad3b634c0783ced522107d2e73.html)  
 	- v2011 or greater in order to use the Integration APIs with OAUTH and Admin API (available since v1811.)

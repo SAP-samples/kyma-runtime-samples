@@ -8,7 +8,7 @@ This sample can be used as a reference for achieving the same when using other i
 
 ## Prerequisites
 
-- [SAP BTP, Kyma runtime instance](../prerequisites/#kyma)
+- [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
 - SAP Identity Authentication Service tenant
 
 ## Configuration
@@ -111,13 +111,13 @@ In the following example, I am using the default role `cluster-admin`. If you wa
 
 ### Configure IAS for RBAC
 
-The groups configured in Auth0 are manifest as a string array for assertion attribute `http://schemas.xmlsoap.org/claims/Group`. Because the Kyma OIDC is configured to expect the `groupsClaim` attribute as `groups`, you must enrich the assertion attribute that is received from Auth0.
+The groups configured in Auth0 are manifest as a string array for assertion attribute `http://schemas.xmlsoap.org/claims/Group`. Because the Kyma OIDC is configured to expect the `groupsClaim` attribute as `groups`, you must enrich the assertion attribute that is received from Auth0. <!-- markdown-link-check-disable-line -->
 
 >Note: You can also use the attribute received from Auth0 and configure the same in Kyma. Using `groups` makes it clearer.
 
 1. For the Auth0 configured corporate identity provider, add an entry for `Enriched Assertion Attributes`
    - `Attribute`: groups
-   - `Value`: ${http://schemas.xmlsoap.org/claims/Group}
+   - `Value`: ${http://schemas.xmlsoap.org/claims/Group} <!-- markdown-link-check-disable-line -->
    ![ias-enrich-attribute](assets/ias-enrich-attribute.png)
 2. In your application in IAS, verify the following:
    - `groups` is an assertion attribute.

@@ -27,8 +27,8 @@ Highly Available despite Zone 3 going down
 
 ### Prerequisites
 
-- [SAP BTP, Kyma runtime instance](../prerequisites/#kyma)
-- [Kubernetes tooling](../prerequisites/#kubernetes)
+- [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
+- [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 
 ### Steps
 

@@ -127,7 +127,7 @@ We will define the endpoint later when we deploy the containers to Kyma via a *A
 
 > 📝 **Tip** - For the sake of this hands-on the endpoint will be publicly available. In real-life scenario we must of course place corresponding security measures in place to safeguard the endpoint.
 
-We follow the same approach as for the other image namely we define a [`Dockerfile`](../ordermicroservice/frontend-ui5-mssql/Dockerfile) to build the image based on a Node.js image. We use that docker file to build and push the image via the GitHub action defined in [`build-and-publish-frontend-ui5-mssql`](../../.github/workflows/build-and-publish-frontend-ui5-mssql).
+We follow the same approach as for the other image namely we define a [`Dockerfile`](../ordermicroservice/frontend-ui5-mssql/Dockerfile) to build the image based on a Node.js image. We use that docker file to build and push the image via the GitHub action defined in [`build-and-publish-frontend-ui5-mssql`](../../.github/workflows/build-and-publish-frontend-ui5-mssql.yml).
 
 Run the workflow and check that the container is stored in the GitHub packages.
 
@@ -139,7 +139,7 @@ We have already prepared the corresponding files in the `k8s` directories of the
 
 For the *database deployment* we create the following artifacts:
 
-- [`secret.yaml`](../ordermicroservice/api-mssql-go/k8s/secret.yaml): containing the default secrets to access the MS SQL database. This secret will also be used by the API.
+- [`secret.yaml`](../ordermicroservice/database-mssql/k8s/secret.yaml): containing the default secrets to access the MS SQL database. This secret will also be used by the API.
 - [`pvc.yaml`](../ordermicroservice/database-mssql/k8s/pvc.yaml): defining the persistent volume claim for the database.
 - [`deployment.yaml`](../ordermicroservice/database-mssql/k8s/deployment.yaml): defining the deployment of the database container including a service.
 
@@ -206,7 +206,7 @@ We store the content of the `kubeconfig.yaml` of the Service Account in the secr
 
 ![GitHub Action secret](../pics/step1_GHAction_Secret.png)
 
-Now we create the workflow file [`deploy-microservice-to-kyma.yml`](../../.github/workflows/deploy-microservice-to-kyma.yml) containing the steps to deploy the order microservice:
+Now we create the workflow file [`deploy-order-microservice-to-kyma.yml`](../../.github/workflows/deploy-order-microservice-to-kyma.yml) containing the steps to deploy the order microservice:
 
 - Set the execution event to `workflow_dispatch`:
   
@@ -258,7 +258,7 @@ Now we create the workflow file [`deploy-microservice-to-kyma.yml`](../../.githu
   - name: Setup MS SQL Deployment in Kyma
         run: |
           echo "*** Create secret ***"
-          kubectl apply -f dsagtt22/ordermicroservice/api-mssql-go/k8s/secret.yaml -n ${{ env.NAMESPACE }}
+          kubectl apply -f dsagtt22/ordermicroservice/database-mssql/k8s/secret.yaml -n ${{ env.NAMESPACE }}
           echo "*** Create persistent volume claim ***"  
           kubectl apply -f dsagtt22/ordermicroservice/database-mssql/k8s/pvc.yaml -n ${{ env.NAMESPACE }}
           echo "*** Create deployment ***"

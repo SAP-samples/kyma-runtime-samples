@@ -1,0 +1,41 @@
+name: Build docker for the Orders Service Sample
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - "orders-service/**"
+  workflow_dispatch:
+env:
+  REGISTRY: ghcr.io
+  SUBDIRECTORY: orders-service
+  IMAGE_NAME: orders-service
+  LABEL: 1.0.0
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Log in to the Container registry (GH Packages)
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{env.REGISTRY}}/${{ github.repository }}/${{env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}},value=${{ env.LABEL }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3.1.0
+        with:
+          context: ./${{ env.SUBDIRECTORY}}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "fullname" . }}
+    example: {{ template "fullname" . }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}
+      example: {{ template "fullname" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+        example: {{ template "fullname" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ template "fullname" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            limits:
+              cpu: {{ .Values.pod.resources.limits.cpu }}
+              memory: {{ .Values.pod.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.pod.resources.requests.cpu }}
+              memory: {{ .Values.pod.resources.requests.memory }}
+          env:
+            - name: APP_PORT
+              value: "{{ .Values.pod.env.appPort }}"
+            - name: APP_REDIS_PREFIX
+              value: "{{ .Values.pod.env.redisPrefix }}"

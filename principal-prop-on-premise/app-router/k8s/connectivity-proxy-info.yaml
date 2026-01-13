@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  onpremise_proxy_host: connectivity-proxy.kyma-system.svc.cluster.local
+  onpremise_proxy_http_port: "20003"
+  onpremise_proxy_ldap_port: "20001"
+  onpremise_proxy_port: "20003"
+  onpremise_proxy_rfc_port: "20001"
+  onpremise_socks5_proxy_port: "20004"
+  tags: '["connectivity"]'
+  type: connectivity
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: connectivity-proxy-info
+  labels:
+    sample: principal-prop-on-prem

@@ -1,14 +1,14 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.7.3'
+    id 'org.springframework.boot' version '3.2.5'
 }
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'java'
 
 group = 'org.gabbi'
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = '21'
+targetCompatibility = '21'
 
 repositories {
     mavenCentral()

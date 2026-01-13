@@ -1,17 +1,16 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: cpi-scc-httpbin
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: cpi-scc-httpbin
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - cpi-scc-httpbin
   service:
     name: cpi-scc-httpbin
     port: 80
   rules:
-  - accessStrategies:
-    - config: {}
-      handler: noop
+  - noAuth: true
     methods:
     - GET
     - POST
@@ -19,4 +18,4 @@ spec:
     - PATCH
     - DELETE
     - HEAD
-    path: /.*
+    path: /*

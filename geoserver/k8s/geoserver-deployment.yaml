@@ -58,22 +58,21 @@ spec:
   selector:
     app: geoserver
 ---
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: geoserver
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: geoserver
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - geoserver
   service:
     #virtual host nam should be unique for the whole cluster
     #maybe include namespace in the virtual host name
     name: geoserver
     port: 8080
   rules:
-  - accessStrategies:
-    - config: {}
-      handler: allow
+  - noAuth: true
     methods:
     - GET
     - POST
@@ -81,4 +80,4 @@ spec:
     - PATCH
     - DELETE
     - HEAD
-    path: /.*
+    path: /*

@@ -31,8 +31,8 @@ Now, let's explore how we can leverage SAP Cloud Logging to ingest logs from app
 
 ### Prerequisites
 
-- [SAP BTP, Kyma runtime instance](../prerequisites#kyma)
-- [Kubernetes tooling](../prerequisites#kubernetes)
+- [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
+- [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 - Entitlement added for SAP Cloud Logging to the subaccount where Kyma is provisioned
 
 ### Procedure

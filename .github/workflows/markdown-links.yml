@@ -1,0 +1,28 @@
+name: PR Docu Checks
+
+on:
+  pull_request:
+    branches:
+      - "main"
+    paths-ignore:
+      - 'dependencies/**'
+      - 'OWNERS'
+      - 'CODEOWNERS'
+      - 'external-images.yaml'
+  workflow_dispatch:
+
+jobs:
+  markdown-link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Install node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22.x"
+      - name: Install md-check-link
+        run: npm install -g md-check-link
+      - name: Verify links
+        run: |
+          md-check-link -q -n 8 -c https://raw.githubusercontent.com/kyma-project/md-check-link/main/.mlc.config.json ./

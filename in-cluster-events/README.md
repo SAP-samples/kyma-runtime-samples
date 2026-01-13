@@ -15,8 +15,8 @@ In this sample, we will walk through a quick tutorial to set up and test the in-
 
 ## Prerequisites
 
-* [SAP BTP, Kyma runtime instance](../prerequisites/#kyma)
-* [Kubernetes tooling](../prerequisites/#kubernetes)
+* [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
+* [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 * [curl](https://curl.se/download.html)
 
 ## Steps

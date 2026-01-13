@@ -16,7 +16,7 @@ In this sample, we will connect to an external system that is secured with **Cli
 * JDK 11 or higher
 * [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 * Kubectl configured to connect to your provisioned Kyma runtime using downloaded KUBECONFIG
-* [Make](https://www.gnu.org/software/make/)
+* [Make](https://www.gnu.org/software/make/)<!-- markdown-link-check-disable-line -->
 * [docker](https://www.docker.com/products/docker-desktop)
 
 ## Setup
@@ -51,7 +51,7 @@ In this sample, we will connect to an external system that is secured with **Cli
     ```
 
 2. Upload the client certificate as a secret. This will be used by a job in next step to upload the certificate to your SAP BTP Subaccount. You can also manually upload the certificate to the destination service.
-The certificate for this sample has been retrieved from the [test site](https://badssl.com/download/)
+The certificate for this sample has been retrieved from the [test site](https://badssl.com/download/) <!-- markdown-link-check-disable-line -->
 
     ```shell
     kubectl -n {your-namespace} create secret generic client-certs --from-file=assets/badssl.p12
@@ -66,15 +66,17 @@ The certificate for this sample has been retrieved from the [test site](https://
 4. Configure the Destination in SAP Business Technology Platform (SAP BTP) Cockpit.
 ![dest-config](./assets/dest-client-cert-auth.png)
 
-    ```shell
-    Name: test-client-cert-auth
-    Type: HTTP
-    URL: https://client.badssl.com/
-    Proxy Type: Internet
-    Authentication: ClientCertificateAuthentication
-    Key Store Location: badssl.p12
-    Key Store Password: badssl.com
-    ```
+<!-- markdown-link-check-disable -->
+   ```shell
+   Name: test-client-cert-auth
+   Type: HTTP
+   URL: https://client.badssl.com/ 
+   Proxy Type: Internet
+   Authentication: ClientCertificateAuthentication
+   Key Store Location: badssl.p12
+   Key Store Password: badssl.com
+   ```
+<!-- markdown-link-check-enable -->
 
 ### Application
 
@@ -83,7 +85,7 @@ The Java Spring Application has been generated using the [SAP Cloud SDK](https:/
 It has a [controller](./application/src/main/java/sample/kyma/client/cert/auth/controllers/ExternalServiceController.java) which
 
 * Loads the configured destination
-* Uses the retrieved credentials (in this case client certificate) to connect to the [external system](https://client.badssl.com/).
+* Uses the retrieved credentials (in this case client certificate) to connect to the [external system](https://client.badssl.com/).<!-- markdown-link-check-disable-line -->
 
 Deploy the application to the Kyma runtime:
 

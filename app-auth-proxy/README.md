@@ -60,7 +60,6 @@ This sample demonstrates how to:
 
    - [React frontend MS SQL](../frontend-react-mssql/README.md)
      - Requires the configmap API_URL to point to `https://app-auth-proxy.<cluster domain>`
-   - [Golang MS SQL database API](../api-mssql-go/README.md)
 
    | Property                              | Description                                                                                                                         | Remarks                                                                                                |
    | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |

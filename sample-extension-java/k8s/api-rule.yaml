@@ -1,20 +1,19 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: sample-extension-java
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: sample-extension-java
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - sample-extension-java
   rules:
-    - accessStrategies:
-        - config: {}
-          handler: noop
+    - noAuth: true
       methods:
         - GET
         - POST
         - PUT
         - DELETE
-      path: /.*
+      path: /*
       service:
         name: sample-extension-java
         port: 8080

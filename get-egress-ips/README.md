@@ -8,8 +8,8 @@ The script intelligently runs the curl pod in each of the different availability
 
 ## Prerequisites
 
-- [SAP BTP, Kyma runtime instance](../prerequisites#kyma)
-- [Kubernetes tooling](../prerequisites#kubernetes)
+- [SAP BTP, Kyma runtime instance](../prerequisites/README.md#kyma)
+- [Kubernetes tooling](../prerequisites/README.md#kubernetes)
 
 ## To run
 

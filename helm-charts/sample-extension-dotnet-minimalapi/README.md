@@ -15,7 +15,8 @@ A Helm chart definition to deploy the sample .NET minimal API extension.
 
 The following prerequisites are needed:
 
-* [Docker and Kubernetes](../prerequisites#docker-and-kubernetes)
+* [Docker](../../prerequisites/README.md#docker)
+* [Kubernetes](../../prerequisites/README.md#kubernetes)
 
 ### Helm install
 

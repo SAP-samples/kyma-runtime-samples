@@ -1,18 +1,16 @@
-apiVersion: gateway.kyma-project.io/v1beta1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: c4c-extension-with-user-context
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: c4c-extension-with-user-context
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - c4c-extension-with-user-context 
   rules:
-  - accessStrategies:
-    - config:
-        jwks_urls:
-        - https://{sap-cloud-identity-tenant}.ondemand.com/oauth2/certs
-        trusted_issuers:
-        - https://{sap-cloud-identity-tenant}.ondemand.com
-      handler: jwt
+  - jwt:
+      authentications:
+        - jwksUri: https://{sap-cloud-identity-tenant}.ondemand.com/oauth2/certs
+          issuer: https://{sap-cloud-identity-tenant}.ondemand.com
     methods:
     - GET
     - POST
@@ -20,10 +18,7 @@ spec:
     - PATCH
     - DELETE
     - HEAD
-    path: /.*
+    path: /*
     service:
       name: c4c-extension-with-user-context
       port: 8080
-    mutators:
-      - handler: noop
-status: {}

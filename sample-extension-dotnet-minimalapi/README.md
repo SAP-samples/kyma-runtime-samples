@@ -10,7 +10,7 @@ This sample demonstrates how to:
 
 * Create a development Namespace in the Kyma runtime.
 * Create and deploy an ASP.NET Core-based application in the Kyma runtime.
-* Expose the ASP.NET Core application using [APIRules](https://kyma-project.io/docs/kyma/latest/05-technical-reference/00-custom-resources/apix-01-apirule/#documentation-content).
+* Expose the ASP.NET Core application using [APIRules](https://kyma-project.io/external-content/api-gateway/docs/user/custom-resources/apirule/04-10-apirule-custom-resource.html).
 * Call the API.
 
 ## ToDo App
@@ -21,11 +21,11 @@ The application used in this sample is described [here](https://docs.microsoft.c
 
 This tutorial requires the following prerequisites:
 
-* [Docker](../prerequisites#docker)
-* [Kubernetes](../prerequisites#kubernetes)
-* [.NET](../prerequisites#net)
-* [REST Client Extension](../prerequisites#rest-clients)
-* [Build Tooling](../prerequisites#build-tooling)
+* [Docker](../prerequisites/README.md#docker)
+* [Kubernetes](../prerequisites/README.md#kubernetes)
+* [.NET](../prerequisites/README.md#net)
+* [REST Client Extension](../prerequisites/README.md#rest-clients)
+* [Build Tooling](../prerequisites/README.md#build-tooling)
 
 ## Steps
 
@@ -77,24 +77,23 @@ sample-extension-dotnet-minimalapi-774fbc5c7b-x44pd   2/2     Running   0       
 1. Create an APIRule. In the APIRule, specify the Kubernetes Service that is exposed:
 
 ```yaml
-apiVersion: gateway.kyma-project.io/v1alpha1
+apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
   name: sample-extension-dotnet-minimalapi
 spec:
-  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  gateway: kyma-system/kyma-gateway
+  hosts:
+  - sample-extension-dotnet-minimalapi
   rules:
-    - accessStrategies:
-        - config: {}
-          handler: noop
+    - noAuth: true
       methods:
         - GET
         - POST
         - PUT
         - DELETE
-      path: /.*
+      path: /*
   service:
-    host: sample-extension-dotnet-minimalapi
     name: sample-extension-dotnet-minimalapi
     port: 5046
 ```  
@@ -116,7 +115,8 @@ A [Helm Chart definition](../helm-charts/sample-extension-dotnet/README.md) is a
 
 The following prerequisites are needed:
 
-* [Docker and Kubernetes](../prerequisites#docker-and-kubernetes)
+* [Docker](../prerequisites/README.md#docker)
+* [Kubernetes](../prerequisites/README.md#kubernetes)
 
 #### Helm install
 

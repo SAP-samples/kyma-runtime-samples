@@ -46,7 +46,7 @@ This DCO replaces the previously used CLA ("Contributor License Agreement") as w
 3. Commit and push your changes on that branch
    * When you have several commits, squash them into one (see [this explanation](http://davidwalsh.name/squash-commits-git)) - this also needs to be done when additional changes are required after the code review
 
-4. In the commit message follow the [commit message guidelines](docs/guidelines.md#git-guidelines)
+4. In the commit message follow the [commit message guidelines](https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53).
 5. If your change fixes an issue reported at GitHub, add the following line to the commit message:
    * ```Fixes https://github.com/SAP-samples/kyma-runtime-extension-samples/issues/(issueNumber)```
    * Do NOT add a colon after "Fixes" - this prevents automatic closing.
