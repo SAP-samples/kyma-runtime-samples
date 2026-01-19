@@ -164,11 +164,11 @@ The samples are provided "as-is". There is no guarantee that raised issues will 
 
 ## Contributing
 
-Please refer to the [contrubuting guidelines](./CONTRIBUTING.md)
+Please refer to the [contributing guidelines](./CONTRIBUTING.md)
 
 ## Code of Conduct
 
-Please note, that we have a [code of conduct](https://github.com/SAP-samples/.github/blob/main/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
+Please note that we have a [code of conduct](https://github.com/SAP-samples/.github/blob/main/CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project.
 
 ## License
 
