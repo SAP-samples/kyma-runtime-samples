@@ -66,6 +66,7 @@ Running various samples requires access to the Kyma environment. There are also 
 | Name                                                                 | Description                                                                                                                                                                                 | References                                                        |
 |----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
 | [From Zero to CAP on Kyma](./from-zero-to-cap-on-kyma/README.md)     | Starting from scratch, build a CAP application and deploy it to Kyma runtime                                                                                                                 |                                                                   |
+| [Build and Deploy a Multitenant CAP Application to Kyma](./cap-multitenancy-sample/README.md) | A simple end-to-end sample to demonstrate building and deploying a multitenant CAP application to Kyma                                                                                                                 |                                                                   |  
 
 ## SAP Cloud SDK
 
