@@ -1,4 +1,4 @@
-# Build and Deploy a Multitenant CAP Application to Kyma
+# Build and Deploy a Multitenant CAP Application on Kyma
 
 ![mt-bookshop](./assets/bookshop-mt-drawio.png)
 
