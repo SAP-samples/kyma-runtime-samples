@@ -1,6 +1,6 @@
-# SAP BTP, Kyma Runtime samples
+# SAP BTP, Kyma Runtime Samples
 
-[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/kyma-runtime-extension-samples)](https://api.reuse.software/info/github.com/SAP-samples/kyma-runtime-extension-samples)
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/kyma-runtime-samples)](https://api.reuse.software/info/github.com/SAP-samples/kyma-runtime-samples)
 
 This project contains sample applications for building extensions using lambdas and microservices on [SAP BTP, Kyma runtime](https://blogs.sap.com/2020/05/12/get-a-fully-managed-runtime-based-on-kyma-and-kubernetes/).
 
@@ -10,13 +10,14 @@ The samples are implemented in multiple languages and demonstrate various Kyma r
 
 ## Requirements
 
-Running various samples requires access to the Kyma runtime. There are also other sample-specific requirements that you can find in the _Prerequisites_ section of each sample. An overview of prerequisites is available in the [prerequisites](prerequisites/README.md) directory.
+Running various samples requires access to the Kyma environment. There are also other sample-specific requirements that you can find in the _Prerequisites_ section of each sample. An overview of prerequisites is available in the [prerequisites](prerequisites/README.md) directory.
 
 ## Samples
 
-🚀 Jumpstart your Kyma journey by using these samples to build event and api based extensions in your favorite technology. We have grouped the samples focusing on their content "center of gravity". But maybe there is more in there, so it is always worth to take a look at all of them 😎
+🚀 Jumpstart your Kyma journey by using these samples to build event and api based extensions in your favorite technology. We have grouped the samples focusing on their content "center of gravity". But maybe there is more in there, so it is always worth taking a look at all of them 😎
 
-> > In case you are using [Visual Studio Code](https://code.visualstudio.com/) you can open each of the samples as a dedicated workspace. You find the corresponding file in the [workspaces](workspaces) directory
+> [!Tip]
+> If you are using [Visual Studio Code](https://code.visualstudio.com/), you can open each of the samples as a dedicated workspace. You find the corresponding file in the [workspaces](workspaces) directory.
 
 ### SAP TechEd
 
@@ -24,7 +25,7 @@ Running various samples requires access to the Kyma runtime. There are also othe
 | ---- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | 2021 | [DEV261 - Build Extensions with SAP BTP, Kyma Runtime](https://github.com/SAP-samples/teched2021-DEV261) | This is a full setup including many other SAP BTP Services and a CI/CD setup with the respective SAP BTP service. | Recording no longer available |
 
-## Sample Extensions
+## Sample Applications
 
 | Name                                                                                                                           | Description                                                                                                                                                           | References |
 | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
@@ -64,20 +65,20 @@ Running various samples requires access to the Kyma runtime. There are also othe
 
 | Name                                                                 | Description                                                                                                                                                                                 | References                                                        |
 |----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|
-| [From Zero to CAP on Kyma](./from-zero-to-cap-on-kyma/README.md)     | Starting from scratch build a CAP application and deploy it to Kyma runtime                                                                                                                 |                                                                   |
+| [From Zero to CAP on Kyma](./from-zero-to-cap-on-kyma/README.md)     | Starting from scratch, build a CAP application and deploy it to Kyma runtime                                                                                                                 |                                                                   |
+| [Build and Deploy a Multitenant CAP Application to Kyma](./cap-multitenancy-sample/README.md) | A simple end-to-end sample to demonstrate building and deploying a multitenant CAP application on Kyma                                                                                                                 |                                                                   |  
 
 ## SAP Cloud SDK
 
 | Name                                                                                                     | Description                                                                                                                       | References                                                                                                                                 |
 | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| [SAP Cloud SDK Java Client Certificate Authentication](./cloudsdk-client-cert-auth/README.md)            | This sample show how to connect to an external system secured with Client Certificate Authentication using SAP Cloud SDK          | [Post](https://blogs.sap.com/2022/01/11/use-sap-cloud-sdk-on-kyma-runtime-to-connect-to-external-systems-with-client-cert-authentication/) |
+| [SAP Cloud SDK Java Client Certificate Authentication](./cloudsdk-client-cert-auth/README.md)            | This sample shows how to connect to an external system secured with Client Certificate Authentication using SAP Cloud SDK          | [Post](https://blogs.sap.com/2022/01/11/use-sap-cloud-sdk-on-kyma-runtime-to-connect-to-external-systems-with-client-cert-authentication/) |
 
 ## Utilities
 
 | Name                                                                 | Description                                                                                     | References |
 | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------- |
 | [Secret from CF Service Key](./secret-from-cf-service-key/README.md) | This sample shows how to create a Kubernetes secret from a Cloud Foundry service key  | -          |
-| [Get Egress IPs of a Kyma Cluster](./get-egress-ips/README.md) | This sample shows how to retrieve egress IPs of a Kyma cluster | -    |
 
 ## SAP HANA Cloud
 
@@ -90,10 +91,10 @@ Running various samples requires access to the Kyma runtime. There are also othe
 
 | Name                                                                      | Description                                                                                                 | References                                                                     |
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [MS SQL database](./database-mssql/README.md)                             | This sample demonstrates how to containerize and deploy a MS SQL database                                   | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-mssql-deployment.html) |
-| [Golang MS SQL database API](./api-mssql-go/README.md)                    | This sample provides a Golang API endpoint for communication with a MS SQL databases                        | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-api-mssql-golang.html) |
+| [MS SQL database](./database-mssql/README.md)                             | This sample demonstrates how to containerize and deploy an MS SQL database                                   | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-mssql-deployment.html) |
+| [Golang MS SQL database API](./api-mssql-go/README.md)                    | This sample provides a Golang API endpoint for communication with an MS SQL database                        | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-api-mssql-golang.html) |
 
-## Advanced scenarios
+## Advanced Scenarios
 
 | Name                                                                                                                          | Description                                                                                                                              | References                                                                                                                                             |
 |-------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -103,14 +104,14 @@ Running various samples requires access to the Kyma runtime. There are also othe
 | [Cloud Integration Neo](./pi-scenario/README-neo.md)                                                                          | This sample details how to bi-directionally connect SAP Process Integration and Kyma in NEO                                              | -                                                                                                                                                      |
 | [gRPC Python](./grpc-python/README.md)                                                                                        | This sample demonstrates gRPC connectivity                                                                                               | -                                                                                                                                                      |
 | [Next.js app with Kyma eventing & Go backend connected to SAP HANA Cloud database](./nextjs-app-with-kyma-eventing/README.md) | This sample provides a tutorial for a conference registration app using Next.js                                                          | [Post](https://blogs.sap.com/2022/02/24/going-jamstack-with-kyma-runtime-building-a-high-performance-web-app/)                                         |
-| [Data Backup and Restore](./data-backup-and-restore/README.md)                                                                | This sample demonstrates performing a backup and restore for a stateful application where data is stored using Persistence Volume Claim. | -                                                                                                                                                      |
+| [Data Backup and Restore](./data-backup-and-restore/README.md)                                                                | This sample demonstrates performing a backup and restore for a stateful application where data is stored using Persistent Volume Claim. | -                                                                                                                                                      |
 | [HandsOn DSAG Technology Days 2022](./dsagtt22/)                                                                              | This sample gives a walk-through setting up a scenario combining on-premise systems with Kyma Functions and the Event Mesh                  | -                                                                                                                                                      |
 | [Query LDAP Users on on-premise](./sample-ldap/README.md)                                                                     | This sample queries the LDAP users from an on-premise LDAP Server via SAP Connectivity proxy                                             | -                                                                                                                                                      |
 | [Deploy Highly Available Workloads](./multi-zone-ha-deployment/README.md)                                                     | This sample demonstrates deploying highly available workloads in Kyma runtime                                                            | -                                                                                                                                                      |
 | [Running GPU Workload in a Kyma Cluster](./gpu/README.md)                                                                     | This sample demonstrates how to set up and run GPU-accelerated workloads on Kyma runtime, including AI image generation                   | -                                                                                                                                                      |
-| [Power of serverless with SAP BTP, Kyma runtime.](./kyma-serverless/README.md)                                                | This sample demonstrates how to leverage latest features of kyma functions with SAP HANA Cloud and SAP libraries                         | [Post](https://blogs.sap.com/2023/02/06/power-of-serverless-with-sap-btp-kyma-runtime.-secrets-mounted-as-volumes./)                                   |
+| [Power of serverless with SAP BTP, Kyma runtime.](./kyma-serverless/README.md)                                                | This sample demonstrates how to leverage the latest features of Kyma functions with SAP HANA Cloud and SAP libraries                         | [Post](https://blogs.sap.com/2023/02/06/power-of-serverless-with-sap-btp-kyma-runtime.-secrets-mounted-as-volumes./)                                   |
 | [KEDA Cron based scaler](./keda-cron-scaler/README.md)                                                                        | This sample demonstrates how to leverage KEDA Cron scaler for efficient scaling strategies.                                              | -                                                                                                                                                      |
-| [SAP Cloud Logging](./sap-cloud-logging/README.md)                                                                        | This sample explains how to integrate SAP Cloud Loghing with Kyma runtime and ship logs, metrics and traces.                                              | -                                                                                                                                                      |
+| [SAP Cloud Logging](./sap-cloud-logging/README.md)                                                                        | This sample explains how to integrate SAP Cloud Logging with Kyma runtime and ship logs, metrics, and traces.                                              | -                                                                                                                                                      |
 
 ## Authentication and Authorization
 
@@ -118,10 +119,10 @@ Running various samples requires access to the Kyma runtime. There are also othe
 | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | [Sample to extend SAP Cloud for Customer with user propagation](./user-propagation/README.md)                     | This sample provides details on how a user propagation flow can be achieved when extending SAP Cloud for Customer(C4C) via IAS                | -          |
 | [Sample to extend SAP Cloud for Customer with user propagation via XSUAA](./user-propagation-via-xsuaa/README.md) | This sample demonstrates how a user propagation flow can be achieved when extending SAP Cloud for Customer(C4C) via XSUAA                     | -          |
-| [App Reverse Proxy with OIDC Authentication Middleware](./app-auth-proxy/README.md)                               | This sample provides a reverse proxy feature which dispatches requests to other microservice running in Kyma                                  | -          |
-| [Standalone approuter on SAP BTP, Kyma runtime](./standalone-approuter/README.md)                                 | This Sample demonstrates deploying a standalone app router on Kyma runtime and use it to securely expose microservices and functions          | -          |
+| [App Reverse Proxy with OIDC Authentication Middleware](./app-auth-proxy/README.md)                               | This sample provides a reverse proxy feature which dispatches requests to other microservices running in Kyma                                  | -          |
+| [Standalone approuter on SAP BTP, Kyma runtime](./standalone-approuter/README.md)                                 | This sample demonstrates deploying a standalone app router on Kyma runtime and using it to securely expose microservices and functions          | -          |
 | [Principal Propagation to an On-Premise System](./principal-prop-on-premise/README.md)                                         | This sample provides details on how a principal propagation flow can be achieved when extending an on-premise system using SAP BTP, Kyma runtime | -          |
-| [Configure Auth0 as IDP for Kyma access](./kyma-access-auth0-as-idp/)                                             | This sample provide details on how Auth0 can be configured as an Identity Provider for accessing Kyma runtime                                 | -          |
+| [Configure Auth0 as IDP for Kyma access](./kyma-access-auth0-as-idp/)                                             | This sample provides details on how Auth0 can be configured as an Identity Provider for accessing Kyma runtime                                 | -          |
 
 ## Updates on SAP BTP, Kyma runtime based on Open Source Kyma 2.0
 
@@ -131,12 +132,12 @@ An overview blog post about updates on SAP BTP, Kyma runtime based on Open Sourc
 | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | [In-Cluster Events](./in-cluster-events/README.md)                              | Sample that walks you through how to set up and test the in-cluster eventing       | [Post](https://blogs.sap.com/2022/02/24/eventing-whats-new-in-kyma-2.0/)                |
 | [Installing a custom component](./custom-component-dapr/README.md)              | Sample that installs and uses [Dapr](https://dapr.io/) as Custom Component on Kyma | -                                                                                       |
-| [Extending on-premise systems via Kyma runtime](./from-kyma-to-on-premise/README.md) | Sample that walks you through how to connect an on premise system                  | [Post](https://blogs.sap.com/2022/02/24/extending-on-premise-systems-via-kyma-runtime/) |
+| [Extending on-premise systems via Kyma runtime](./from-kyma-to-on-premise/README.md) | Sample that walks you through how to connect an on-premise system                  | [Post](https://blogs.sap.com/2022/02/24/extending-on-premise-systems-via-kyma-runtime/) |
 | [Hands-on for DSAG Technlology Days 2022](./dsagtt22/README.md)                 | Hands-on which combines an event-based setup with on-premise connectivity          |                                                                                         |
 
 ## Helm Charts
 
-It is also possible to deploy some of the samples as a helm chart and template your Kyma extensions. You find more details in the [Helm Chart Examples](./helm-charts/README.md) file.
+It is also possible to deploy some of the samples as a Helm chart and template your Kyma extensions. For more information, see the [Helm Chart Examples](./helm-charts/README.md) file.
 
 ## Resources
 
@@ -147,28 +148,28 @@ There are also further resources that allow you to dive into the topic of Kyma:
 
 ## How to get in touch with us?
 
-If you want to get in touch with us here you go:
+If you want to get in touch with us, here you go:
 
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kyma-project)
 
 [![Twitter](https://img.shields.io/twitter/url?label=@kymaproject&style=social&url=https://twitter.com/kymaproject)](https://twitter.com/kymaproject) <!-- markdown-link-check-disable-line -->
 
-## Known issues
+## Known Issues
 
-The samples are provided on the "as-is" basis. Currently, there are no known issues for the sample projects.
+The samples are provided on an "as-is" basis. Currently, there are no known issues for the sample projects.
 
-## Get support
+## Get Support
 
 The samples are provided "as-is". There is no guarantee that raised issues will be answered or addressed in future releases. For more information, visit [SAP Community](https://community.sap.com/), especially our [Kyma topic page](https://community.sap.com/topics/kyma) and [ask a question](https://answers.sap.com/questions/ask.html?primaryTagId=73554900100800003012), or contact your SAP contact to get support. In case you observe any defect in the product usage itself, kindly use the SAP Product Support channel and raise an incident adequately for the defects observed.
 
 ## Contributing
 
-Please refer to the [contrubuting guidelines](./CONTRIBUTING.md)
+Please refer to the [contributing guidelines](./CONTRIBUTING.md)
 
 ## Code of Conduct
 
-Please note, that we have a [code of conduct](https://github.com/SAP-samples/.github/blob/main/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
+Please note that we have a [code of conduct](https://github.com/SAP-samples/.github/blob/main/CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project.
 
 ## License
 
-Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0 except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.
+Copyright (c) 2022 SAP SE or an SAP affiliate company. All rights reserved. This project is licensed under the Apache Software License, version 2.0, except as noted otherwise in the [LICENSE](LICENSES/Apache-2.0.txt) file.
