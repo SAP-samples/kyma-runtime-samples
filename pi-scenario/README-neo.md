@@ -103,7 +103,7 @@ To setup trust between Integration and the Kyma runtime, the root certificate of
 4. Choose the `Keystore` tile.
 5. Choose **Add -> Certificate**.
 6. Choose **Browse** and select the save root certificate `kyma.cer`, do not provide an Alias.
-7. Choose `**Add** and Confirm Cert.
+7. Choose **Add** and Confirm Cert.
 
 ### Configure the Kyma API OAuth Credential
 
@@ -128,8 +128,8 @@ To setup trust between Integration and the Kyma runtime, the root certificate of
 3. Within `Kyma Samples`, choose the Artifacts tab.
 4. Choose the `call-kyma-api` artifact to open it.
 5. Choose the `Configure` option and provide following values:
-   1. Address: `https://cpi-api-read-oauth.<kyma cluster>`
-   2. Credential Name: kyma
+   * **Address**: `https://cpi-api-read-oauth.<kyma cluster>`
+   * **Credential Name**: `kyma`
 6. Save the changes.
 
 ## Testing the Scenarios
@@ -138,7 +138,7 @@ To setup trust between Integration and the Kyma runtime, the root certificate of
 
 1. Open the `dev` namespace within Kyma dashboard.
 2. Choose the menu option **Discovery and Network -> API Rules**.
-3. Choose the `Host` option for the `cpi-scc-httpbin-neo` entry.
+3. Choose the ***Host** option for the `cpi-scc-httpbin-neo` entry.
 4. A successful response should contain a json structure containing the data submitted in the request:
 
    ```
