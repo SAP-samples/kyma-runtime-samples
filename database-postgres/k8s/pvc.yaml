@@ -1,9 +1,9 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: mssql-data
+  name: postgres-data
   labels:
-    app: mssql
+    app: postgres
 spec:
   accessModes:
     - ReadWriteOnce
