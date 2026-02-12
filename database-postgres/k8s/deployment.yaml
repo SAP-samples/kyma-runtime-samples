@@ -19,7 +19,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: postgres
-          image: your-registry/postgres #change it to your registry
+          image: <your-registry>/postgres #change it to your image
           imagePullPolicy: Always
           ports:
             - containerPort: 5432
