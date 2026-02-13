@@ -1,7 +1,7 @@
 # Cloud Integration in the Neo Environment
 
 This sample presents two use cases:
-- How a call originating from Process Integration can call the Kyma Runtime.
+- How a call originating from Process Integration can call the Kyma runtime.
 - How a call originating from Kyma can call Process Integration. This scenario is intended for PI running in the Neo environment.
 
 ### Prerequistes
@@ -51,16 +51,16 @@ Choose `Cloud To On-Premise`
 
 ## Kyma Setup
 
-1. Create a new `dev` Namespace:
+1. Create a new `dev` namespace:
 
    ```shell script
    kubectl create namespace dev
    kubectl label namespaces dev istio-injection=enabled
    ```
 
-### Calling Integration From Kyma Setup
+### Calling Integration From the Kyma Setup
 
-1. Apply the Resources:
+1. Apply the following resources:
 
    ```shell script
    kubectl -n dev apply -f ./k8s/cpi-scc-httpbin/function-neo.yaml
@@ -75,7 +75,7 @@ Choose `Cloud To On-Premise`
 
 ### Calling Kyma From Integration Setup
 
-1. Apply the Resources:
+1. Apply the following resources:
 
    ```shell script
    kubectl -n dev apply -f ./k8s/call-kyma-api/function.yaml
@@ -95,7 +95,7 @@ Choose `Cloud To On-Premise`
 
 ### Add Kyma Root Certificate
 
-To setup trust between Integration and the Kyma runtime, the root certificate of Kyma will need to be added into the Integration tenant.
+To set up trust between Integration and the Kyma runtime, you must add the root certificate of Kyma into the Integration tenant.
 
 1. Navigate to [dst-root-ca-x3](https://www.identrust.com/dst-root-ca-x3)
 2. Copy and paste the DST Root certificate into a text file on your computer, saving it as `kyma.cer`.
@@ -141,7 +141,7 @@ To setup trust between Integration and the Kyma runtime, the root certificate of
 3. Choose the ***Host** option for the `cpi-scc-httpbin-neo` entry.
 4. A successful response should contain a json structure containing the data submitted in the request:
 
-   ```
+   ```json
    {
       "args":{},
       "data":"{\"somedata\":\"1234\"}",
