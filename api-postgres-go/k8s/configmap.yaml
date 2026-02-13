@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-postgres-go
+  labels:
+    app: api-postgres-go
+data:
+  database: DemoDB
+  host: postgres.dev.svc.cluster.local
+  port: "5432"

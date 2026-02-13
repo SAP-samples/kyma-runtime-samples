@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: api-mssql-go
+      app: api-postgres-go
   action: ALLOW
   rules:
   - from:

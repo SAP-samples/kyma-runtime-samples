@@ -1,0 +1,82 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-postgres-go
+  labels:
+    app: api-postgres-go
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-postgres-go
+  template:
+    metadata:
+      labels:
+        app: api-postgres-go
+    spec:
+      containers:
+        # replace the repository URL with your own repository
+        - image: jcawley5/api-postgres-go:latest
+          imagePullPolicy: Always
+          name: api-postgres-go
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: api-postgres-go
+                  key: database
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: api-postgres-go
+                  key: host
+            - name: POSTGRES_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: api-postgres-go
+                  key: port
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: postgres
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: postgres
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-postgres-go
+  labels:
+    app: api-postgres-go
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8000
+      protocol: TCP
+  selector:
+    app: api-postgres-go
+---
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: api-postgres-go
+spec:
+  gateway: kyma-system/kyma-gateway
+  hosts: 
+  - api-postgres-go
+  service:
+    name: api-postgres-go
+    port: 80
+  rules:
+    - path: /orders/{**}
+      noAuth: true
+      methods: ["GET", "POST", "PUT", "DELETE"]

@@ -3,9 +3,10 @@ package api
 import (
 	"encoding/json"
 	"net/http"
-	"strings"
 
-	"github.com/SAP-samples/kyma-runtime-extension-samples/api-mssql-go/internal/db"
+	"github.com/gorilla/mux"
+
+	"github.com/SAP-samples/kyma-runtime-extension-samples/api-postgres-go/internal/db"
 )
 
 type orderData struct {
@@ -24,8 +25,11 @@ func InitAPIServer() *server {
 }
 
 func (s *server) GetOrder(w http.ResponseWriter, r *http.Request) {
-
-	order_id := strings.Split(r.URL.Path, "/")[2]
+	order_id := mux.Vars(r)["id"]
+	if order_id == "" {
+		http.Error(w, "missing order id", http.StatusBadRequest)
+		return
+	}
 	orders, err := s.db.GetOrder(order_id)
 
 	if err != nil {
@@ -58,7 +62,14 @@ func (s *server) EditOrder(w http.ResponseWriter, r *http.Request) {
 	var order orderData
 
 	defer r.Body.Close()
-	err := json.NewDecoder(r.Body).Decode(&order)
+	if err := json.NewDecoder(r.Body).Decode(&order); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	if order.Orderid == "" {
+		http.Error(w, "order_id is required", http.StatusBadRequest)
+		return
+	}
 
 	rowsEffected, err := s.db.EditOrder(order.Orderid, order.Description)
 
@@ -78,10 +89,12 @@ func (s *server) AddOrder(w http.ResponseWriter, r *http.Request) {
 	var order orderData
 
 	defer r.Body.Close()
-	err := json.NewDecoder(r.Body).Decode(&order)
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	if err := json.NewDecoder(r.Body).Decode(&order); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	if order.Orderid == "" {
+		http.Error(w, "order_id is required", http.StatusBadRequest)
 		return
 	}
 
@@ -99,7 +112,11 @@ func (s *server) AddOrder(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *server) DeleteOrder(w http.ResponseWriter, r *http.Request) {
-	order_id := strings.Split(r.URL.Path, "/")[2]
+	order_id := mux.Vars(r)["id"]
+	if order_id == "" {
+		http.Error(w, "missing order id", http.StatusBadRequest)
+		return
+	}
 	rowsEffected, err := s.db.DeleteOrder(order_id)
 
 	if err != nil {

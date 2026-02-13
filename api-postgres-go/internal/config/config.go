@@ -9,16 +9,17 @@ import (
 
 var appConfig Config
 
-//Config struct to hold the app config
+// Config struct to hold the app config
 type Config struct {
-	Server   string `envconfig:"MYAPP_host"`
-	Port     string `envconfig:"MYAPP_port,default=1433"`
-	Username string `envconfig:"MYAPP_username"`
-	Password string `envconfig:"MYAPP_password"`
-	Database string `envconfig:"MYAPP_database"`
+	Host     string `envconfig:"POSTGRES_HOST"`
+	Port     string `envconfig:"POSTGRES_PORT,default=5432"`
+	Username string `envconfig:"POSTGRES_USER"`
+	Password string `envconfig:"POSTGRES_PASSWORD"`
+	Database string `envconfig:"POSTGRES_DB"`
+	SSLMode  string `envconfig:"POSTGRES_SSLMODE,default=disable"`
 }
 
-//InitConfig initializes the AppConfig
+// InitConfig initializes the AppConfig
 func initConfig() {
 	log.Println("initilizing db configuration....")
 	appConfig = Config{}
@@ -32,7 +33,7 @@ func initConfig() {
 	}
 }
 
-//AppConfig returns the current AppConfig
+// AppConfig returns the current AppConfig
 func GetConfig() Config {
 	if appConfig == (Config{}) {
 		initConfig()
