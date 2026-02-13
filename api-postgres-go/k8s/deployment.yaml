@@ -15,7 +15,7 @@ spec:
         app: api-postgres-go
     spec:
       containers:
-        - image: 00776600/api-postgres-go:latest #change it to your image
+        - image: <your-registry>/api-postgres-go:latest #change it to your image
           imagePullPolicy: Always
           name: api-postgres-go
           ports:
