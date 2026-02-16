@@ -1,6 +1,6 @@
 # Build and Deploy a Multitenant CAP Application on Kyma
 
-This is a simple end-to-end sample to demonstrate building and deploying a multitenant CAP application to Kyma.
+This is a simple end-to-end sample to demonstrate building and deploying a multitenant CAP application on Kyma.
 
 ![mt-bookshop](./assets/bookshop-mt-drawio.png)
 
@@ -65,7 +65,7 @@ This is a simple end-to-end sample to demonstrate building and deploying a multi
    curl -u erin: http://localhost:4004/odata/v4/catalog/Books
    ```
 
-### Deploy to Kyma
+### Deploy on Kyma
 
 1. Update the following parameters in [`bookshop-external/chart/values.yaml`](bookshop-external/chart/values.yaml):
 
@@ -76,7 +76,7 @@ This is a simple end-to-end sample to demonstrate building and deploying a multi
 2. Update the following parameter in [`bookshop-external/containerize.yaml`](bookshop-external/containerize.yaml):
    - **repository**: your Docker registry server
 
-3. Build the Docker images and deploy the Helm chart to Kyma.
+3. Build the Docker images and deploy the Helm chart on Kyma.
 
    ```bash
    cds build --production
