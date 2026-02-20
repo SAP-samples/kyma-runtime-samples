@@ -19,7 +19,7 @@ spec:
       - DELETE
       - OPTIONS
     allowOrigins:
-      - regex: ".d3ea4b2.stage.kyma.ondemand.com"
+      - regex: ".*{YOUR_DOMAIN}"
       - exact: http://localhost:8080
   rules:
     - path: "/orders"
