@@ -311,4 +311,4 @@ You can lookup the detailed commands in the section above as defined in the GitH
 
 Continue to [Step 2 - Set up the on-premise components](step2.md).
 
-[🔼 Overview](../README.md#tutorial-steps) | [Next step ▶](step2.md)
+[🔼 Overview](../dsagtt22.md#tutorial-steps) | [Next step ▶](step2.md)
