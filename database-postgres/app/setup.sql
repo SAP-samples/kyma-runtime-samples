@@ -1,13 +1,10 @@
--- Database is created automatically by POSTGRES_DB environment variable
-
--- Create Orders table
-CREATE TABLE IF NOT EXISTS Orders (
-    order_id VARCHAR(50) NOT NULL PRIMARY KEY,
-    description VARCHAR(255),
-    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS orders (
+    order_id varchar(50) PRIMARY KEY,
+    description varchar(255),
+    created timestamptz DEFAULT NOW()
 );
 
--- Insert sample data
-INSERT INTO Orders (order_id, description)
-VALUES ('10000001', 'Sample Order 1'),
-       ('10000002', 'Sample Order 2');
+INSERT INTO orders (order_id, description) VALUES
+    ('10000001', 'Sample Order 1'),
+    ('10000002', 'Sample Order 2')
+ON CONFLICT (order_id) DO NOTHING;

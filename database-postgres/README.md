@@ -1,100 +1,73 @@
-
-# PostgreSQL database
+# PostgreSQL sample for Kyma
 
 ## Overview
 
-This sample provides a PostgreSQL database configured with a sample `DemoDB` database containing one `Orders` table populated with two rows of sample data. The `app/setup.sql` file handles the creation of the database, table, and data. In the `app/init-db.sh` file, you can also configure the database user and password. They must match the configuration of the Secret defined in the `k8s/secret.yaml` file.
+This sample seeds a managed PostgreSQL instance on SAP BTP with a small `orders` table. It assumes you already created a PostgreSQL Service Instance and Service Binding for your Kyma cluster. The Service Binding must produce a Kubernetes Secret containing the connection details (`hostname`, `port`, `dbname`, `username`, `password`, and optionally `sslmode`).
 
-This sample demonstrates how to:
+The sample demonstrates how to:
 
-- Create a development namespace in Kyma runtime.
-- Configure and build the PostgreSQL database Docker image.
-- Deploy the PostgreSQL database in Kyma runtime, which includes:
-   - A Secret containing the database user and password.
-   - A PersistentVolumeClaim for the storage of the database data.
-   - A Deployment of the PostgreSQL image with the Secret and PersistentVolumeClaim configuration.
-   - A Service to expose the database to other Kubernetes resources.
+- Prepare a Kyma namespace for consuming a BTP-managed PostgreSQL instance.
+- Seed the database using a Kubernetes Job that runs `psql` against the bound instance.
 
+The SQL used to create and seed the table is stored in `app/setup.sql`. The Job definition lives in `k8s/seed-job.yaml`.
 
 ## Prerequisites
 
 - SAP BTP, Kyma runtime instance
-- [Docker](https://www.docker.com/) with a valid public account
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) configured to use the `KUBECONFIG` file downloaded from the Kyma runtime
+- Existing PostgreSQL Service Instance and Service Binding that exposes a Secret in your Kyma cluster
+- [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/) configured to use the `KUBECONFIG` file downloaded from the Kyma runtime
 
+## Deploy the sample
 
-## Deploy the database
-
-1. Create a new `dev` Namespace and enable Istio:
+1. Create and label a `dev` namespace if it does not exist:
 
    ```shell
    kubectl create namespace dev
-   kubectl label namespaces dev istio-injection=enabled
+   kubectl label namespace dev istio-injection=enabled
    ```
 
-2. Build and push the Docker image to your repository (replace `<your-docker-id>` with your Docker Hub ID):
+2. Make sure the PostgreSQL Service Binding Secret is available in the `dev` namespace. If it was created elsewhere, copy it into `dev` or recreate the binding in `dev`. Adjust the Secret name and key names in `k8s/seed-job.yaml` if they differ from your binding.
+
+3. Apply the ConfigMap and Job that seeds the database:
 
    ```shell
-   docker build -t <your-docker-id>/postgres -f docker/Dockerfile .
-   docker push <your-docker-id>/postgres
+   kubectl -n dev apply -f ./k8s/seed-job.yaml
    ```
 
-3. Apply the PersistentVolumeClaim:
+4. Wait for the Job to finish:
 
    ```shell
-   kubectl -n dev apply -f ./k8s/pvc.yaml
+   kubectl -n dev get jobs seed-postgresql
    ```
 
-4. Apply the Secret:
+5. (Optional) Verify the data using a temporary `psql` client Pod. Replace `postgresql-credentials` with your binding Secret name if it differs:
 
-   ```shell
-   kubectl -n dev apply -f ./k8s/secret.yaml
-   ```
+    ```shell
+    kubectl -n dev apply -f - <<'EOF'
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: pg-client
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: psql
+        image: postgres:15
+        envFrom:
+        - secretRef:
+            name: postgresql-credentials
+        command: ["psql"]
+        args: ["-v", "ON_ERROR_STOP=1", "-c", "SELECT order_id, description, created FROM orders;"]
+    EOF
+    kubectl -n dev logs pod/pg-client
+    kubectl -n dev delete pod/pg-client
+    ```
 
-5. In `k8s/deployment.yaml`, set the correct image (e.g. `<your-docker-id>/postgres`), then apply the Deployment:
+## Cleanup
 
-   ```shell
-   kubectl -n dev apply -f ./k8s/deployment.yaml
-   ```
-
-6. Verify that the Pod is up and running:
-
-   ```shell
-   kubectl -n dev get po
-   ```
-
-The expected result shows a Pod for the `postgres` Deployment running:
-
-```shell
-NAME                                     READY   STATUS    RESTARTS   AGE
-postgres-6df65c689d-xxxxx                2/2     Running   0          93s
-```
-
-
-## Run the Docker image locally
-
-To run the Docker image locally (replace `<your-docker-id>` with your Docker Hub ID):
+Delete the seeding assets if you no longer need them:
 
 ```shell
-docker run -e POSTGRES_DB=DemoDB -e POSTGRES_PASSWORD=Yukon900 -p 5432:5432 --name postgres1 -d <your-docker-id>/postgres
+kubectl -n dev delete job seed-postgresql
+kubectl -n dev delete configmap postgresql-sample-sql
 ```
-
-To open a bash shell in the container:
-
-```shell
-docker exec -it postgres1 bash
-```
-
-Then start the psql client:
-
-```shell
-psql -U postgres -d DemoDB
-```
-
-Example query:
-
-```shell
-SELECT * FROM orders;
-```
-
-To exit psql, type `\q`, and to exit bash, type `exit`.
