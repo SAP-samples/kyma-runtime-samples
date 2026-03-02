@@ -1,4 +1,4 @@
-This chart installs the example [api-mssql-go](../api-mssql-go/README.md) as well as it's dependency [database-postgres](../database-postgres/README.md)
+This chart installs the example [api-mssql-go](../api-mssql-go/README.md) as well as it's dependency [database-postgres](../../database-postgres/README.md)
 
 
 ## Installing the Chart

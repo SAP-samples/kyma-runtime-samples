@@ -1,4 +1,4 @@
-This chart installs the example [MSSQL Database](../database-postgres/README.md)
+This chart installs the example [MSSQL Database](../../database-postgres/README.md)
 
 
 ## Installing the Chart
