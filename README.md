@@ -59,7 +59,7 @@ Running various samples requires access to the Kyma environment. There are also 
 | Name                                                      | Description                                                                                  | References                                                                       |
 | --------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | [React frontend MS SQL](./frontend-react-mssql/README.md) | This sample provides a frontend React UI application configured with the sample `Order` APIs | -                                                                                |
-| [UI5 frontend MS SQL](./frontend-ui5-mssql/README.md)     | This sample provides a frontend SAPUI5 application configured with the sample `Order` APIs   | - |
+| [UI5 frontend MS SQL](./frontend-ui5-postgresql/README.md)     | This sample provides a frontend SAPUI5 application configured with the sample `Order` APIs   | - |
 
 ## CAP
 
