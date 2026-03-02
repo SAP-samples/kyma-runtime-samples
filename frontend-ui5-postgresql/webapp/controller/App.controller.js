@@ -1,4 +1,4 @@
-sap.ui.define(["sap/ui/core/mvc/Controller", "skr/frontend/ui5/mssql/model/formatter"], function (
+sap.ui.define(["sap/ui/core/mvc/Controller", "../model/formatter"], function (
   Controller,
   formatter
 ) {

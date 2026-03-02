@@ -49,14 +49,14 @@ This sample demonstrates how to:
 1. Build and push the image to your Docker repository:
 
    ```shell
-   docker build -t {your-docker-account}/fe-ui5-mssql -f docker/Dockerfile .
-   docker push {your-docker-account}/fe-ui5-mssql
+   docker build -t {your-docker-account}/fe-ui5-postgresql -f docker/Dockerfile .
+   docker push {your-docker-account}/fe-ui5-postgresql
    ```
 
-2. To run the image locally, adjust the value of the **API_URL** parameter in the `webapp/config.js` file and mount it into the image:
+2. To run the image locally, adjust the value of the **API_URL** parameter in the `webapp/config.json` file and mount it into the image:
 
    ```shell
-   docker run --mount type=bind,source=$(pwd)/webapp/config.json,target=/usr/share/nginx/html/config.json -p 8080:80 -d {your-docker-account}/fe-ui5-mssql:latest
+   docker run --mount type=bind,source=$(pwd)/webapp/config.json,target=/usr/share/nginx/html/config.json -p 8080:80 -d {your-docker-account}/fe-ui5-postgresql:latest
    ```
 
 ### Deploy the frontend
@@ -81,5 +81,5 @@ This sample demonstrates how to:
 4. Use the APIRule to open the application:
 
    ```shell
-   https://fe-ui5-mssql.{cluster-domain}
+   https://fe-ui5-postgresql.{cluster-domain}
    ```

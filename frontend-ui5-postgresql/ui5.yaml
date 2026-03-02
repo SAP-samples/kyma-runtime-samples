@@ -1,6 +1,6 @@
 specVersion: "2.1"
 metadata:
-  name: frontend-ui5-mssql
+  name: frontend-ui5-postgresql
 type: application
 framework:
   name: OpenUI5

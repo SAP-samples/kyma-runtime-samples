@@ -1,5 +1,5 @@
-# build environment
-FROM node:current-slim as build
+# build environment (pin to current LTS to avoid breaking CLI deps)
+FROM node:24-slim AS build
 WORKDIR /app
 COPY package.json ./
 RUN npm install

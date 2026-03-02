@@ -1,7 +1,7 @@
 {
-  "name": "frontend-ui5-mssql",
-  "version": "0.1.0",
-  "description": "Kyma Sample App - frontend-ui5-mssql",
+  "name": "frontend-ui5-postgresql",
+  "version": "1.0.0",
+  "description": "Kyma Sample App - frontend-ui5-postgresql",
   "private": true,
   "scripts": {
     "start": "ui5 serve -o index.html",
@@ -9,8 +9,8 @@
     "karma": "karma start",
     "karma-ci": "karma start karma-ci.conf.js",
     "watch": "npm run karma",
-    "test": "npm run lint && rimraf coverage && npm run karma-ci",
-    "build": "rimraf dist && ui5 build --a"
+    "test": "npm run lint && rm -rf coverage && npm run karma-ci",
+    "build": "rm -rf dist && node node_modules/@ui5/cli/bin/ui5.js build --a"
   },
   "devDependencies": {
     "@ui5/cli": "^2.2.6",

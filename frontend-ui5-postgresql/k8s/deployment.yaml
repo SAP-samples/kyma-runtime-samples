@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fe-ui5-mssql
+  name: fe-ui5-postgresql
   labels:
-    app: fe-ui5-mssql
+    app: fe-ui5-postgresql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fe-ui5-mssql
+      app: fe-ui5-postgresql
   template:
     metadata:
       labels:
-        app: fe-ui5-mssql
+        app: fe-ui5-postgresql
     spec:
       containers:
-        - name: fe-ui5-mssql
-          image: jcawley5/fe-ui5-mssql
+        - name: fe-ui5-postgresql
+          image: johndoe/fe-ui5-postgresql
           imagePullPolicy: Always
           ports:
             - name: http
@@ -28,17 +28,17 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: fe-ui5-mssql
+            name: fe-ui5-postgresql
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: fe-ui5-mssql
+  name: fe-ui5-postgresql
   labels:
-    app: fe-ui5-mssql
+    app: fe-ui5-postgresql
 spec:
   ports:
     - name: http
       port: 80
   selector:
-    app: fe-ui5-mssql
+    app: fe-ui5-postgresql
