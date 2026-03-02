@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-postgresql-go
+  labels:
+    app: api-postgresql-go
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-postgresql-go
+  template:
+    metadata:
+      labels:
+        app: api-postgresql-go
+    spec:
+      containers:
+        - image: johndoe/api-postgresql-go:latest #change it to your image
+          imagePullPolicy: Always
+          name: api-postgresql-go
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: MYAPP_database
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-binding
+                  key: dbname
+            - name: MYAPP_host
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-binding
+                  key: hostname
+            - name: MYAPP_port
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-binding
+                  key: port
+            - name: MYAPP_username
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: postgres-binding
+            - name: MYAPP_password
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: postgres-binding
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-postgresql-go
+  labels:
+    app: api-postgresql-go
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8000
+      protocol: TCP
+  selector:
+    app: api-postgresql-go

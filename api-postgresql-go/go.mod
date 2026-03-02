@@ -1,6 +1,6 @@
-module github.com/SAP-samples/kyma-runtime-extension-samples/api-postgres-go
+module github.com/SAP-samples/kyma-runtime-extension-samples/api-postgresql-go
 
-go 1.21
+go 1.14
 
 require (
 	github.com/gorilla/mux v1.8.0

@@ -11,12 +11,11 @@ var appConfig Config
 
 // Config struct to hold the app config
 type Config struct {
-	Host     string `envconfig:"POSTGRES_HOST"`
-	Port     string `envconfig:"POSTGRES_PORT,default=5432"`
-	Username string `envconfig:"POSTGRES_USER"`
-	Password string `envconfig:"POSTGRES_PASSWORD"`
-	Database string `envconfig:"POSTGRES_DB"`
-	SSLMode  string `envconfig:"POSTGRES_SSLMODE,default=disable"`
+	Server   string `envconfig:"MYAPP_host"`
+	Port     string `envconfig:"MYAPP_port,default=5432"`
+	Username string `envconfig:"MYAPP_username"`
+	Password string `envconfig:"MYAPP_password"`
+	Database string `envconfig:"MYAPP_database"`
 }
 
 // InitConfig initializes the AppConfig

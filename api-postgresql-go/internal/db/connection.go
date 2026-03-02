@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/SAP-samples/kyma-runtime-extension-samples/api-postgres-go/internal/config"
+	"github.com/SAP-samples/kyma-runtime-extension-samples/api-postgresql-go/internal/config"
 	_ "github.com/lib/pq"
 )
 
@@ -40,13 +40,8 @@ func getConnString() string {
 
 	config := config.GetConfig()
 
-	connString := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=%s",
-		config.Username,
-		config.Password,
-		config.Host,
-		config.Port,
-		config.Database,
-		config.SSLMode)
+	connString := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=require",
+		config.Server, config.Port, config.Username, config.Password, config.Database)
 
 	return connString
 }

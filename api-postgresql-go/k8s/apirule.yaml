@@ -1,12 +1,12 @@
 apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
-  name: api-postgres-go
+  name: api-postgresql-go
 spec:
   hosts:
-    - api-postgres-go
+    - api-postgresql-go
   service:
-    name: api-postgres-go
+    name: api-postgresql-go
     port: 80
   gateway: kyma-system/kyma-gateway
   corsPolicy: 
@@ -19,8 +19,7 @@ spec:
       - DELETE
       - OPTIONS
     allowOrigins:
-      - regex: ".*{YOUR_DOMAIN}"
-      - exact: http://localhost:8080
+      - regex: ".*{YOUR_KYMA_DOMAIN}"
   rules:
     - path: "/orders"
       methods:

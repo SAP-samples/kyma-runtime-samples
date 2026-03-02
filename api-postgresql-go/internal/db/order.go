@@ -18,12 +18,12 @@ type RowsAffected struct {
 }
 
 func (s *Server) GetOrder(order_id string) ([]Order, error) {
-	tsql := fmt.Sprintf("SELECT order_id, description, created FROM Orders WHERE order_id=$1;")
+	tsql := fmt.Sprintf("SELECT * FROM Orders WHERE order_id=$1;")
 	return s.query(tsql, order_id)
 }
 
 func (s *Server) GetOrders() ([]Order, error) {
-	tsql := fmt.Sprintf("SELECT order_id, description, created FROM Orders;")
+	tsql := fmt.Sprintf("SELECT * FROM Orders;")
 	return s.query(tsql)
 }
 
@@ -34,7 +34,7 @@ func (s *Server) AddOrder(order_id string, description string) ([]Order, error) 
 		return nil, err
 	}
 
-	tsql = fmt.Sprintf("SELECT order_id, description, created FROM Orders WHERE order_id=$1;")
+	tsql = fmt.Sprintf("SELECT * FROM Orders WHERE order_id=$1;")
 	return s.query(tsql, order_id)
 }
 
@@ -56,7 +56,7 @@ func (s *Server) exec(tsql string, args ...interface{}) (RowsAffected, error) {
 	rowsAffectedResult.RowsAffected = 0
 
 	log.Printf("Executing SQL: %s \n", tsql)
-	log.Printf("With args: %v \n", args)
+	log.Printf("With args: %s \n", args...)
 
 	result, err := s.db.Exec(tsql, args...)
 	if err != nil {
@@ -78,7 +78,7 @@ func (s *Server) query(tsql string, args ...interface{}) ([]Order, error) {
 	orders := []Order{}
 
 	log.Printf("Executing SQL: %s \n", tsql)
-	log.Printf("With args: %v \n", args)
+	log.Printf("With args: %s \n", args...)
 
 	rows, err := s.db.Query(tsql, args...)
 
@@ -90,7 +90,8 @@ func (s *Server) query(tsql string, args ...interface{}) ([]Order, error) {
 	defer rows.Close()
 
 	for rows.Next() {
-		if err := rows.Scan(&order.Orderid, &order.Description, &order.Created); err != nil {
+		err := rows.Scan(&order.Orderid, &order.Description, &order.Created)
+		if err != nil {
 			return nil, err
 		}
 		orders = append(orders, order)

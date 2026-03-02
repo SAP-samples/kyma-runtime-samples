@@ -2,11 +2,11 @@ apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
   name: allow-internal
-  namespace: dev
+  namespace: postgres-dev
 spec:
   selector:
     matchLabels:
-      app: api-postgres-go
+      app: api-postgresql-go
   action: ALLOW
   rules:
   - from:

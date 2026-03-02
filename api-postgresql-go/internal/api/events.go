@@ -20,11 +20,6 @@ func (s *server) ConsumeOrderCode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if order.OrderCode == "" {
-		http.Error(w, "orderCode is required", http.StatusBadRequest)
-		return
-	}
-
 	_, err = s.db.AddOrder(order.OrderCode, "order received from event")
 
 	if err != nil {
