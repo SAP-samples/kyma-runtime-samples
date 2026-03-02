@@ -16,8 +16,8 @@ For more information see [helm](https://helm.sh/)
 ## Samples
 
 - [UI5 Frontend MSSQL](./frontend-ui5-mssql/README.md)
-  - will also install dependent charts [Golang MSSQL Database API](./api-mssql-go/README.md) and [MSSQL Database](./database-mssql/README.md)
-- [Golang MSSQL Database API](./api-mssql-go/README.md)
+  - will also install dependent charts [Golang PostgreSQL Database API](./api-postgresql-go/README.md) and [MSSQL Database](./database-mssql/README.md)
+- [Golang PostgreSQL Database API](../api-postgresql-go/README.md)
   - will also install dependent chart [MSSQL Database](./database-mssql/README.md)
 - [MSSQL Database](./database-mssql/README.md)
 - [Sample Event Trigger Java](./sample-event-trigger-java/README.md)

@@ -92,7 +92,7 @@ Running various samples requires access to the Kyma environment. There are also 
 | Name                                                                      | Description                                                                                                 | References                                                                     |
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | [MS SQL database](./database-mssql/README.md)                             | This sample demonstrates how to containerize and deploy an MS SQL database                                   | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-mssql-deployment.html) |
-| [Golang MS SQL database API](./api-mssql-go/README.md)                    | This sample provides a Golang API endpoint for communication with an MS SQL database                        | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-api-mssql-golang.html) |
+| [Golang MS SQL database API](./api-postgresql-go/README.md)                    | This sample provides a Golang API endpoint for communication with an MS SQL database                        | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-api-mssql-golang.html) |
 
 ## Advanced Scenarios
 

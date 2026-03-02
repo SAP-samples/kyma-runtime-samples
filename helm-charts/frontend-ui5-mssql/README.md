@@ -1,4 +1,4 @@
-This chart installs the example [frontend-ui5-mssql](../frontend-ui5-mssql/README.md). Installing this chart will also install the charts [api-mssql-go](../api-mssql-go/README.md) and [database-mssql](../database-mssql/README.md)   
+This chart installs the example [frontend-ui5-mssql](../frontend-ui5-mssql/README.md). Installing this chart will also install the charts [api-mssql-go](../../api-postgresql-go/README.md) and [database-mssql](../database-mssql/README.md)   
 
 
 ## Installing the Chart
