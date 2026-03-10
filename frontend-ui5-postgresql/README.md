@@ -2,6 +2,9 @@
 
 ## Overview
 
+> [!NOTE]
+> This sample is used in the Deploy the SAPUI5 Frontend in SAP BTP, Kyma Runtime tutorial.
+
 This sample provides a frontend SAPUI5 application that you can configure with any of the sample `Order` APIs.
 
 This sample demonstrates how to:
