@@ -2,6 +2,9 @@
 
 ## Overview
 
+> [!NOTE]
+> This sample is used in the Use and Seed SAP BTP PostgreSQL in Kyma Runtime tutorial.
+
 This sample seeds a managed PostgreSQL instance on SAP BTP with a small `orders` table. It assumes you already created a PostgreSQL Service Instance and Service Binding for your Kyma cluster. The Service Binding must produce a Kubernetes Secret containing the connection details (`hostname`, `port`, `dbname`, `username`, `password`, and optionally `sslmode`).
 
 The sample demonstrates how to:
