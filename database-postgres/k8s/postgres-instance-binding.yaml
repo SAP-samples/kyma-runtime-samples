@@ -5,7 +5,7 @@ metadata:
   namespace: dev
 spec:
   serviceOfferingName: postgresql-db
-  servicePlanName: trial
+  servicePlanName: free
 ---
 apiVersion: services.cloud.sap.com/v1
 kind: ServiceBinding
