@@ -104,7 +104,7 @@ Your application running in SAP BTP, Kyma runtime will send logs to stdout. The 
 To create the LogPipeline, run:
 
 ```shell
-kubectl apply -f ./k8s/logging/logs-pipeline-application-logs.yaml
+kubectl apply -f ./k8s/logging/logs-pipeline.yaml
 ```
 
 In the LogPipeline, configure the details about shipping the logs to SAP Cloud Logging. Include major configurations such as:
@@ -116,33 +116,21 @@ You can learn about all the parameters in detail from the official Telemetry [Lo
 
 This is an example of the LogPipeline configuration used for this sample:
 
-![log-pipeline](./assets/log-pipeline-app-logs.png)
+![log-pipeline](./assets/log-pipeline.png)
 
-### Create a LogPipeline CR for the Istio access logs
+### Enable Istio access logs
 
-Referred from [kyma-project.io documentation about istio access logs](https://kyma-project.io/#/istio/user/tutorials/01-45-enable-istio-access-logs).
+Referred from [kyma-project.io documentation about istio access logs](https://kyma-project.io/external-content/telemetry-manager/docs/user/collecting-logs/istio-support.html).
 
 Istio access logs provide fine-grained details about the traffic when accessing the workloads that are part of Istio service mesh. The only prerequisite is to enable Istio sidecar injection for your workloads. The Istio access logs provide useful information relating to 4 golden signals, such as latency, traffic, errors, and saturation as well as any troubleshooting anomalies.
 
-[Configure Istio access logs for the entire mesh](https://kyma-project.io/#/istio/user/tutorials/01-45-enable-istio-access-logs?id=configure-istio-access-logs-for-the-entire-mesh)
-
-It is also possible to have [fine grained configuration](https://kyma-project.io/#/istio/user/tutorials/01-45-enable-istio-access-logs?id=configuration) for Istio access logs.
+[Configure Istio access logs for the entire mesh](https://kyma-project.io/external-content/telemetry-manager/docs/user/collecting-logs/istio-support.html#enable-istio-logs-for-the-entire-mesh)
 
 ```shell
 kubectl apply -f ./k8s/tracing/trace-istio-telemetry.yaml
 ```
 
 > Note: We use the same Istio telemetry configuration for tracing and logging.
-
-To create the LogPipeline, run:
-
-```shell
-kubectl apply -f ./k8s/logging/logs-pipeline-istio-access-logs.yaml
-```
-
-This is an example of the LogPipeline configuration used for this sample:
-
-![log-pipeline-istio-access-logs](./assets/log-pipeline-istio-access-logs.png)
 
 ## View the logs
 
