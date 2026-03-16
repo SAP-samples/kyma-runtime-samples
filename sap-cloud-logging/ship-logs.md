@@ -37,62 +37,61 @@ Now, let's explore how we can use SAP Cloud Logging to ingest logs from applicat
 
 ### Procedure
 
-For details, see [Create an SAP Cloud Logging Instance through SAP BTP Service Operator
-](https://help.sap.com/docs/cloud-logging/cloud-logging/create-sap-cloud-logging-instance-through-sap-btp-service-operator?version=Cloud).
+For details, see [Create an SAP Cloud Logging Instance through SAP BTP Service Operator](https://help.sap.com/docs/cloud-logging/cloud-logging/create-sap-cloud-logging-instance-through-sap-btp-service-operator?version=Cloud).
 
 1. Export your namespace name as an environment variable:
 
-```shell
-# In the instructions, all resources are created in cls namespace. If you want to use a different namespace, adjust the files appropriately
-export NS=cls
-kubectl create ns ${NS}
-```
+   ```shell
+   # In the instructions, all resources are created in cls namespace. If you want to use a different namespace, adjust the files appropriately
+   export NS=cls
+   kubectl create ns ${NS}
+   ```
 
 2. To provision an instance of SAP Cloud Logging, create a service instance and a service binding:
 
-```shell
-kubectl -n ${NS} apply -f ./k8s/cls-instance.yaml
-```
+    ```shell
+    kubectl -n ${NS} apply -f ./k8s/cls-instance.yaml
+    ```
 
-For reference, this is the service instance specification:
+    For reference, this is the service instance specification:
 
-```yaml
-apiVersion: services.cloud.sap.com/v1
-kind: ServiceInstance
-metadata:
-    name: my-cls
-spec:
-    serviceOfferingName: cloud-logging
-    servicePlanName: dev
-    parameters:
-      retentionPeriod: 7
-      esApiEnabled: false
-      ingest_otlp:
+    ```yaml
+    apiVersion: services.cloud.sap.com/v1
+    kind: ServiceInstance
+    metadata:
+        name: my-cls
+    spec:
+        serviceOfferingName: cloud-logging
+        servicePlanName: dev
+        parameters:
+          retentionPeriod: 7
+          esApiEnabled: false
+          ingest_otlp:
+            enabled: true
+    ```
+
+    This is the corresponding service binding.
+
+    ```yaml
+    apiVersion: services.cloud.sap.com/v1
+    kind: ServiceBinding
+    metadata:
+        name: my-cls-binding
+    spec:
+      serviceInstanceName: my-cls
+      credentialsRotationPolicy:
         enabled: true
-```
+        rotationFrequency: "720h"
+        rotatedBindingTTL: "24h"
+    ```
 
-This is the corresponding service binding.
+    The service binding specifies the credentials rotation policy. The Telemetry module automatically switches to new credentials after they are rotated, which requires no action from you.
 
-```yaml
-apiVersion: services.cloud.sap.com/v1
-kind: ServiceBinding
-metadata:
-    name: my-cls-binding
-spec:
-  serviceInstanceName: my-cls
-  credentialsRotationPolicy:
-    enabled: true
-    rotationFrequency: "720h"
-    rotatedBindingTTL: "24h"
-```
+    > **NOTE:** You reuse this same instance to configure tracing and monitoring in the subsequent tutorials.
 
-The service binding specifies the credentials rotation policy. The Telemetry module automatically switches to new credentials after they are rotated, which requires no action from you.
+    The service binding also generates a Secret with the same name. It contains the details to access the dashboard of the SAP Cloud Logging instance previously created.
 
-> **NOTE:** You reuse this same instance to configure tracing and monitoring in the subsequent tutorials.
-
-The service binding also generates a Secret with the same name. It contains the details to access the dashboard of the SAP Cloud Logging instance previously created.
-
-![cls-binding-secret](./assets/cls-binding-secret.png)
+    ![cls-binding-secret](./assets/cls-binding-secret.png)
 
 ## Ship your application logs to SAP Cloud Logging
 
@@ -123,8 +122,7 @@ This is an example of the LogPipeline configuration used for this sample:
 
 For details, see [Configure Istio Access Logs](https://kyma-project.io/external-content/telemetry-manager/docs/user/collecting-logs/istio-support.html).
 
-
-Istio access logs provide fine-grained details about traffic to workloads in the Istio service mesh, related to the four golden signals (latency, traffic, errors, and saturation) and help troubleshoot anomalies. Before you enable Istio access logs, enable Istio sidecar injection for your workloads. 
+Istio access logs provide fine-grained details about traffic to workloads in the Istio service mesh, related to the four golden signals (latency, traffic, errors, and saturation) and help troubleshoot anomalies. Before you enable Istio access logs, enable Istio sidecar injection for your workloads.
 
 For details, see [Enable Istio Logs for the Entire Mesh](https://kyma-project.io/external-content/telemetry-manager/docs/user/collecting-logs/istio-support.html#enable-istio-logs-for-the-entire-mesh).
 
