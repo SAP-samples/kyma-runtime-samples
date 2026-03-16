@@ -40,7 +40,7 @@ Now, let's explore how we can use SAP Cloud Logging to ingest logs from applicat
 For details, see [Create an SAP Cloud Logging Instance through SAP BTP Service Operator
 ](https://help.sap.com/docs/cloud-logging/cloud-logging/create-sap-cloud-logging-instance-through-sap-btp-service-operator?version=Cloud).
 
-- Export your namespace's name as an environment variable.
+1. Export your namespace name as an environment variable:
 
 ```shell
 # In the instructions, all resources are created in cls namespace. If you want to use a different namespace, adjust the files appropriately
@@ -48,7 +48,7 @@ export NS=cls
 kubectl create ns ${NS}
 ```
 
-- To provision an instance of SAP Cloud Logging, create an instance of SAP Cloud Logging and a service binding:
+2. To provision an instance of SAP Cloud Logging, create a service instance and a service binding:
 
 ```shell
 kubectl -n ${NS} apply -f ./k8s/cls-instance.yaml
@@ -86,9 +86,9 @@ spec:
     rotatedBindingTTL: "24h"
 ```
 
-The service binding specifies the credentials rotation policy. It is a great developer experience that the Telemetry module intelligently switches to new credentials once they are rotated. This does not require any action from the developer.
+The service binding specifies the credentials rotation policy. The Telemetry module automatically switches to new credentials after they are rotated, which requires no action from you.
 
-> **NOTE:** The same instance will be reused for configuring tracing and monitoring.
+> **NOTE:** You reuse this same instance to configure tracing and monitoring in the subsequent tutorials.
 
 The service binding also generates a Secret with the same name. It contains the details to access the dashboard of the SAP Cloud Logging instance previously created.
 
@@ -108,10 +108,10 @@ To create the LogPipeline, run:
 kubectl apply -f ./k8s/logging/logs-pipeline.yaml
 ```
 
-In the LogPipeline, configure the details about shipping the logs to SAP Cloud Logging. Include major configurations such as:
+In the LogPipeline, you configure how logs are shipped to SAP Cloud Logging with the following options:
 
-- Input: From which applications, containers, and namespaces the logs should be shipped
-- Output: The access details of the SAP Cloud Logging instance to which logs will be shipped
+- Input: Specifies the applications, containers, and namespaces from which logs are shipped
+- Output: Contains the access details of the SAP Cloud Logging instance to which logs are shipped.
 
 You can learn about all the parameters in detail from the official Telemetry [LogPipeline](https://kyma-project.io/#/telemetry-manager/user/resources/02-logpipeline?id=custom-resource-parameters) documentation.
 
