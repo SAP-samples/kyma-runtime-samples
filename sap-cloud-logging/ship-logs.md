@@ -2,7 +2,7 @@
 
 Welcome to the first sample in our three-part series, where we will explore how Kyma can seamlessly integrate with the SAP Cloud Logging service. By enabling the three pillars of observability - logs, traces, and metrics - Kyma developers and operators can effectively troubleshoot issues, identify root causes, investigate performance bottlenecks, and gain a comprehensive understanding of system behavior.
 
-In this sample, we will delve into the following topics:
+This sample covers the following topics:
 
 1. SAP Cloud Logging: An Overview
    - Learn about the SAP Cloud Logging service and its significance in the context of Kyma integration.
@@ -11,7 +11,7 @@ In this sample, we will delve into the following topics:
 2. Shipping Logs to SAP Cloud Logging
    - Explore the step-by-step process of shipping logs from applications deployed on SAP BTP, Kyma runtime to SAP Cloud Logging.
 
-In the subsequent samples, we will continue our exploration by discussing the integration of traces and metrics.
+The subsequent samples cover the integration of traces and metrics.
 
 ## What is SAP Cloud Logging?
 
@@ -23,11 +23,11 @@ For Cloud Foundry and Kyma, SAP Cloud Logging offers an easy integration by prov
 
 To get started with SAP Cloud Logging, visit the [Discovery Center](https://discovery-center.cloud.sap/serviceCatalog/cloud-logging?service_plan=overall-(large,-standard,-and-dev)&region=all&commercialModel=cloud&tab=feature) where you will find more detailed information about its features and capabilities.
 
-Pricing for the SAP Cloud Logging service can be determined using the [SAP Cloud Logging Capacity Unit Estimator](https://sap-cloud-logging-estimator.cfapps.us10.hana.ondemand.com/). It is important to note that for Kyma, the "Ingest Otel" option needs to be enabled, which should be taken into account when estimating pricing. This option is used for shipping traces and metrics.
+To estimate pricing, use the [SAP Cloud Logging Capacity Unit Estimator](https://sap-cloud-logging-estimator.cfapps.us10.hana.ondemand.com/). For Kyma, you must enable the **Ingest Otel** option, which is used for shipping traces and metrics.
 
 ## Provision an Instance of SAP Cloud Logging
 
-Now, let's explore how we can leverage SAP Cloud Logging to ingest logs from applications deployed on SAP BTP, Kyma runtime.
+Now, let's explore how we can use SAP Cloud Logging to ingest logs from applications deployed on SAP BTP, Kyma runtime.
 
 ### Prerequisites
 
@@ -37,7 +37,8 @@ Now, let's explore how we can leverage SAP Cloud Logging to ingest logs from app
 
 ### Procedure
 
-You can refer to the [official SAP documentation](https://help.sap.com/docs/cloud-logging/cloud-logging/create-sap-cloud-logging-instance-through-sap-btp-service-operator?version=Cloud) to create an SAP Cloud Logging service instance for details.
+For details, see [Create an SAP Cloud Logging Instance through SAP BTP Service Operator
+](https://help.sap.com/docs/cloud-logging/cloud-logging/create-sap-cloud-logging-instance-through-sap-btp-service-operator?version=Cloud).
 
 - Export your namespace's name as an environment variable.
 
@@ -97,7 +98,7 @@ The service binding also generates a Secret with the same name. It contains the 
 
 To ship your logs to SAP Cloud Logging, create LogPipeline custom resources (CRs).
 
-Your application running in SAP BTP, Kyma runtime will send logs to stdout. The Telemetry module based on the LogPipeline will capture and ship them to SAP Cloud Logging.
+Your application running in SAP BTP, Kyma runtime sends logs to stdout. Based on the LogPipeline, the Telemetry module captures and ships them to SAP Cloud Logging.
 
 ### Create a LogPipeline CR for Your Application Logs
 
@@ -118,23 +119,24 @@ This is an example of the LogPipeline configuration used for this sample:
 
 ![log-pipeline](./assets/log-pipeline.png)
 
-### Enable Istio access logs
+### Enable Istio Access logs
 
-Referred from [kyma-project.io documentation about istio access logs](https://kyma-project.io/external-content/telemetry-manager/docs/user/collecting-logs/istio-support.html).
+For details, see [Configure Istio Access Logs](https://kyma-project.io/external-content/telemetry-manager/docs/user/collecting-logs/istio-support.html).
 
-Istio access logs provide fine-grained details about the traffic when accessing the workloads that are part of Istio service mesh. The only prerequisite is to enable Istio sidecar injection for your workloads. The Istio access logs provide useful information relating to 4 golden signals, such as latency, traffic, errors, and saturation as well as any troubleshooting anomalies.
 
-[Configure Istio access logs for the entire mesh](https://kyma-project.io/external-content/telemetry-manager/docs/user/collecting-logs/istio-support.html#enable-istio-logs-for-the-entire-mesh)
+Istio access logs provide fine-grained details about traffic to workloads in the Istio service mesh, related to the four golden signals (latency, traffic, errors, and saturation) and help troubleshoot anomalies. Before you enable Istio access logs, enable Istio sidecar injection for your workloads. 
+
+For details, see [Enable Istio Logs for the Entire Mesh](https://kyma-project.io/external-content/telemetry-manager/docs/user/collecting-logs/istio-support.html#enable-istio-logs-for-the-entire-mesh).
 
 ```shell
 kubectl apply -f ./k8s/tracing/trace-istio-telemetry.yaml
 ```
 
-> Note: We use the same Istio telemetry configuration for tracing and logging.
+> **NOTE:** This and the subsequent samples use the same Istio Telemetry configuration for tracing and logging.
 
 ## View the logs
 
-You can access the SAP Cloud Logging instance dashboard. The access details are available in the Secret generated by the service binding.
+To access the SAP Cloud Logging dashboard, use the credentials from the Secret generated by the service binding.
 
 ![cls-binding-secret](./assets/cls-binding-secret.png)
 
@@ -142,11 +144,11 @@ The simplest way to start exploring the logs is to navigate to **Discover** and 
 
 ![cls-access](./assets/cls-access.png)
 
-You can choose the index pattern to view the relevant logs, apply a filter or search term to narrow down your search or use other Open Search capabilities.
+You can choose an index pattern to view relevant logs, apply a filter or search term to narrow down results, or use other OpenSearch capabilities.
 
 ![choose-index](./assets/choose-index.png)
 
-We will talk more about metrics in one of the next samples. However, I would like to bring your attention to the Four Golden Signals dashboard. It is provided out of the box and is based on the Istio access logs which we configured previously.
+While metrics are covered in a later sample, note the **Four Golden Signals** dashboard. SAP Cloud Logging provides this dashboard out-of-the-box, based on the Istio access logs that you configured previously.
 
 For reference, check out the generic and latency dashboards.
 
