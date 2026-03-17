@@ -5,19 +5,18 @@
 > [!NOTE]
 > This sample is used in the Use and Seed SAP BTP PostgreSQL in Kyma Runtime tutorial.
 
-This sample seeds a managed PostgreSQL instance on SAP BTP with a small `orders` table. It assumes you already created a PostgreSQL Service Instance and Service Binding for your Kyma cluster. The Service Binding must produce a Kubernetes Secret containing the connection details (`hostname`, `port`, `dbname`, `username`, `password`, and optionally `sslmode`).
+This sample seeds a managed PostgreSQL instance on SAP BTP with a small `orders` table. You use the provided `postgres-instance-binding.yaml` to create a PostgreSQL Service Instance and Service Binding for your Kyma cluster. The Service Binding produces a Kubernetes Secret containing the connection details (`hostname`, `port`, `dbname`, `username`, `password`, and optionally `sslmode`).
 
 The sample demonstrates how to:
 
 - Prepare a Kyma namespace for consuming a BTP-managed PostgreSQL instance.
 - Seed the database using a Kubernetes Job that runs `psql` against the bound instance.
 
-The SQL used to create and seed the table is stored in `app/setup.sql`. The Job definition lives in `k8s/seed-job.yaml`.
+The SQL used to create and seed the table lives inline in the ConfigMap in [database-postgres/k8s/seed-job.yaml](database-postgres/k8s/seed-job.yaml).
 
 ## Prerequisites
 
 - SAP BTP, Kyma runtime instance
-- Existing PostgreSQL Service Instance and Service Binding that exposes a Secret in your Kyma cluster
 - [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/) configured to use the `KUBECONFIG` file downloaded from the Kyma runtime
 
 ## Deploy the sample
@@ -29,7 +28,11 @@ The SQL used to create and seed the table is stored in `app/setup.sql`. The Job 
    kubectl label namespace dev istio-injection=enabled
    ```
 
-2. Make sure the PostgreSQL Service Binding Secret is available in the `dev` namespace. If it was created elsewhere, copy it into `dev` or recreate the binding in `dev`. Adjust the Secret name and key names in `k8s/seed-job.yaml` if they differ from your binding.
+2. Use the provided postgres-instance-binding.yaml manifest to create the PostgreSQL instance and binding:
+
+   ```shell
+   kubectl -n dev apply -f ./k8s/postgres-instance-binding.yaml
+   ```
 
 3. Apply the ConfigMap and Job that seeds the database:
 
