@@ -1,33 +1,29 @@
-apiVersion: telemetry.kyma-project.io/v1alpha1
+apiVersion: telemetry.kyma-project.io/v1beta1
 kind: LogPipeline
 metadata:
-  name: my-cls-access-logs
+  name: my-cls
 spec:
   input:
-    application:
-      containers:
-        include:
-          - istio-proxy
+    runtime:
+      enabled: true
   output:
-    http:
-      dedot: true
-      host:
+    otlp:
+      endpoint:
         valueFrom:
           secretKeyRef:
             name: my-cls-binding
             namespace: cls
-            key: ingest-mtls-endpoint
+            key: ingest-otlp-endpoint
       tls:
         cert:
           valueFrom:
             secretKeyRef:
               name: my-cls-binding
               namespace: cls
-              key: ingest-mtls-cert
+              key: ingest-otlp-cert
         key:
           valueFrom:
             secretKeyRef:
               name: my-cls-binding
               namespace: cls
-              key: ingest-mtls-key
-      uri: /customindex/istio-envoy-kyma
+              key: ingest-otlp-key
