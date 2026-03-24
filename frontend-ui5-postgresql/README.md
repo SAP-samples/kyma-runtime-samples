@@ -1,4 +1,4 @@
-# UI5 frontend MS SQL
+# Deploy the SAPUI5 Frontend in SAP BTP, Kyma Runtime
 
 ## Overview
 
