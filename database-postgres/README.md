@@ -1,4 +1,4 @@
-# PostgreSQL sample for Kyma
+# Use and Seed SAP BTP PostgreSQL in SAP BTP, Kyma Runtime
 
 ## Overview
 
@@ -19,7 +19,7 @@ The SQL used to create and seed the table lives inline in the ConfigMap in [data
 - SAP BTP, Kyma runtime instance
 - [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/) configured to use the `KUBECONFIG` file downloaded from the Kyma runtime
 
-## Deploy the sample
+## Deploy the Sample
 
 1. Create and label a `dev` namespace if it does not exist:
 
