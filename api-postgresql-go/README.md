@@ -1,4 +1,4 @@
-# Golang PostgreSQL database API
+# Deploy a Go PostgreSQL API Endpoint in SAP BTP, Kyma Runtime
 
 ## Overview
 
@@ -7,13 +7,13 @@
 
 This sample provides a Golang API endpoint for communication with PostgreSQL databases. The API connects to a BTP-managed PostgreSQL instance using Service Binding credentials available in the Kyma cluster.
 
-## PostgreSQL database example
+## PostgreSQL Database Example
 
 For the PostgreSQL example, use the `deployment.yaml` file. It provides the Deployment definition as well as an APIRule to expose the API without authentication. The Deployment references the PostgreSQL Service Binding Secret for connection credentials.
 
 This sample demonstrates how to:
 
-- Create a development Namespace in the Kyma runtime.
+- Create a development namespace in the Kyma runtime.
 - Deploy the following Kubernetes resources:
   - API deployment written in GO
   - API Rule
@@ -23,14 +23,14 @@ This sample demonstrates how to:
 ## Prerequisites
 
 - SAP BTP, Kyma runtime instance
-- PostgreSQL Service Instance and Service Binding in Kyma cluster
+- PostgreSQL Service Instance and Service Binding in the Kyma cluster
 - [Docker](https://www.docker.com/)
 - [Go](https://golang.org/doc/install)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) configured to use the `KUBECONFIG` file downloaded from the Kyma runtime
 
-## Steps
+## Procedure
 
-### Build the Docker image
+### Build the Docker Image
 
 1. Build and push the image to your Docker repository:
 
@@ -41,7 +41,7 @@ This sample demonstrates how to:
 
 ### Deploy the API
 
-1. Create a new `dev` Namespace:
+1. Create a new `dev` namespace:
 
    ```shell script
    kubectl create namespace dev
