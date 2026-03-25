@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-//Order -
+// Order -
 type Order struct {
 	Orderid     string    `json:"order_id"`
 	Description string    `json:"description"`
@@ -18,33 +18,33 @@ type RowsAffected struct {
 }
 
 func (s *Server) GetOrder(order_id string) ([]Order, error) {
-	tsql := fmt.Sprintf("SELECT * FROM Orders WHERE order_id=@p1;")
+	tsql := fmt.Sprintf("SELECT * FROM Orders WHERE order_id=$1;")
 	return s.query(tsql, order_id)
 }
 
 func (s *Server) GetOrders() ([]Order, error) {
 	tsql := fmt.Sprintf("SELECT * FROM Orders;")
-	return s.query(tsql, nil)
+	return s.query(tsql)
 }
 
 func (s *Server) AddOrder(order_id string, description string) ([]Order, error) {
-	tsql := fmt.Sprintf("INSERT INTO Orders(order_id, description) VALUES(@p1,@p2);")
+	tsql := fmt.Sprintf("INSERT INTO Orders(order_id, description) VALUES($1,$2);")
 	_, err := s.exec(tsql, order_id, description)
 	if err != nil {
 		return nil, err
 	}
 
-	tsql = fmt.Sprintf("SELECT * FROM Orders WHERE order_id=@p1;")
-	return s.query(tsql, order_id, description)
+	tsql = fmt.Sprintf("SELECT * FROM Orders WHERE order_id=$1;")
+	return s.query(tsql, order_id)
 }
 
 func (s *Server) EditOrder(order_id string, description string) (RowsAffected, error) {
-	tsql := fmt.Sprintf("UPDATE Orders SET description=@p2 WHERE order_id=@p1")
+	tsql := fmt.Sprintf("UPDATE Orders SET description=$2 WHERE order_id=$1")
 	return s.exec(tsql, order_id, description)
 }
 
 func (s *Server) DeleteOrder(order_id string) (RowsAffected, error) {
-	tsql := fmt.Sprintf("DELETE FROM Orders WHERE order_id=@p1")
+	tsql := fmt.Sprintf("DELETE FROM Orders WHERE order_id=$1")
 	return s.exec(tsql, order_id)
 }
 

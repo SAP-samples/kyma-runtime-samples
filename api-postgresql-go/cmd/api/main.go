@@ -6,7 +6,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/SAP-samples/kyma-runtime-extension-samples/api-mssql-go/internal/api"
+	"github.com/SAP-samples/kyma-runtime-extension-samples/api-postgresql-go/internal/api"
 )
 
 func main() {
