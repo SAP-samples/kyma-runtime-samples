@@ -15,9 +15,6 @@ For more information see [helm](https://helm.sh/)
 
 ## Samples
 
-<<<<<<< HEAD
-- [UI5 Frontend MSSQL](../frontend-ui5-postgresql/README.md)
-=======
 - [Deploy the SAPUI5 Frontend in SAP BTP, Kyma Runtime](../frontend-ui5-postgresql/README.md)
 >>>>>>> d697026517dc690884c9bc3a815dc6b659b01052
   - will also install dependent charts [Golang MSSQL Database API](./api-mssql-go/README.md) and [MSSQL Database](./database-mssql/README.md)
