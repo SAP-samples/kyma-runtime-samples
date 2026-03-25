@@ -16,7 +16,7 @@ For more information see [helm](https://helm.sh/)
 ## Samples
 
 - [Deploy a Go PostgreSQL API Endpoint in SAP BTP, Kyma Runtime](../api-postgresql-go/README.md)
-  - will also install dependent chart [PostgreSQL Database](./database-postgres/README.md)
+  - will also install dependent chart [PostgreSQL Database](../database-postgres/README.md)
 - [Use and Seed SAP BTP PostgreSQL in SAP BTP, Kyma Runtime](../database-postgres/README.md)
 - [Sample Event Trigger Java](./sample-event-trigger-java/README.md)
 - [Sample Extension Java](./sample-extension-java/README.md)
