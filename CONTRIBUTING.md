@@ -9,7 +9,7 @@ You want to contribute to Kyma Runtime Extension Samples? Welcome! Please read t
 
 ## Help Others
 
-You can help Kyma Runtime by helping others who use Kyma Runtime and need support. You will find them in the [SAP BTP, Kyma runtime Community](https://answers.sap.com/tags/73554900100800003012).
+You can help Kyma Runtime by helping others who use Kyma Runtime and need support. You will find them in the [SAP BTP, Kyma runtime Community](https://answers.sap.com/tags/73554900100800003012). <!-- markdown-link-check-disable-line -->
 
 ## Analyze Issues
 
