@@ -1,4 +1,4 @@
-FROM golang:1.14 as builder
+FROM golang:1.21 as builder
 
 ENV GO111MODULE=on
 
@@ -12,11 +12,11 @@ COPY cmd               ./cmd
 COPY internal               ./internal
 
 RUN ls /app/
-RUN CGO_ENABLED=0 GOOS=linux go build -v -a -o api-mssql-go ./cmd/api
+RUN CGO_ENABLED=0 GOOS=linux go build -v -a -o api-postgresql-go ./cmd/api
 
 FROM scratch
 WORKDIR /app
-COPY --from=builder /app/api-mssql-go /app/
+COPY --from=builder /app/api-postgresql-go /app/
 
 EXPOSE 8000
-ENTRYPOINT ["/app/api-mssql-go"]
+ENTRYPOINT ["/app/api-postgresql-go"]

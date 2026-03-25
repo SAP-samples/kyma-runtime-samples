@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-postgresql-go
+  labels:
+    app: api-postgresql-go
+data:
+  database: orders

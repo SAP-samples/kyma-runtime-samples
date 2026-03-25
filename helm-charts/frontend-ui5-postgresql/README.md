@@ -1,4 +1,8 @@
+<<<<<<< frontent-postgres
 This chart installs the example [frontend-ui5-postgresql](../../frontend-ui5-postgresql/README.md). Installing this chart will also install the charts [api-postgresql-go](../api-postgresql-go/README.md) and [database-postgres](../../database-postgres/README.md)   
+=======
+This chart installs the example `frontend-ui5-postgresql`. Installing this chart will also install the charts [api-postgresql-go](../../api-postgresql-go/README.md) and [database-postgres](../../database-postgres/README.md)   
+>>>>>>> main
 
 
 ## Installing the Chart

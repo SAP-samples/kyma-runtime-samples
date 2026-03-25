@@ -9,16 +9,16 @@ import (
 
 var appConfig Config
 
-//Config struct to hold the app config
+// Config struct to hold the app config
 type Config struct {
 	Server   string `envconfig:"MYAPP_host"`
-	Port     string `envconfig:"MYAPP_port,default=1433"`
+	Port     string `envconfig:"MYAPP_port,default=5432"`
 	Username string `envconfig:"MYAPP_username"`
 	Password string `envconfig:"MYAPP_password"`
 	Database string `envconfig:"MYAPP_database"`
 }
 
-//InitConfig initializes the AppConfig
+// InitConfig initializes the AppConfig
 func initConfig() {
 	log.Println("initilizing db configuration....")
 	appConfig = Config{}
@@ -32,7 +32,7 @@ func initConfig() {
 	}
 }
 
-//AppConfig returns the current AppConfig
+// AppConfig returns the current AppConfig
 func GetConfig() Config {
 	if appConfig == (Config{}) {
 		initConfig()

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/SAP-samples/kyma-runtime-extension-samples/api-mssql-go/internal/db"
+	"github.com/SAP-samples/kyma-runtime-extension-samples/api-postgresql-go/internal/db"
 )
 
 type orderData struct {
