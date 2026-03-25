@@ -12,7 +12,7 @@ The sample demonstrates how to:
 - Prepare a Kyma namespace for consuming a BTP-managed PostgreSQL instance.
 - Seed the database using a Kubernetes Job that runs `psql` against the bound instance.
 
-The SQL used to create and seed the table lives inline in the ConfigMap in [database-postgres/k8s/seed-job.yaml](database-postgres/k8s/seed-job.yaml).
+The SQL used to create and seed the table lives inline in the ConfigMap in [database-postgres/k8s/seed-job.yaml](k8s/seed-job.yaml).
 
 ## Prerequisites
 
