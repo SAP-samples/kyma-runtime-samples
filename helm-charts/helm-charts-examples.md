@@ -15,11 +15,9 @@ For more information see [helm](https://helm.sh/)
 
 ## Samples
 
-- [UI5 Frontend MSSQL](./frontend-ui5-mssql/README.md)
-  - will also install dependent charts [Golang PostgreSQL Database API](../api-postgresql-go/README.md) and [MSSQL Database](./database-mssql/README.md)
 - [Deploy a Go PostgreSQL API Endpoint in SAP BTP, Kyma Runtime](../api-postgresql-go/README.md)
-  - will also install dependent chart [MSSQL Database](./database-mssql/README.md)
-- [MSSQL Database](./database-mssql/README.md)
+  - will also install dependent chart [PostgreSQL Database](./database-postgres/README.md)
+- [Use and Seed SAP BTP PostgreSQL in SAP BTP, Kyma Runtime](../database-postgres/README.md)
 - [Sample Event Trigger Java](./sample-event-trigger-java/README.md)
 - [Sample Extension Java](./sample-extension-java/README.md)
 - [Sample Extension .Net](./sample-extension-dotnet/README.md)

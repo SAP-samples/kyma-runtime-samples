@@ -1,0 +1,16 @@
+apiVersion: services.cloud.sap.com/v1
+kind: ServiceInstance
+metadata:
+  name: postgres-instance
+  namespace: dev
+spec:
+  serviceOfferingName: postgresql-db
+  servicePlanName: free
+---
+apiVersion: services.cloud.sap.com/v1
+kind: ServiceBinding
+metadata:
+  name: postgres-binding
+  namespace: dev
+spec:
+  serviceInstanceName: postgres-instance

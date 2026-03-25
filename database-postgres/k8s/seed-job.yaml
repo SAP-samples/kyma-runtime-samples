@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-sample-sql
+  labels:
+    app: postgresql-sample
+data:
+  setup.sql: |-
+    CREATE TABLE IF NOT EXISTS orders (
+        order_id varchar(50) PRIMARY KEY,
+        description varchar(255),
+        created timestamptz DEFAULT NOW()
+    );
+
+    INSERT INTO orders (order_id, description) VALUES
+        ('10000001', 'Sample Order 1'),
+        ('10000002', 'Sample Order 2')
+    ON CONFLICT (order_id) DO NOTHING;
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: seed-postgresql
+  labels:
+    app: postgresql-sample
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: psql-client
+          image: postgres:15
+          env:
+            - name: PGHOST
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-binding # change to your binding Secret name
+                  key: hostname
+            - name: PGPORT
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-binding # change to your binding Secret name
+                  key: port
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-binding # change to your binding Secret name
+                  key: dbname
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-binding # change to your binding Secret name
+                  key: username
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-binding # change to your binding Secret name
+                  key: password
+            - name: PGSSLMODE
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-binding # change to your binding Secret name
+                  key: sslmode
+                  optional: true
+          volumeMounts:
+            - name: sql
+              mountPath: /init
+          command: ["psql"]
+          args:
+            ["-v", "ON_ERROR_STOP=1", "-f", "/init/setup.sql"]
+      volumes:
+        - name: sql
+          configMap:
+            name: postgresql-sample-sql

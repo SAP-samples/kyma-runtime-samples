@@ -91,8 +91,8 @@ Running various samples requires access to the Kyma environment. There are also 
 
 | Name                                                                      | Description                                                                                                 | References                                                                     |
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [MS SQL database](./database-mssql/README.md)                             | This sample demonstrates how to containerize and deploy an MS SQL database                                   | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-mssql-deployment.html) |
 | [Deploy a Go PostgreSQL API Endpoint in SAP BTP, Kyma Runtime](./api-postgresql-go/README.md)                    | This sample provides a Golang API endpoint for communication with an MS SQL database                        | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-api-mssql-golang.html) |
+| [Use and Seed SAP BTP PostgreSQL in SAP BTP, Kyma Runtime](./database-postgres/README.md)                             | This sample demonstrates how to containerize and deploy an MS SQL database                                   | [Tutorial](https://developers.sap.com/tutorials/cp-kyma-mssql-deployment.html) |
 
 ## Advanced Scenarios
 
