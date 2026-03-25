@@ -1,16 +1,16 @@
 apiVersion: gateway.kyma-project.io/v2
 kind: APIRule
 metadata:
-  name: fe-ui5-mssql
+  name: fe-ui5-postgresql
 spec:
   gateway: kyma-system/kyma-gateway
   hosts:
-    - fe-ui5-mssql
+    - fe-ui5-postgresql
   rules:
     - methods:
         - GET
       noAuth: true
       path: /*
   service:
-    name: fe-ui5-mssql
+    name: fe-ui5-postgresql
     port: 80

@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: fe-ui5-postgresql
+  labels:
+    app: fe-ui5-postgresql
+data:
+  config.json: |-
+    {
+      "API_URL": "https://api-postgresql-go.{YOUR_KYMA_DOMAIN}"
+    }
