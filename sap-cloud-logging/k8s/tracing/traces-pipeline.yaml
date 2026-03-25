@@ -1,7 +1,7 @@
-apiVersion: telemetry.kyma-project.io/v1alpha1
+apiVersion: telemetry.kyma-project.io/v1beta1
 kind: TracePipeline
 metadata:
-  name: my-cls-trace-pipeline
+  name: my-cls
 spec:
   output:
     otlp:
