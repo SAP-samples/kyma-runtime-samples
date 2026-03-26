@@ -5,6 +5,6 @@
   "author": "Gaurav Abbi",
   "dependencies": {
     "axios": "^0.25.0",
-    "cloudevents": "^5.3.0"
+    "cloudevents": "^10.0.0"
   }
 }
