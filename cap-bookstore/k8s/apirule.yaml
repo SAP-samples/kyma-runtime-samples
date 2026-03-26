@@ -1,0 +1,17 @@
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: bookstore-api
+  labels:
+    app: bookstore
+spec:
+  hosts:
+  - {YOUR_HOSTNAME}
+  service:
+    name: bookstore-service
+    port: 80
+  gateway: kyma-system/kyma-gateway
+  rules:
+  - path: /{**}
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
+    noAuth: true
