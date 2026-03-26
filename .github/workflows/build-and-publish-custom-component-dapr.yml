@@ -31,7 +31,7 @@ jobs:
           npm run build
           popd  
       - name: Log in to the Container registry (GH Packages)
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
