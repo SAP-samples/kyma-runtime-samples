@@ -56,7 +56,7 @@ Interactive documentation is available at `/swagger-ui.html` after deployment.
 
 ```json
 {
-  "id": "1714900000000",
+  "id": "4e92e9c6-ebe3-4840-ae3c-2ede35ee4b74",
   "title": "Blade Runner",
   "year": 1982,
   "director": "Ridley Scott",
