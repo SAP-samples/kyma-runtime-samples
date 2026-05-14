@@ -12,6 +12,7 @@ import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/movies")
@@ -50,7 +51,7 @@ public class MovieController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new movie")
     public Movie create(@org.springframework.web.bind.annotation.RequestBody Movie movie) throws Exception {
-        Movie saved = movie.withId(String.valueOf(System.currentTimeMillis()));
+        Movie saved = movie.withId(UUID.randomUUID().toString());
         putMovie(saved);
         return saved;
     }
