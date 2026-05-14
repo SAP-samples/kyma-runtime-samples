@@ -1,6 +1,17 @@
-# Movies REST API — Java / SAP BTP Kyma
+# Deploy a Spring Boot Movies REST API in SAP BTP, Kyma Runtime
 
-A Spring Boot REST API that keeps movie records as JSON objects in an S3-compatible **SAP Object Store** service. The app is deployed to **SAP BTP, Kyma runtime** using the `kyma-project/setup-kyma-cli/app-push` GitHub Action.
+## Overview
+
+> [!NOTE]
+> This sample is used in the Fast Prototyping in SAP BTP, Kyma Runtime Using App Push tutorial.
+
+This sample provides a Spring Boot REST API that manages movie records stored as JSON objects in an S3-compatible **SAP Object Store** service.
+
+This sample demonstrates how to:
+
+- How to go from source code to a running, externally accessible application on Kyma runtime in a single command
+- How to iterate quickly on a prototype without writing Kubernetes manifests, Dockerfiles, or configuring a container registry
+- How to evolve a local prototype into an automated GitHub Actions CD pipeline
 
 ## Architecture
 
@@ -41,7 +52,7 @@ Each movie is stored as a JSON file at `movies/<id>.json` inside the bound S3 bu
 
 Interactive documentation is available at `/swagger-ui.html` after deployment.
 
-### Movie resource
+### Movie Resource
 
 ```json
 {
@@ -51,69 +62,4 @@ Interactive documentation is available at `/swagger-ui.html` after deployment.
   "director": "Ridley Scott",
   "rating": 8.1
 }
-```
-
-## Prerequisites
-
-- SAP BTP Kyma cluster
-- GitHub repository secrets:
-  - `SERVER` — Kyma API server URL
-  - `CA_CRT` — Kyma cluster CA certificate
-- OIDC client configured with audience `my-client-id-for-gh-action`
-
-## SAP Object Store Setup
-
-Apply the Kubernetes manifests to provision the Object Store service and bind it to the app namespace:
-
-```bash
-kubectl apply -f movies-rest/service-instance.yaml
-kubectl apply -f movies-rest/service-binding.yaml
-```
-
-These create:
-- `ServiceInstance` `object-store-instance` — provisions an S3-compatible bucket via the SAP Service Operator
-- `ServiceBinding` `object-store-binding` — injects credentials as a Kubernetes secret that the app reads at startup
-
-## Deployment
-
-Push to the `main` branch. The GitHub Actions workflow will:
-
-1. Install Kyma CLI
-2. Obtain a kubeconfig using OIDC
-3. Build and push the container image
-4. Deploy the app to the `movie-rest` namespace with:
-   - Istio sidecar injection enabled
-   - Public ingress (`expose: true`)
-   - The `object-store-binding` secret mounted as a service binding
-   - JVM tuning from `.env`
-
-The workflow appends `/swagger-ui.html` to the output URL so you go directly on the API docs.
-
-## Local Development
-
-The app requires an Object Store service binding to start. For local testing, provide the binding via environment variables or a local `VCAP_SERVICES` / secrets file supported by the SAP Service Binding library.
-
-```bash
-cd movies-rest
-mvn spring-boot:run
-```
-
-The server starts on port `8080`.
-
-## Project Structure
-
-```
-movies-rest/
-├── src/main/java/com/example/movies/
-│   ├── Application.java          # Spring Boot entry point
-│   ├── Movie.java                # Record: id, title, year, director, rating
-│   ├── MovieController.java      # REST controller — CRUD over S3
-│   └── ObjectStoreConfig.java    # Reads SAP service binding, creates S3Client
-├── src/main/resources/
-│   └── application.properties    # server.port=8080
-├── .github/workflows/deploy.yaml # CI/CD pipeline
-├── service-instance.yaml         # SAP BTP ServiceInstance manifest
-├── service-binding.yaml          # SAP BTP ServiceBinding manifest
-├── .env                          # JVM tuning flags for Buildpacks
-└── pom.xml
 ```
