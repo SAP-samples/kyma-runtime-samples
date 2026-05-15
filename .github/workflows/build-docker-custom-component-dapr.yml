@@ -1,38 +1,40 @@
 name: Build docker for the Custom Component Sample
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-    - "custom-component-dapr/**"
+      - "custom-component-dapr/**"
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * 0'
+
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-     matrix:
-       node-version: [14.x, 16.x]
+      matrix:
+        node-version: [14.x, 16.x]
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: 'Install dependencies and Build'
+      - name: "Install dependencies and Build"
         shell: bash
         run: |
           pushd './custom-component-dapr'
           npm ci
           npm run build --if-present
           popd
-      - name: 'Check for outdated dependencies'
+      - name: "Check for outdated dependencies"
         shell: bash
         run: |
           pushd './custom-component-dapr'
           npm outdated --ignore-packages dapr-client@2.0.2
           popd
-      - name: 'Build Docker Image'
+      - name: "Build Docker Image"
         shell: bash
         run: |
           pushd './custom-component-dapr'
@@ -42,5 +44,5 @@ jobs:
         uses: rtCamp/action-slack-notify@v2.2.0
         if: ${{ failure() }}
         env:
-          SLACK_MESSAGE: 'Build Failed for ${{ env.SAMPLE_NAME }}'
-          SLACK_WEBHOOK: ${{ secrets.BUILD_FAIL_NOTIFY_SLACK_URL }}                    
+          SLACK_MESSAGE: "Build Failed for ${{ env.SAMPLE_NAME }}"
+          SLACK_WEBHOOK: ${{ secrets.BUILD_FAIL_NOTIFY_SLACK_URL }}

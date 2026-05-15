@@ -2,36 +2,37 @@ name: Build docker sample-extension-dotnet-minimalapi
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
-    - "sample-extension-dotnet-minimalapi/**"
+      - "sample-extension-dotnet-minimalapi/**"
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * 0'
+
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: '6.0.x'
-    - name: 'Build .NET Project'
-      shell: bash
-      run: |
-        pushd './sample-extension-dotnet-minimalapi/TodoApi'
-        dotnet publish -c Release
-        popd     
-    - name: Build the Docker image
-      shell: bash
-      run: |
-        pushd './sample-extension-dotnet-minimalapi/'
-        make build-image
-        popd
-    - name: Slack Notify
-      uses: rtCamp/action-slack-notify@v2.2.0
-      if: ${{ failure() }}
-      env:
-        SLACK_MESSAGE: 'Build Failed for ${{ env.SAMPLE_NAME }}'
-        SLACK_WEBHOOK: ${{ secrets.BUILD_FAIL_NOTIFY_SLACK_URL }}    
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: "6.0.x"
+      - name: "Build .NET Project"
+        shell: bash
+        run: |
+          pushd './sample-extension-dotnet-minimalapi/TodoApi'
+          dotnet publish -c Release
+          popd
+      - name: Build the Docker image
+        shell: bash
+        run: |
+          pushd './sample-extension-dotnet-minimalapi/'
+          make build-image
+          popd
+      - name: Slack Notify
+        uses: rtCamp/action-slack-notify@v2.2.0
+        if: ${{ failure() }}
+        env:
+          SLACK_MESSAGE: "Build Failed for ${{ env.SAMPLE_NAME }}"
+          SLACK_WEBHOOK: ${{ secrets.BUILD_FAIL_NOTIFY_SLACK_URL }}

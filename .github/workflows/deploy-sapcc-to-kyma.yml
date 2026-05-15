@@ -1,9 +1,12 @@
-name: DSAG TT 2022 - Deploy SAP Cloud Connector to Kyma 
+name: DSAG TT 2022 - Deploy SAP Cloud Connector to Kyma
 
 on:
   workflow_dispatch: {}
 env:
   NAMESPACE: dsagtt22-sapcc
+
+permissions:
+  contents: read
 
 jobs:
   execute_deployment:
