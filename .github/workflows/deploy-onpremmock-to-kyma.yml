@@ -1,9 +1,12 @@
-name: DSAG TT 2022 - Deploy on prem mock to Kyma 
+name: DSAG TT 2022 - Deploy on prem mock to Kyma
 
 on:
   workflow_dispatch: {}
 env:
   NAMESPACE: dsagtt22-sapcc
+
+permissions:
+  contents: read
 
 jobs:
   execute_deployment:
@@ -19,4 +22,3 @@ jobs:
       - name: Execute deployment of on-premise mock
         run: |
           kubectl apply -f dsagtt22/onprem-mock/k8s/deployment.yaml
-      

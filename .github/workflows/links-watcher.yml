@@ -9,7 +9,7 @@ on:
 
 permissions:
   contents: read
-  issues: write 
+  issues: write
 
 jobs:
   links-watcher:
@@ -26,13 +26,3 @@ jobs:
           output: ./lychee/out.md
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      
-      #- name: Create issue when fail
-      #  uses: peter-evans/create-issue-from-file@v5
-      #  if: ${{ steps.lychee.outputs.exit_code }} != 0
-      #  with:
-      #    title: Link Checker Report
-      #    content-filepath: ./lychee/out.md
-      #    labels: broken link, automated issue
-      #  env:
-      #    GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

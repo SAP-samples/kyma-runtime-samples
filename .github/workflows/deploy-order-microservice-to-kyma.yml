@@ -5,6 +5,9 @@ on:
 env:
   NAMESPACE: dsagtt22
 
+permissions:
+  contents: read
+
 jobs:
   execute_deployment:
     runs-on: ubuntu-latest
@@ -24,23 +27,23 @@ jobs:
         run: |
           echo "*** Create secret ***"
           kubectl apply -f dsagtt22/ordermicroservice/database-mssql/k8s/secret.yaml -n ${{ env.NAMESPACE }}
-          echo "*** Create persistent volume claim ***"  
+          echo "*** Create persistent volume claim ***"
           kubectl apply -f dsagtt22/ordermicroservice/database-mssql/k8s/pvc.yaml -n ${{ env.NAMESPACE }}
           echo "*** Create deployment ***"
           kubectl apply -f dsagtt22/ordermicroservice/database-mssql/k8s/deployment.yaml -n ${{ env.NAMESPACE }}
       - name: Setup GO API for MS SQL in Kyma
         run: |
-          echo "*** Create configmap ***"  
+          echo "*** Create configmap ***"
           kubectl apply -f dsagtt22/ordermicroservice/api-mssql-go/k8s/configmap.yaml -n ${{ env.NAMESPACE }}
           echo "*** Create deployment ***"
           kubectl apply -f dsagtt22/ordermicroservice/api-mssql-go/k8s/deployment.yaml -n ${{ env.NAMESPACE }}
           echo "*** Create API rule ***"
-          kubectl apply -f dsagtt22/ordermicroservice/api-mssql-go/k8s/apirule.yaml -n ${{ env.NAMESPACE }}    
+          kubectl apply -f dsagtt22/ordermicroservice/api-mssql-go/k8s/apirule.yaml -n ${{ env.NAMESPACE }}
       - name: Setup UI5 frontend for MS SQL in Kyma
         run: |
-          echo "*** Create configmap ***"  
+          echo "*** Create configmap ***"
           kubectl apply -f dsagtt22/ordermicroservice/frontend-ui5-mssql/k8s/configmap.yaml -n ${{ env.NAMESPACE }}
           echo "*** Create deployment ***"
           kubectl apply -f dsagtt22/ordermicroservice/frontend-ui5-mssql/k8s/deployment.yaml -n ${{ env.NAMESPACE }}
           echo "*** Create API rule ***"
-          kubectl apply -f dsagtt22/ordermicroservice/frontend-ui5-mssql/k8s/apirule.yaml -n ${{ env.NAMESPACE }}    
+          kubectl apply -f dsagtt22/ordermicroservice/frontend-ui5-mssql/k8s/apirule.yaml -n ${{ env.NAMESPACE }}

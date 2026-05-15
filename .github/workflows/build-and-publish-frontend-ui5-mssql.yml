@@ -7,6 +7,10 @@ env:
   IMAGE_NAME: frontend-ui5-mssql
   LABEL: 1.0.0
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
@@ -29,7 +33,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.1.0
         with:
-          context: "{{defaultContext}}:dsagtt22/ordermicroservice/frontend-ui5-mssql" 
+          context: "{{defaultContext}}:dsagtt22/ordermicroservice/frontend-ui5-mssql"
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}            
+          labels: ${{ steps.meta.outputs.labels }}
