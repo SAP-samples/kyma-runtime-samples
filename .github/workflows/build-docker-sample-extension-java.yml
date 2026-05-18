@@ -8,6 +8,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 0'
+
+permissions:
+  contents: read
+
 env:
   SAMPLE_NAME: sample-extension-java
 jobs:
