@@ -11,6 +11,9 @@ on:
       - 'external-images.yaml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
