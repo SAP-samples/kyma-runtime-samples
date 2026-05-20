@@ -42,22 +42,15 @@ spec:
 status:
   loadBalancer: {}
 ---
-apiVersion: eventing.kyma-project.io/v1alpha1
+apiVersion: eventing.kyma-project.io/v1alpha2
 kind: Subscription
 metadata:
   name: websocket-server
 spec:
-  filter:
-    filters:
-      - eventSource:
-          property: source
-          type: exact
-          value: ''
-        eventType:
-          property: type
-          type: exact
-          value: sap.kyma.custom.mp-gaurav-10-mock-ccv2.order.created.v1
-  protocolsettings: {}
+  source: ""
+  types:
+    - sap.kyma.custom.mp-gaurav-10-mock-ccv2.order.created.v1
+  typeMatching: exact
   sink: http://websocket-server.dev.svc.cluster.local:8888/events
 ---
 apiVersion: gateway.kyma-project.io/v2

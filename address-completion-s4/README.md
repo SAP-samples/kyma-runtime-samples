@@ -105,6 +105,12 @@ This step creats the connection between the two Message Clients in SAP Event Mes
 
 ## Using SAP Data Quality Services
 
+> [!WARNING]
+> SAP Data Quality Services (DQS) is **not supported in Kyma runtime**. The service instances and bindings
+> (`dqs-si.yaml`, `dqs-sb.yaml`) can only be created in Cloud Foundry runtime. If you are deploying to
+> Kyma, use the [HERE Services](#using-here-services) or [Google Maps Services](#using-google-maps-services)
+> implementations instead.
+
 ### Create the SAP DQS Service Instance and Binding
 
 The APIs for the DQS service can be found [here](https://api.sap.com/api/mld/resource). The addressCleanse endpoint is used in this scenario.

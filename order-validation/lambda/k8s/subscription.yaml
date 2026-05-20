@@ -1,16 +1,10 @@
-apiVersion: eventing.kyma-project.io/v1alpha1
+apiVersion: eventing.kyma-project.io/v1alpha2
 kind: Subscription
 metadata:
   name: order-validation
 spec:
-  filter:
-    filters:
-    - eventSource:
-        property: source
-        type: exact
-        value: ""
-      eventType:
-        property: type
-        type: exact
-        value: sap.kyma.custom.<ccv2-application>.order.fraudcheck.v1
+  source: ""
+  types:
+    - sap.kyma.custom.<ccv2-application>.order.fraudcheck.v1
+  typeMatching: exact
   sink: http://order-validation.order-validation.svc.cluster.local
