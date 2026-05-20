@@ -1,26 +1,13 @@
-apiVersion: eventing.kyma-project.io/v1alpha1
+apiVersion: eventing.kyma-project.io/v1alpha2
 kind: Subscription
 metadata:
   labels:
     scenario: address-completion
   name: address-completion-here
 spec:
-  filter:
-    filters:
-    - eventSource:
-        property: source
-        type: exact
-        value: ""
-      eventType:
-        property: type
-        type: exact
-        value: sap.kyma.custom.{provide-your-application-name-as-shown-in-kyma}.Account.Root.Created.v1
-    - eventSource:
-        property: source
-        type: exact
-        value: ""
-      eventType:
-        property: type
-        type: exact
-        value: sap.kyma.custom.{provide-your-application-name-as-shown-in-kyma}.Account.Root.Updated.v1
+  source: "{provide-your-application-name-as-shown-in-kyma}"
+  types:
+    - Account.Root.Created.v1
+    - Account.Root.Updated.v1
+  typeMatching: standard
   sink: http://address-completion-here.{your-namespace}.svc.cluster.local

@@ -1,20 +1,12 @@
-apiVersion: eventing.kyma-project.io/v1alpha1
+apiVersion: eventing.kyma-project.io/v1alpha2
 kind: Subscription
 metadata:
   name: consumer
   labels:
     scenario: in-cluster-events
 spec:
-  filter:
-    filters:
-    - eventSource:
-        property: source
-        type: exact
-        value: ""
-      eventType:
-        property: type
-        type: exact
-        value: sap.kyma.custom.internal.product.viewed.v1
-  protocol: ""
-  protocolsettings: {}
-  sink: http://consumer.in-cluster-events.svc.cluster.local #this is the service name and port
+  source: ""
+  types:
+    - sap.kyma.custom.internal.product.viewed.v1
+  typeMatching: exact
+  sink: http://consumer.in-cluster-events.svc.cluster.local

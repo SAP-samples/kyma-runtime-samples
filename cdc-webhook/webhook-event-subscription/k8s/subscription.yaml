@@ -1,19 +1,11 @@
-apiVersion: eventing.kyma-project.io/v1alpha1
+apiVersion: eventing.kyma-project.io/v1alpha2
 kind: Subscription
 metadata:
   name: event-registration-subscription
   namespace: cdc
 spec:
-  filter:
-    filters:
-    - eventSource:
-        property: source
-        type: exact
-        value: ""
-      eventType:
-        property: type
-        type: exact
-        value: sap.kyma.custom.cdc.subscription.updated.v1
-  protocol: ""
-  protocolsettings: {}
+  source: ""
+  types:
+    - sap.kyma.custom.cdc.subscription.updated.v1
+  typeMatching: exact
   sink: http://event-consumer.cdc.svc.cluster.local

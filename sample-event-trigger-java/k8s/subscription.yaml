@@ -1,16 +1,10 @@
-apiVersion: eventing.kyma-project.io/v1alpha1
+apiVersion: eventing.kyma-project.io/v1alpha2
 kind: Subscription
 metadata:
   name: sample-event-trigger-java-subscription
 spec:
-  filter:
-    filters:
-      - eventSource:
-          property: source
-          type: exact
-          value: ""
-        eventType:
-          property: type
-          type: exact
-          value: sap.kyma.custom.{your-connected-commerce-application-name}.order.created.v1
+  source: ""
+  types:
+    - sap.kyma.custom.{your-connected-commerce-application-name}.order.created.v1
+  typeMatching: exact
   sink: http://sample-event-trigger-java.dev.svc.cluster.local

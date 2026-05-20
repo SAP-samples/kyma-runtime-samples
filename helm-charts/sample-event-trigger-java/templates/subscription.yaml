@@ -1,18 +1,12 @@
-apiVersion: eventing.kyma-project.io/v1alpha1
+apiVersion: eventing.kyma-project.io/v1alpha2
 kind: Subscription
 metadata:
   name: {{ include "sample-event-trigger-java.fullname" . }}
   labels:
     {{- include "sample-event-trigger-java.labels" . | nindent 4 }}
 spec:
-  filter:
-    filters:
-      - eventSource:
-          property: source
-          type: exact
-          value: ""
-        eventType:
-          property: type
-          type: exact
-          value: sap.kyma.custom.{{ .Values.subscription.application }}.{{ .Values.subscription.eventType }}.v1
+  source: ""
+  types:
+    - sap.kyma.custom.{{ .Values.subscription.application }}.{{ .Values.subscription.eventType }}.v1
+  typeMatching: exact
   sink: http://{{ include "sample-event-trigger-java.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local
