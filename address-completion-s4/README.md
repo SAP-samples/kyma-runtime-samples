@@ -106,11 +106,11 @@ This step creats the connection between the two Message Clients in SAP Event Mes
 ## Using SAP Data Quality Services
 
 > [!NOTE]
-> SAP Data Quality Services (DQS) is available only for Cloud Foundry (CF) environments. See the [pricing and region availability details](https://discovery-center.cloud.sap/serviceCatalog/data-quality-services?region=all&tab=service_plan).
-> The steps below describe how to create the service instance in CF and make its credentials available to Kyma.
-> The [API reference](https://api.sap.com/api/mld/resource) for the addressCleanse endpoint is available here.
+> SAP Data Quality Services (DQS) are available only for the Cloud Foundry (CF) environment. See the [pricing and region availability details](https://discovery-center.cloud.sap/serviceCatalog/data-quality-services?region=all&tab=service_plan).
+> The steps below describe how to create an SAP DSQ service instance in CF and make its credentials available to Kyma.
+> For the `addressCleanse` endpoint, see the [API reference](https://api.sap.com/api/mld/resource).
 
-### Create the SAP DQS Service Instance in Cloud Foundry
+### Create an SAP DQS Service Instance in Cloud Foundry
 
 - Set up a subaccount with a CF environment and space in a region where DQS is available (e.g. AWS: Europe (Frankfurt))
 - Create an instance named `data-quality-service` of `Data Quality Services` with plan `standard` in that CF space
@@ -118,7 +118,7 @@ This step creats the connection between the two Message Clients in SAP Event Mes
 
 ### Copy the DQS Credentials to Kyma
 
-Copy the CF service key credentials into a Kubernetes secret using the [secret-from-cf-service-key](../secret-from-cf-service-key/README.md) utility:
+Copy the CF service key credentials into a Kubernetes Secret using the [secret-from-cf-service-key](../secret-from-cf-service-key/README.md) utility:
 
 ```bash
 node create-k8s-secret-from-cf-service-key.js data-quality-service-sb {your-service-key-name} | kubectl -n dev apply -f -
