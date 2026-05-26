@@ -7,11 +7,11 @@
 
 This sample provides a Spring Boot REST API that manages movie records stored as JSON objects in an S3-compatible **SAP Object Store** service.
 
-This sample demonstrates how to:
+This sample demonstrates how to perform the following operations:
 
-- How to go from source code to a running, externally accessible application on Kyma runtime in a single command
-- How to iterate quickly on a prototype without writing Kubernetes manifests, Dockerfiles, or configuring a container registry
-- How to evolve a local prototype into an automated GitHub Actions CD pipeline
+- Go from source code to a running, externally accessible application on Kyma runtime in a single command
+- Iterate quickly on a prototype without writing Kubernetes manifests, Dockerfiles, or configuring a container registry
+- Evolve a local prototype into an automated GitHub Actions CD pipeline
 
 ## Architecture
 
