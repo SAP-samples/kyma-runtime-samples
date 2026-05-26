@@ -1,4 +1,4 @@
-RELEASE?=0.0.24
+RELEASE?=0.0.25
 APP?=sample-extension-java
 DOCKER_ACCOUNT?=gauravsap
 CONTAINER_IMAGE?=${DOCKER_ACCOUNT}/${APP}:${RELEASE}
@@ -16,7 +16,7 @@ build:
 build-image-using-pack: clean build
 	pack build $(APP) --tag $(CONTAINER_IMAGE) \
 		--path . \
-		--builder paketobuildpacks/builder:tiny \
+		--builder paketobuildpacks/builder-jammy-tiny \
 		--env BP_JVM_VERSION=17
 
 build-image-using-docker: clean build
