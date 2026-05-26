@@ -87,7 +87,7 @@ Running various samples requires access to the Kyma environment. There are also 
 | [HANA Cloud NodeJS API](./hana-nodejs/README.md)                               | This sample demonstrates how SAP HANA Cloud can be utilized within the Kyma runtime | -          |
 | [GeoServer for a geospatial middleware over HANA Cloud](./geoserver/README.md) | This sample provides a GeoServerinstance with the plugin for SAP HANA Connectivity  | -          |
 
-## MS SQL/Azure SQL
+## PostgreSQL
 
 | Name                                                                      | Description                                                                                                 | References                                                                     |
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
