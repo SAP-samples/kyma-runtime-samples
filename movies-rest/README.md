@@ -29,7 +29,7 @@ Kyma Runtime (Kubernetes)
 Each movie is stored as a JSON file at `movies/<id>.json` inside the bound S3 bucket.
 
 > [!NOTE]
-> Object Store is a good fit here because the data is simple and self-contained. For applications with structured, relational, or frequently queried data, use a proper database such as PostgreSQL instead.
+> Object Store is used here for the sake of simplicity. For applications with structured, relational use a proper database such as Hana Cloud or PostgreSQL.
 
 ## Tech Stack
 
