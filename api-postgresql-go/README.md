@@ -3,7 +3,7 @@
 ## Overview
 
 > [!NOTE]
-> This sample is used in the Deploy a Go PostgreSQL API Endpoint in SAP BTP, Kyma Runtime tutorial.
+> This sample is used in the [Deploy a Go PostgreSQL API Endpoint in SAP BTP, Kyma Runtime](https://developers.sap.com/tutorials/cp-kyma-api-postgres-golang.html) tutorial.
 
 This sample provides a Golang API endpoint for communication with PostgreSQL databases. The API connects to a BTP-managed PostgreSQL instance using Service Binding credentials available in the Kyma cluster.
 
