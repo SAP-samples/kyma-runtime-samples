@@ -40,9 +40,3 @@ jobs:
           pushd './custom-component-dapr'
           make build-image
           popd
-      - name: Slack Notify
-        uses: rtCamp/action-slack-notify@v2.2.0
-        if: ${{ failure() }}
-        env:
-          SLACK_MESSAGE: "Build Failed for ${{ env.SAMPLE_NAME }}"
-          SLACK_WEBHOOK: ${{ secrets.BUILD_FAIL_NOTIFY_SLACK_URL }}
