@@ -8,7 +8,7 @@ This example includes a **Kyma Serverless Function**, *cdp-extension*, that is e
 * Deploy a Kyma Serverless Function and an API Rule with **JWT Access strategy** using the [Kubernetes command-line tool](https://kubernetes.io/docs/reference/kubectl/overview/)
 * Alternately, deploy a Kyma Serverless Function and an API Rule with **JWT Access strategy** using the Kyma Console User Interface
 * Explore [api.sap.com](https://api.sap.com/) and try out REST API calls using a sandbox environment
-* Use the [SAP S/4HANA Cloud Business Partner (A2X) microservice](https://www.sap.com/canada/products/data-quality-management.html) for Business Partner, Supplier, and Customer master data in SAP S/4HANA Cloud system
+* Use the [SAP S/4HANA Cloud Business Partner (A2X) microservice](https://www.sap.com/canada/products/data-cloud/data-quality-management.html) for Business Partner, Supplier, and Customer master data in SAP S/4HANA Cloud system
 
 #### Solution Architecture
 
@@ -323,7 +323,7 @@ This example includes a **Kyma Serverless Function**, *cdp-extension*, that is e
 
 Upload the `input_20211119_001.json` file (located in the `./kyma-runtime-extension-samples/cdp-extension/input` folder of the **cdp-extensions** repo) to the **input** folder of your AWS S3 bucket.
 
->> Note: The `input_20211119_001.json` file contains mock email addresses that are currently used by the [SAP S/4HANA Cloud Business Partner (A2X) microservice](https://www.sap.com/canada/products/data-quality-management.html) for Business Partner, Supplier, and Customer master data in SAP S/4HANA Cloud system.
+>> Note: The `input_20211119_001.json` file contains mock email addresses that are currently used by the [SAP S/4HANA Cloud Business Partner (A2X) microservice](https://www.sap.com/products/data-cloud/data-quality-management.html) for Business Partner, Supplier, and Customer master data in SAP S/4HANA Cloud system.
 
 ## Test the solution
 

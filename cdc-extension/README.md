@@ -8,7 +8,7 @@ This example includes a **Kyma serverless function**, *cdc-extension*, that is e
 * Deploy a Kyma serverless function and an API Rule using the [Kubernetes command-line tool](https://kubernetes.io/docs/reference/kubectl/overview/)
 * Alternately, deploy a Kyma serverless function and an API Rule using the Kyma Console User Interface
 * Explore [api.sap.com](https://api.sap.com/) and try out REST API calls using a sandbox environment
-* Use the [SAP Data Quality Management microservice](https://www.sap.com/canada/products/data-quality-management.html) for location data to cleanse addresses
+* Use the [SAP Data Quality Management, microservices for location data](https://www.sap.com/products/data-cloud/data-quality-management.html) to cleanse addresses
 
 **Notes:**
 
@@ -34,7 +34,7 @@ This example includes a **Kyma serverless function**, *cdc-extension*, that is e
 
 ## Pre-requisites
 
-* Provision [SAP Data Quality Management, microservices for location data](https://www.sap.com/products/technology-platform/data-quality-management.html) and [set up an SAP Customer Data Cloud site](https://help.sap.com/viewer/8b8d6fffe113457094a17701f63e3d6a/GIGYA/en-US/41720d7370b21014bbc5a10ce4041860.html).
+* Provision [SAP Data Quality Management, microservices for location data](https://www.sap.com/products/technology-platform/data-quality-management.html) and [set up an SAP Customer Data Cloud site](https://help.sap.com/docs/SAP_CUSTOMER_DATA_CLOUD/8b8d6fffe113457094a17701f63e3d6a/dce043f09265489f965201cdcf06f1f3.html?locale=en-US&ai=true#loiodce043f09265489f965201cdcf06f1f3__Add_Your_Site).
 * [Get a Free Account on SAP BTP Trial](https://developers.sap.com/tutorials/hcp-create-trial-account.html)*
 * [Enable SAP BTP, Kyma Runtime](https://developers.sap.com/tutorials/cp-kyma-getting-started.html).
 * [Download and install the Kubernetes Command Line Tool](https://developers.sap.com/tutorials/cp-kyma-download-cli.html#d81e7789-ced4-4df6-b4a0-132d8c637077).
