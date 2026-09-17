@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+apirule:
+  gateway: kyma-system/kyma-gateway
+
+resources: {}

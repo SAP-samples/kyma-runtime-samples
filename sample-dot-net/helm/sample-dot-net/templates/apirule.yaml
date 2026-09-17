@@ -1,0 +1,18 @@
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: {{ include "sample-dot-net.fullname" . }}
+  labels:
+    {{- include "sample-dot-net.labels" . | nindent 4 }}
+spec:
+  gateway: {{ .Values.apirule.gateway }}
+  hosts:
+    - {{ .Chart.Name }}-{{ .Release.Namespace }}
+  rules:
+    - noAuth: true
+      methods:
+        - GET
+      path: /*
+  service:
+    name: {{ include "sample-dot-net.fullname" . }}
+    port: {{ .Values.service.port }}
