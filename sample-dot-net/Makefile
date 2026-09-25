@@ -4,6 +4,10 @@ IMAGE_NAME      = $(DOCKER_ACCOUNT)/$(APP_NAME):$(TAG)
 CONTAINER_NAME  = $(APP_NAME)
 HELM_CHART      = helm/sample-dot-net
 
+JWT_ENABLED  ?= false
+JWT_ISSUER   ?=
+JWT_JWKS_URI ?=
+
 .DEFAULT_GOAL := help
 .PHONY: build-arm build-amd push-image dev run stop clean create-namespace create-registry-secret helm-template helm-dry-run helm-deploy helm-undeploy help
 
@@ -60,13 +64,19 @@ helm-template: ## Render helm templates locally (dry run, no cluster needed)
 	helm template $(HELM_RELEASE) $(HELM_CHART) \
 		--namespace $(NAMESPACE) \
 		--set image.repository=$(IMAGE_NAME) \
-		--set imagePullSecrets[0].name=$(REGISTRY_SECRET)
+		--set imagePullSecrets[0].name=$(REGISTRY_SECRET) \
+		--set apirule.jwt.enabled=$(JWT_ENABLED) \
+		--set "apirule.jwt.authentications[0].issuer=$(JWT_ISSUER)" \
+		--set "apirule.jwt.authentications[0].jwksUri=$(JWT_JWKS_URI)"
 
 helm-dry-run: ## Simulate helm install against the cluster (server-side dry run)
 	helm upgrade --install $(HELM_RELEASE) $(HELM_CHART) \
 		--namespace $(NAMESPACE) \
 		--set image.repository=$(IMAGE_NAME) \
 		--set imagePullSecrets[0].name=$(REGISTRY_SECRET) \
+		--set apirule.jwt.enabled=$(JWT_ENABLED) \
+		--set "apirule.jwt.authentications[0].issuer=$(JWT_ISSUER)" \
+		--set "apirule.jwt.authentications[0].jwksUri=$(JWT_JWKS_URI)" \
 		--dry-run=server --debug
 
 helm-deploy: ## Deploy app to Kyma via Helm
@@ -74,6 +84,9 @@ helm-deploy: ## Deploy app to Kyma via Helm
 		--namespace $(NAMESPACE) \
 		--set image.repository=$(IMAGE_NAME) \
 		--set imagePullSecrets[0].name=$(REGISTRY_SECRET) \
+		--set apirule.jwt.enabled=$(JWT_ENABLED) \
+		--set "apirule.jwt.authentications[0].issuer=$(JWT_ISSUER)" \
+		--set "apirule.jwt.authentications[0].jwksUri=$(JWT_JWKS_URI)" \
 		--wait
 
 helm-undeploy: ## Remove Helm release from the cluster

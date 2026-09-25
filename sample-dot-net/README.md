@@ -30,6 +30,9 @@ cp .env.template .env
 | REGISTRY_SECRET  | Name of the image pull secret                     | regcred                              |
 | DOCKER_PASSWORD  | Docker registry password or access token          |                                      |
 | DOCKER_EMAIL     | Email associated with the Docker registry account |                                      |
+| JWT_ENABLED      | Enable JWT authentication on the APIRule          | false                                |
+| JWT_ISSUER       | Token issuer URL (e.g. SAP Cloud Identity Services tenant) |                         |
+| JWT_JWKS_URI     | JWKS endpoint for token signature validation      |                                      |
 
 The image is published as `$(DOCKER_ACCOUNT)/$(APP_NAME):$(TAG)`.
 
@@ -89,6 +92,24 @@ This target:
 - Runs `helm upgrade --install` with the image and image pull secret from `.env`
 
 The APIRule exposes the app at `https://sample-dot-net-<NAMESPACE>.<kyma-cluster-domain>/weatherforecast`.
+
+### JWT Authentication
+
+By default the APIRule is deployed with `noAuth: true`, meaning the endpoint is publicly accessible. To require a valid JWT on all requests, set the following variables in `.env` before deploying:
+
+```text
+JWT_ENABLED=true
+JWT_ISSUER=https://your-tenant.accounts.ondemand.com
+JWT_JWKS_URI=https://your-tenant.accounts.ondemand.com/oauth/jwks
+```
+
+Then redeploy:
+
+```sh
+make helm-deploy
+```
+
+With JWT enabled, requests without a valid Bearer token receive `403 RBAC: access denied` from the Kyma API Gateway. The issuer and JWKS URI are typically provided by your identity provider (e.g. SAP Cloud Identity Services). See the [Kyma JWT documentation](https://kyma-project.io/external-content/api-gateway/docs/user/expose-workloads/jwt/expose-workload-jwt.html) for details.
 
 ### Useful targets
 

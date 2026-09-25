@@ -13,5 +13,10 @@ service:
 
 apirule:
   gateway: kyma-system/kyma-gateway
+  jwt:
+    enabled: false
+    authentications:
+      - issuer: ""
+        jwksUri: ""
 
 resources: {}

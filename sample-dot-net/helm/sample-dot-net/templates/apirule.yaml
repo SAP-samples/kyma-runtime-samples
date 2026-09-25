@@ -9,10 +9,22 @@ spec:
   hosts:
     - {{ .Chart.Name }}-{{ .Release.Namespace }}
   rules:
+    {{- if .Values.apirule.jwt.enabled }}
+    - jwt:
+        authentications:
+          {{- range .Values.apirule.jwt.authentications }}
+          - issuer: {{ .issuer }}
+            jwksUri: {{ .jwksUri }}
+          {{- end }}
+      methods:
+        - GET
+      path: /*
+    {{- else }}
     - noAuth: true
       methods:
         - GET
       path: /*
+    {{- end }}
   service:
     name: {{ include "sample-dot-net.fullname" . }}
     port: {{ .Values.service.port }}
