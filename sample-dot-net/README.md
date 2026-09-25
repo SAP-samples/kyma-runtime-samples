@@ -1,4 +1,4 @@
-# SampleAppDotNet
+# Build and Create a SampleAppDotNet Microservice
 
 A minimal ASP.NET Core 10.0 Web API demonstrating the minimal APIs pattern,
 packaged as a container image using Cloud Native Buildpacks.
