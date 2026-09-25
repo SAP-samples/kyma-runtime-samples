@@ -1,7 +1,6 @@
 # Build and Create a SampleAppDotNet Microservice
 
-A minimal ASP.NET Core 10.0 Web API demonstrating the minimal APIs pattern,
-packaged as a container image using Cloud Native Buildpacks.
+This sample shows how to build and deploy an ASP.NET-based microservice as an extension and expose the API. This is a minimal ASP.NET Core 10.0 Web API demonstrating the minimal APIs pattern, packaged as a container image using Cloud Native Buildpacks.
 
 ## Prerequisites
 
