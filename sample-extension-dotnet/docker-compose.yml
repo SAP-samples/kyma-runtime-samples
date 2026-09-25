@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  sample-extension-dotnet:
-    image: ${DOCKER_REGISTRY-}sampleextensiondotnet
-    build:
-      context: .
-      dockerfile: sample-extension-dotnet/Dockerfile

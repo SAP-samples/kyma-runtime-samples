@@ -34,7 +34,7 @@ spec:
         app: app-router
     spec:
       containers:
-      - image: sapse/approuter:20.6.0
+      - image: sapse/approuter:21.5.0
         name: app-router
         ports:
         - containerPort: 5000

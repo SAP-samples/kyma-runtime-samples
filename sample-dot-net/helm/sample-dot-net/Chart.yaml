@@ -1,0 +1,6 @@
+apiVersion: v2
+name: sample-dot-net
+description: A Helm chart for deploying the sample-dot-net ASP.NET Core Web API on Kyma
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
