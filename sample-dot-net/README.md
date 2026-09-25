@@ -86,9 +86,7 @@ make helm-deploy
 
 This target:
 
-1. Creates the namespace if it does not exist
-2. Labels the namespace with `istio-injection=enabled` to enable the Istio sidecar
-3. Runs `helm upgrade --install` with the image and image pull secret from `.env`
+- Runs `helm upgrade --install` with the image and image pull secret from `.env`
 
 The APIRule exposes the app at `https://sample-dot-net-<NAMESPACE>.<kyma-cluster-domain>/weatherforecast`.
 
