@@ -54,8 +54,8 @@ create-namespace: ## Create namespace and enable Istio sidecar injection
 create-registry-secret: ## Create image pull secret for the private registry
 	kubectl create secret docker-registry $(REGISTRY_SECRET) \
 		--namespace $(NAMESPACE) \
-		--docker-server=https://index.docker.io/v1/ \
-		--docker-username=$(DOCKER_ACCOUNT) \
+		--docker-server=$(DOCKER_REGISTRY) \
+		--docker-username=$(DOCKER_USERNAME) \
 		--docker-password=$(DOCKER_PASSWORD) \
 		--docker-email=$(DOCKER_EMAIL) \
 		--dry-run=client -o yaml | kubectl apply -f -

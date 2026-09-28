@@ -17,10 +17,14 @@ cp .env.template .env
 ```
 
 | Variable         | Description                                       | Default                              |
-| ---------------- | ------------------------------------------------- | ------------------------------------ |
+| --- | --- | --- |
 | APP_NAME         | Application name (used for image and container)   | sample-dot-net                       |
 | TAG              | Image tag                                         | 1.0.0                                |
-| DOCKER_ACCOUNT   | Docker registry account (prefix for image name)   | your-dockerhub-user                  |
+| DOCKER_REGISTRY  | Docker registry hostname                          | your-private-registry                |
+| DOCKER_ACCOUNT   | Registry account / namespace (prefix for image)   | your-registry-account                |
+| DOCKER_USERNAME  | Username for registry authentication              | your-registry-username               |
+| DOCKER_PASSWORD  | Docker registry password or access token          |                                      |
+| DOCKER_EMAIL     | Email associated with the Docker registry account |                                      |
 | APP_DIR          | Directory containing the .NET project             | SampleAppDotNet                      |
 | HOST_PORT        | Host port mapped to the container                 | 5085                                 |
 | CONTAINER_PORT   | Port the app listens on inside the container      | 8080                                 |
@@ -28,8 +32,6 @@ cp .env.template .env
 | NAMESPACE        | Kubernetes namespace to deploy into               | sample-dot-net                       |
 | HELM_RELEASE     | Helm release name                                 | sample-dot-net                       |
 | REGISTRY_SECRET  | Name of the image pull secret                     | regcred                              |
-| DOCKER_PASSWORD  | Docker registry password or access token          |                                      |
-| DOCKER_EMAIL     | Email associated with the Docker registry account |                                      |
 | JWT_ENABLED      | Enable JWT authentication on the APIRule          | false                                |
 | JWT_ISSUER       | Token issuer URL (e.g. SAP Cloud Identity Services tenant) |                         |
 | JWT_JWKS_URI     | JWKS endpoint for token signature validation      |                                      |
