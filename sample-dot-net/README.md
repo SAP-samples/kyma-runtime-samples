@@ -89,7 +89,7 @@ For more information, see <https://paketo.io/docs/howto/dotnet-core/>.
 
 5.  By default, the APIRule is deployed with `noAuth: true`, meaning the endpoint is publicly accessible. To require a valid JSON Web Token (JWT) on all requests, set the following variables in `.env` before deploying.
 
-   ```bash
+   ```text
    JWT_ENABLED=true
    JWT_ISSUER=https://your-tenant.accounts.ondemand.com
    JWT_JWKS_URI=https://your-tenant.accounts.ondemand.com/oauth/jwks
