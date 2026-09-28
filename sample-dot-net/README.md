@@ -83,13 +83,13 @@ For more information, see <https://paketo.io/docs/howto/dotnet-core/>.
    make helm-deploy
    ```
 
-This target runs `helm upgrade --install` with the image and image pull Secret from `.env`
+   This target runs `helm upgrade --install` with the image and image pull Secret from `.env`.
 
-The APIRule exposes the application at `https://sample-dot-net-<NAMESPACE>.<kyma-cluster-domain>/weatherforecast`.
+   The APIRule exposes the application at `https://sample-dot-net-<NAMESPACE>.<kyma-cluster-domain>/weatherforecast`.
 
-5.  By default, the APIRule is deployed with `noAuth: true`, meaning the endpoint is publicly accessible. To require a valid JSON Web Token (JWT) on all requests, set the following variables in `.env` before deploying:
+5.  By default, the APIRule is deployed with `noAuth: true`, meaning the endpoint is publicly accessible. To require a valid JSON Web Token (JWT) on all requests, set the following variables in `.env` before deploying.
 
-   ```text
+   ```bash
    JWT_ENABLED=true
    JWT_ISSUER=https://your-tenant.accounts.ondemand.com
    JWT_JWKS_URI=https://your-tenant.accounts.ondemand.com/oauth/jwks
