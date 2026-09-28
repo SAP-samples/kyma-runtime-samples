@@ -1,0 +1,25 @@
+# Build output
+bin/
+obj/
+
+# VS Code
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# JetBrains Rider
+.idea/
+
+# macOS
+.DS_Store
+
+# Local environment variables (contains credentials)
+.env

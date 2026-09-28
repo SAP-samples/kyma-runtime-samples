@@ -33,8 +33,7 @@ Running various samples requires access to the Kyma environment. There are also 
 | [Java-based microservice as an Event Trigger using CloudEvents SDK](./sample-event-trigger-java/README.md)                     | This sample demonstrates how to build and deploy a Java-based microservice as an Event Trigger using the CloudEvents SDK                                              | -          |
 | [Scala AKKA HTTP based extesnsion with API exposed via Microgateway](./sample-extension-scala/README.md)                       | This sample demonstrates how to build and deploy a Scala Based Akka-HTTP microservice as an extension and expose the API                                              | -          |
 | [Sample deploying a websocket based extension on Kyma](./sample-websockets/README.md)                                          | This sample demonstrates using websockets with Kyma when building extensions and applications                                                                         | -          |
-| [ASP.NET-based extension with API exposed via Microgateway](./sample-extension-dotnet/README.md)                               | This sample demonstrates how to build and deploy an ASP.NET-based microservice as an extension and expose the API                                                     | -          |
-| [ASP.NET-based (.NET 6.0) extension with Minimal API exposed via Microgateway](./sample-extension-dotnet-minimalapi/README.md) | This sample demonstrates how to build and deploy an ASP.NET Core-based microservice as an extension leveraging the minimal web API functionality and exposing the API | -          |
+| [ASP.NET-based application](./sample-dot-net/README.md)                               | This sample demonstrates how to build and deploy an ASP.NET-based microservice as an extension and expose the API                                                     | -          |
 
 ## CX Extensions
 
