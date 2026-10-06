@@ -7,6 +7,8 @@ This sample shows how to build and deploy an ASP.NET-based microservice as an ex
 - [.NET SDK 10.0](https://dotnet.microsoft.com/download)
 - [pack CLI](https://buildpacks.io/docs/tools/pack/) (Cloud Native Buildpacks)
 - [Docker](https://docs.docker.com/get-docker/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Helm 3](https://helm.sh/docs/intro/install/)
 
 ## Configuration
 
@@ -61,15 +63,13 @@ For more information, see <https://paketo.io/docs/howto/dotnet-core/>.
 
 ## Deploy to Kyma
 
-1. Ensure you have [kubectl](https://kubernetes.io/docs/tasks/tools/) and [Helm 3](https://helm.sh/docs/intro/install/) installed.
-
-2. Create a namespace if it does not exist.
+1. Create a namespace if it does not exist.
 
    ```bash
    make create-namespace
    ```
 
-3. The image is hosted in a private registry. Create a Kubernetes image pull Secret before deploying.
+2. The image is hosted in a private registry. Create a Kubernetes image pull Secret before deploying.
 
    ```sh
    make create-registry-secret
@@ -77,7 +77,7 @@ For more information, see <https://paketo.io/docs/howto/dotnet-core/>.
 
    The command uses `DOCKER_ACCOUNT`, `DOCKER_PASSWORD`, `DOCKER_EMAIL`, and `REGISTRY_SECRET` from `.env`. The command is idempotent - safe to re-run if credentials change.
 
-4. Deploy the application.
+3. Deploy the application.
 
    ```sh
    make helm-deploy
@@ -87,7 +87,7 @@ For more information, see <https://paketo.io/docs/howto/dotnet-core/>.
 
    The APIRule exposes the application at `https://sample-dot-net-<NAMESPACE>.<kyma-cluster-domain>/weatherforecast`.
 
-5.  By default, the APIRule is deployed with `noAuth: true`, meaning the endpoint is publicly accessible. To require a valid JSON Web Token (JWT) on all requests, set the following variables in `.env` before deploying.
+4.  By default, the APIRule is deployed with `noAuth: true`, meaning the endpoint is publicly accessible. To require a valid JSON Web Token (JWT) on all requests, set the following variables in `.env` before deploying.
 
      ```text
      JWT_ENABLED=true
@@ -95,7 +95,7 @@ For more information, see <https://paketo.io/docs/howto/dotnet-core/>.
      JWT_JWKS_URI=https://your-tenant.accounts.ondemand.com/oauth/jwks
      ```
 
-6. Redeploy the application with the JWT.
+5. Redeploy the application with the JWT.
 
    ```sh
    make helm-deploy
@@ -103,7 +103,7 @@ For more information, see <https://paketo.io/docs/howto/dotnet-core/>.
 
    With JWT enabled, requests without a valid Bearer token receive `403 RBAC: access denied` from the Kyma API Gateway. The issuer and JWKS URI are typically provided by your identity provider (for example, SAP Cloud Identity Services). See the [Kyma JWT documentation](https://kyma-project.io/external-content/api-gateway/docs/user/expose-workloads/jwt/expose-workload-jwt.html) for details.
 
-### Useful targets
+### Useful Targets
 
 ```sh
 make helm-template   # render manifests locally without a cluster
